@@ -1,0 +1,42 @@
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+
+.page-content { 
+    flex-basis: 96%;
+    order: 2;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.navbar-content {
+    flex-basis: 4%;
+    height: 100%;
+    background: #ffffff;
+    order: 1;
+}
+
+#topElement {
+    margin-top: 180px;
+}
+
+.nav-block {
+    height: 100px;
+    width: 100%;
+    background:#ffffff;
+}
+.nav-selected {
+    background:#D5D7F4;
+}
+
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    margin: 30px 10px 30px 10px;
+}
