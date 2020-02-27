@@ -15,12 +15,18 @@
     flex-wrap: nowrap;
 }
 
+.page-title {
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
 .navbar-content {
     flex-basis: 4%;
     height: 100%;
     background: #ffffff;
     order: 1;
 }
+
 
 #topElement {
     margin-top: 180px;
@@ -39,4 +45,22 @@
     height: 40px;
     width: 40px;
     margin: 30px 10px 30px 10px;
+}
+
+.task-content { 
+    display: flex; 
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 40px;
+}
+
+.task-box { 
+    background-color: white; 
+    border-style: solid;
+    border-radius: 1px;
+    border-width: 1px;
+    border-color: #000000;
+    flex-basis: 10%; 
+    height: 10%;
 }
