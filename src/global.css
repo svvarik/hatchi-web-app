@@ -1,0 +1,47 @@
+/* Global styles for whole page */
+body {
+    background-color:#FAFBFC;
+  }
+
+/* Page titles styling */
+
+
+h1 {
+    font-family: 'Roboto', 'sans serif';
+    font-size: 2.5em;
+    font-weight: 900;
+}
+
+h2 {
+    font-family: 'Roboto', 'Times New Roman';
+    font-size: 1.875em;
+    font-weight: bolder;
+}
+
+
+h3 {
+    font-family: 'Roboto', 'sans serif';
+    font-size: 1.25em;
+    font-weight: bolder;
+}
+
+h6 {
+    font-family: 'Roboto', 'sans serif';
+    font-size: 0.75em;
+    font-weight: bold;
+    color: #999999;
+}
+
+p {
+    font-family: 'Roboto', 'sans serif';
+    font-size: 1.125 em;
+    font-weight: normal;
+}
+
+.card-styling {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    border-radius: 20px;
+
+}
+
