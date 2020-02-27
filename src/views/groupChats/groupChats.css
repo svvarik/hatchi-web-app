@@ -12,14 +12,49 @@ body {
 li {
     list-style: none;
 }
+/* copied */
+#sidebar {
+  width: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: #ffffff;
+}
+
+#topElement {
+  margin-top: 180px;
+}
+
+.nav-block {
+  height: 100px;
+  width: 100%;
+  background:#ffffff;
+}
+.nav-selected {
+  background:#D5D7F4;
+}
+
+.nav-icon {
+  height: 40px;
+  width: 40px;
+  margin: 30px 10px 30px 10px;
+}
+/* copied */
+
+
 #groupChats {
     flex: 5;
 }
 #chatWindow {
     flex: 12;
 }
-#menu {
-    flex: 2;
+/* hold space for nav bar */
+#emptyDiv {
+  width: 60px;
+}
+/* #menu {
+    flex: 1;
     background-color: rgba(255, 206, 28, 1);
     
 }
@@ -37,7 +72,7 @@ li {
     height: 50px;
     width: 50px;
     color: rgba(59, 72, 74, 1);
-}
+} */
 #groupChatsTitle {
     height: 5vh;
     background-color: white;
@@ -51,6 +86,7 @@ li {
 }
 .groupChat {
     /* border: 1px solid black; */
+    padding-bottom: 20px;
     height: 100px;
     
 }
@@ -59,24 +95,25 @@ li {
 }
 .groupChat h2 {
     text-align: center;
-    padding-top: 10%;
+    padding-top: 8%;
 }
 #courseNameContainer {
-    background-color: grey;
+    background-color: rgba(59, 72, 74, 1);
     height: 5vh;
     
 }
 #courseNameContainer h3 {
-    padding: 20px;
-    text-align: center;
-    font-size: 2em;
+  color: rgba(255, 206, 28, 1);
+  padding: 10px;
+  text-align: center;
+  font-size: 2em;
 }
 #chatWindow {
-    background-color: ghostwhite;
+  background-color: ghostwhite;
 }
 #msgsContainer {
-    height: 89vh;
-    overflow-y: scroll;
+  height: 89vh;
+  overflow-y: scroll;
 }
 .msg{
     margin: 10px;
@@ -124,7 +161,7 @@ li {
     position: fixed;
     bottom: 0;
     display: flex;
-    width: 63.5%;
+    width: 66.6%;
  }
   #msgInput  {
     font-size: 2em;
