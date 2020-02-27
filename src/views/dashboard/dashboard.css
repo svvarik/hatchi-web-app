@@ -1,0 +1,90 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.page-title {
+    margin-left: 100px;
+    margin-top: 40px;
+    width: 70%;
+}
+
+#sidebar {
+    width: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: #ffffff;
+}
+
+#topElement {
+    margin-top: 180px;
+}
+
+.nav-block {
+    height: 100px;
+    width: 100%;
+    background:#ffffff;
+}
+.nav-selected {
+    background:#D5D7F4;
+}
+
+.nav-icon {
+    height: 40px;
+    width: 40px;
+    margin: 30px 10px 30px 10px;
+}
+
+.content-box {
+    width: 90%;
+    margin-left: 100px;
+    margin-top: 20px;
+    min-height: 150px;
+}
+
+.card-title {
+    margin: 1em 2em 2em 2em;
+    padding-top: 30px;
+}
+
+#calendarBox {
+    padding: 20px 10px 40px 20px;
+    margin: 20px 20px 20px 20px;
+    overflow-y: scroll;
+    width: 70%;
+    max-height: 600px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+}
+
+#calendarBox:after {
+    content: "";
+    height: 20px;
+    flex-basis: 100%;
+    flex-shrink: 0;
+}
+
+.calendar-row {
+    flex-basis: 100%;
+    flex-shrink: 0;
+    height: 60px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex: row;
+}
+
+.time-stamp {
+    flex-basis: 5%;
+    padding: 0px 10px 10px 5px;
+    color: #999999;
+}
+
+.time-space {
+    flex-basis: 95%;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #C0C0C0;
+}
