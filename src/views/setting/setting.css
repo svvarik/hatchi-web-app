@@ -9,8 +9,9 @@ body {
 
 #pageContent {
     padding-left: 60px;
+    padding-bottom: 100px;
     background-color: rgba(255, 206, 28, 0.1);
-    height: 100vh;
+    height: 100%;
 }
 
 .page-title {
