@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ 	<meta charset="utf-8">
+    <title>Hachi | Setting</title>
+    <link rel="stylesheet" type="text/css" href="setting.css">
+    <link rel="stylesheet" type="text/css" href="../../global.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js">
+   </script>
+ </head>
+ <body>
+    <nav id="sidebar">
+        <ul class="list-unstyled">
+          <li class="nav-block" id="topElement">
+            <a href="../dashboard/dashboard.html"><img src="../dashboard/dashboard_icons/home.svg" class="nav-icon"></a>
+          </li>
+          <li class="nav-block">
+            <a href="../tasks/tasks.html"><img src="../dashboard/dashboard_icons/check-marks.svg" class="nav-icon"></a>
+          </li>
+          <li class="nav-block">
+            <a href="#"><img src="../dashboard/dashboard_icons/book.svg" class="nav-icon"></a>
+          </li>
+          <li class="nav-block">
+          <a href="../groupChats/groupChats.html"><img src="../dashboard/dashboard_icons/comment.svg" class="nav-icon"></a>
+          </li>
+          <li class="nav-block  nav-selected">
+            <a href="../setting/setting.html"><img src="../dashboard/dashboard_icons/settings.svg" class="nav-icon"></a>
+          </li>
+        </ul>
+    </nav>
+    <div id="pageContent">
+        <div class="page-title">
+            <h1>Setting</h1>
+        </div>
+        <div id="info-container">
+            <div id="name-section" class="card-styling">
+                <h2 class="display-inline" id="username-">Username: </h2>
+                <button class="edit-btn" id="edit-name-btn">edit</button>
+                <!-- <h2 id="username">Anna</h2> -->
+                <!-- <form>
+                    <input type="text" id="new-name" value="Anna"/>
+                </form> -->
+            </div>
+            <div id="email-section" class="card-styling">
+                <h2 class="display-inline" id="email-">Email: </h2>
+                <button class="edit-btn" id="edit-email-btn">edit</button>
+                <!-- <h2 id="email">annaguo8010@gmail.com</h2> -->
+            </div>
+            <div id="password-section" class="card-styling">
+                <h2 class="display-inline" id="password-">Password: </h2>
+                <button class="edit-btn" id="edit-pw-btn">edit</button>
+                <h2 id="password">******</h2>
+            </div>
+        </div>
+    </div>
+ 	
+
+     <script type="text/javascript" src="setting.js"></script>
+    
+ </body>
+</html>
