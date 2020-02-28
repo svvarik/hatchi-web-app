@@ -1,5 +1,5 @@
 // variables
-const myID = 'A'
+const myID = 'user'
 const groupChats = [
     {
         id:1,

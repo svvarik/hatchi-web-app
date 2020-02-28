@@ -1,7 +1,7 @@
 // variables
-let userName = "Anna";
-let email = 'annaguo8010@gmail.com';
-let password = '12345';
+let userName = "user";
+let email = "user@user.com";
+let password = "user";
 let editingName = false;
 let editingEmail = false;
 let editingPW = false;
