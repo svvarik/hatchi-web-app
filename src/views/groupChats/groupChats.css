@@ -115,7 +115,7 @@ li {
   #msgInput  {
     font-size: 2em;
     flex: 8;
-    height: 5vh;
+    /* height: 5vh; */
   }
  #sendButton {
    flex:2;
