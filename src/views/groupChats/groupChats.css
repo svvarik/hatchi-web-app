@@ -12,36 +12,6 @@ body {
 li {
     list-style: none;
 }
-/* copied */
-#sidebar {
-  width: 60px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  background: #ffffff;
-}
-
-#topElement {
-  margin-top: 180px;
-}
-
-.nav-block {
-  height: 100px;
-  width: 100%;
-  background:#ffffff;
-}
-.nav-selected {
-  background:#D5D7F4;
-}
-
-.nav-icon {
-  height: 40px;
-  width: 40px;
-  margin: 30px 10px 30px 10px;
-}
-/* copied */
-
 
 #groupChats {
     flex: 5;
@@ -53,26 +23,6 @@ li {
 #emptyDiv {
   width: 60px;
 }
-/* #menu {
-    flex: 1;
-    background-color: rgba(255, 206, 28, 1);
-    
-}
-#menu ul {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#menu ul li {
-    flex: 1;
-}
-.menuIcons {
-    padding-top: 200%;
-    height: 50px;
-    width: 50px;
-    color: rgba(59, 72, 74, 1);
-} */
 #groupChatsTitle {
     height: 5vh;
     background-color: white;

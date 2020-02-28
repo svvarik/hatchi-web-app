@@ -45,3 +45,31 @@ p {
 
 }
 
+/* navigation bar styling  */
+#sidebar {
+    width: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: #ffffff;
+  }
+  
+  #topElement {
+    margin-top: 180px;
+  }
+  
+  .nav-block {
+    height: 100px;
+    width: 100%;
+    background:#ffffff;
+  }
+  .nav-selected {
+    background:#D5D7F4;
+  }
+  
+  .nav-icon {
+    height: 40px;
+    width: 40px;
+    margin: 30px 10px 30px 10px;
+  }
