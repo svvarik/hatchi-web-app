@@ -90,3 +90,5 @@ $('#edit-pw-btn').click(function () {
         console.log(password)
     }
 })
+
+//log out

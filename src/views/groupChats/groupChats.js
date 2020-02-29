@@ -4,8 +4,6 @@ const groupChats = [
     {
         id:1,
         groupName: 'CSC309',
-        color: 'rgba(187, 0, 0, 1)',
-        clicked: false,
         messages: [['hi', 'A'], 
                   ['this is csc309 group chat', 'B'],
                   ['Lorem ipsum dolor sit amet, conslentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas', 'x'],
@@ -16,8 +14,6 @@ const groupChats = [
     {
         id:2,
         groupName: 'CSC373',
-        color: 'rgba(48, 39, 206, 1)',
-        clicked: true,
         messages: [['hi', 'A'], 
                   ['this is csc373 group chat', 'B'],
                   ['Lorem ipsum dolor sit amet, consectetur adipis. Pellentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas', 'x'],
@@ -40,8 +36,6 @@ const groupChats = [
     {
         id:3,
         groupName: 'STA248',
-        color: 'rgba(255, 107, 0, 1)',
-        clicked: false,
         messages: [['hi', 'A'], 
                   ['this is sta248 group chat', 'B']]
     }
@@ -128,3 +122,5 @@ function addMsgToChat(courseName, msg){
 $('#currPage').click(function( event ) {
     event.preventDefault();
 })
+
+/// one course is blocked  (cannot open chat box)
