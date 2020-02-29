@@ -46,123 +46,23 @@
     width: 40px;
     margin: 30px 10px 30px 10px;
 }
-#search-input {
-    display: inline;
-    /* following lines cannot be deleted */
-    height: 5vh;
-    width: 60%;
-}
-#search-btn {
-    width: 60px;
-    height: 60px;
-    padding: 0 10px 0 10px;
-}
-#search-btn:hover {
-    border: 5px solid grey;
-}
+
 .tasks-content { 
     display: flex; 
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    padding: 10px 50px 0 50px;
-    align-content: flex-start;
+    margin-left: 40px;
+    margin-top: 10px;
 }
 
-.box { 
-    padding: 2%;
-    margin: 50px 2% 50px 2%;
+.task-box { 
     background-color: white; 
     border-radius: 20px;
     border-left: 20px solid #000000; 
-    height: 25vh;
-    flex: 0 0 21%;
+    flex-basis: 15%; 
+    height: 20vh;
+    display: flex; 
     flex-wrap: nowrap;
-}
-.add-task-box-content {
-    height: 100%;
-    display: flex;
     justify-content: center;
-    align-content: center;
-
-}
-.task-box-content div {
-    display: flex;
-    justify-content: center;
-}
-.box:hover {
-    background-color: rgba(255, 206, 28, 0.1);
-    
-}
-.task-box-content img {
-    height: 50px;
-    width: 50px;
-}
-.task-box-content img:hover {
-    padding: 5px;
-    background-color:rgba(255, 206, 28, 1);
-    border-radius: 50%;
-}
-.task-name {
-    text-align: center;
-}
-.due-date {
-    margin-top: 3vh;
-    text-align: center;
-    color: grey;
-}
-.overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    background-color: rgba(0,0,0,0.5); /*dim the background*/
-}
-.task-detail {
-    margin: 20% 25% 0 25%;
-    padding: 20px;
-    width: 50%;
-    height: 600px;
-    position: fixed;
-    background-color: white;
-    border-radius: 102x;
-    text-align: center;
-    z-index: 11;
-}
-.task-detail div {
-    width: 10%;
-    padding-left: 95%;
-    height: 5%
-    
-}
-.task-detail div img:hover {
-    border: 2px solid black;
-}
-.task-detail table{
-    padding: 15px;
-    text-align: center;
-    width: 80%;
-    margin: 0 10% 0 10%;
-    font-size: 1.3em;
-}
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-td input {
-    width: 100%;
-}
-#check-btn-container {
-    padding: 0 50% 0 50%;
-}
-#check-btn {
-    height: 50px;
-    width: 50px;
-}
-#check-btn:hover {
-    background-color: yellow;
-    border-radius: 50%;
-    border: none;
 }
