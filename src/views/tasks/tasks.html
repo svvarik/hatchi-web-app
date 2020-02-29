@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="../../global.css">
     <link rel="stylesheet" href="tasks.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <title>Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js">
+    </script>
+    <title>Hachi | Tasks</title>
 </head>
 
 <body>
@@ -34,30 +36,110 @@
                 </li>
             </ul>
         </nav>
-        <!-- Page Content  -->
-        <div class="page-content">
-            <!-- Page Title -->
-            <div class="page-title">
-                <h1>Tasks</h1>
-                <div>
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        <<<<<<< HEAD <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Title -->
+                <div class="page-title">
+                    <h1>Tasks</h1>
+                    <div>
+                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    </div>
                 </div>
-            </div>
-            <!-- Tasks -->
-            <div class="tasks-content">
-                <div class="card-styling task-box">
-                    <div class="task-color-bar"></div>
-                    <div class="task-box-content"> Test </div>
+                <!-- Tasks -->
+                <div class="tasks-content">
+                    <div class="card-styling task-box">
+                        <div class="task-color-bar"></div>
+                        <div class="task-box-content"> Test </div>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-    </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+                =======
+                <!-- Page Content  -->
+                <div class="page-content">
+                    <!-- Page Title -->
+                    <div class="page-title">
+                        <h1>Tasks</h1>
+                        <!-- <div id="search-container">
+                <input class="form-control" id="search-input" type="text" placeholder="Search" aria-label="Search">
+                <img id="search-btn" src="search-24px.svg" alt="search">
+              </div> -->
+                    </div>
+                    <!-- Tasks -->
+                    <div class="tasks-content">
+                        <!-- <div class="card-styling box task-box">
+              <div class="task-color-bar"></div>
+              <div class="task-box-content">
+                 <h2 class="task-name">BIO220: Infectious Disease Essay</h2>
+                 <h5 class="due-date">Due: Feb. 28, 2020</h5>
+                 <div>
+                    <img class="edit-btn" src="edit-24px.svg" alt="edit">
+                 </div>
+              </div>
+            </div> -->
+                        <!-- <div class="card-styling box task-box">
+              <div class="task-color-bar"></div>
+              <div class="task-box-content"> Test </div>
+            </div>
+            <div class="card-styling box task-box">
+              <div class="task-color-bar"></div>
+              <div class="task-box-content"> Test </div>
+            </div>
+            <div class="card-styling box task-box">
+              <div class="task-color-bar"></div>
+              <div class="task-box-content"> Test </div>
+            </div> -->
+                        <div class="card-styling box" id="add-task-box">
+                            <div class="task-color-bar"></div>
+                            <div class="add-task-box-content">
+                                <img src="add-24px.svg" alt="+">
+                            </div>
+                        </div>
+                    </div>
+
+                    >>>>>>> f27357079093d18a94650169e18d2742f2e37ef2
+                </div>
+                <!-- <div class="overlay"></div>
+        <div class="task-detail card-styling">
+          <div><img id="close-btn" src="close-24px.svg" alt=""></div>
+          <h1>BIO220: Infectious Disease Essay</h1>
+          <h2>Due: Feb. 28, 2020</h2>
+          <table>
+            <tr>
+              <th>Breakdown</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+            </tr>
+            <tr>
+              <td>brainstorm</td>
+              <td>feb 23 3 2020</td>
+              <td>feb 23 4 2020</td>
+            </tr>
+            <tr>
+              <td>research</td>
+              <td>feb 23 3 2020</td>
+              <td>feb 23 4 2020</td>
+            </tr>
+            <tr>
+              <td>research</td>
+              <td>feb 23 3 2020</td>
+              <td>feb 23 4 2020</td>
+            </tr>
+            <tr>
+              <td>research</td>
+              <td>feb 23 3 2020</td>
+              <td>feb 23 4 2020</td>
+            </tr>
+          </table>
+          
+        </div> -->
+
+            </div>
+            <script type="text/javascript" src="tasks.js"></script>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 
 </html>
