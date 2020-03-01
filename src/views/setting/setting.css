@@ -17,28 +17,34 @@ body {
 .page-title {
     padding: 20px 0 20px 40px;
 }
+
 .edit-btn {
     font-family: 'Roboto', 'sans serif';
     font-size: x-large;
     width: 100px;
     margin-left: 50px;
-    height:40px;
+    height: 40px;
     border: 5px solid rgba(255, 206, 28, 1);
 }
+
 .edit-btn:hover {
     background-color: rgba(255, 206, 28, 1);
 }
+
 #info-container {
     /* border: 1px solid black; */
     padding: 0 10% 0 10%;
 }
+
 #info-container div {
     margin-top: 5%;
     padding: 5%;
 }
+
 .display-inline {
     display: inline-block;
 }
+
 form {
     font-size: 1.875em;
 }

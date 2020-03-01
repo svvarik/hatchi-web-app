@@ -1,0 +1,13 @@
+.icon {
+    width: 13px;
+    height: 13px;
+}
+
+.del {
+    border: none;
+    background-color: white;
+}
+
+.pageSelection li {
+    display: inline;
+}
