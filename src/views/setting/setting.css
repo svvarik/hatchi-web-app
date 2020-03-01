@@ -48,3 +48,14 @@ body {
 form {
     font-size: 1.875em;
 }
+#logout-section {
+    text-align: center;
+    
+}
+#logout-section a {
+    text-decoration: none;
+    
+}
+#logout-section {
+    background-color: rgb(245, 216, 143);
+}
