@@ -121,7 +121,7 @@
     z-index: 10;
     background-color: rgba(0,0,0,0.5); /*dim the background*/
 }
-.task-detail {
+.task-detail, .add-task {
     margin: 20% 25% 0 25%;
     padding: 20px;
     width: 50%;
@@ -132,13 +132,13 @@
     text-align: center;
     z-index: 11;
 }
-.task-detail div {
+.task-detail div, .add-task #close-btn-container {
     width: 10%;
     padding-left: 95%;
     height: 5%
     
 }
-.task-detail div img:hover {
+.task-detail div img:hover,.add-task div img:hover {
     border: 2px solid black;
 }
 .task-detail table{
@@ -165,4 +165,29 @@ td input {
     background-color: yellow;
     border-radius: 50%;
     border: none;
+}
+#add-task-inputs h3{
+    display: inline;
+}
+#add-task-inputs {
+    padding: 60px;
+}
+#add-task-inputs div {
+    margin-bottom: 30px;
+}
+#to-breakdown-btn, #finish-add-btn {
+    margin-left: 70%;
+}
+#to-breakdown-btn img, #finish-add-btn img {
+    height: 50px;
+    width: 50px;
+    background-color: rgba(0, 208, 255, 0.2);
+    border-radius: 50%;
+}
+#add-more-subtask-btn {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1.3em;
+    background-color: rgba(0, 208, 255, 0.2);
+    border-style: none;
 }
