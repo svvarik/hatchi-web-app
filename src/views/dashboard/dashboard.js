@@ -49,6 +49,7 @@ function appendCalendarEvent(calEventInfo){
     // Create a new element and get info 
     const calEventDisplay = document.createElement("div");
     const displayName = document.createElement("h5");
+    displayName.setAttribute("id", calEventInfo.id)
     displayName.appendChild(document.createTextNode(calEventInfo.mainTask + ": " + calEventInfo.name));
     const course = calEventInfo.course
     calEventDisplay.style.background = courseColors[course];
