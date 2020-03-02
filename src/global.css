@@ -1,35 +1,49 @@
 /* Global styles for whole page */
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
 body {
-    background-color:#FAFBFC;
-  }
+    background-color: #FAFBFC;
+}
 
 /* Page titles styling */
 
 
 h1 {
-    font-family: 'Roboto', 'sans serif';
-    font-size: 2.5em;
-    font-weight: 900;
+  font-family: 'Roboto', 'sans serif';
+  font-size: 2.5em;
+  font-weight: 900;
 }
 
 h2 {
-    font-family: 'Roboto', 'Times New Roman';
-    font-size: 1.875em;
-    font-weight: bolder;
+  font-family: 'Roboto', 'Times New Roman';
+  font-size: 1.875em;
+  font-weight: bolder;
 }
 
 
 h3 {
-    font-family: 'Roboto', 'sans serif';
-    font-size: 1.25em;
-    font-weight: bolder;
+  font-family: 'Roboto', 'sans serif';
+  font-size: 1.25em;
+  font-weight: bolder;
+}
+
+h4 { 
+  font-family: 'Roboto', 'sans serif';
+  font-size: 1.25em;
+  font-weight:  normal;
+}
+
+h5 {
+  font-family: 'Roboto', 'sans serif';
+  font-size: 1em;
+  font-weight: bolder;
 }
 
 h6 {
-    font-family: 'Roboto', 'sans serif';
-    font-size: 0.75em;
-    font-weight: bold;
-    color: #999999;
+  font-family: 'Roboto', 'sans serif';
+  font-size: 0.75em;
+  font-weight: bold;
+  color: #999999;
 }
 
 p {
@@ -54,22 +68,30 @@ p {
     height: 100vh;
     background: #ffffff;
   }
-  
-  #topElement {
+
+.navbar-content {
+    flex-basis: 4%;
+    height: 100vh;
+    background: #ffffff;
+    order: 1;
+}
+
+#topElement {
     margin-top: 180px;
-  }
-  
-  .nav-block {
+}
+
+.nav-block {
     height: 100px;
     width: 100%;
     background:#ffffff;
-  }
-  .nav-selected {
-    background:#D5D7F4;
-  }
-  
-  .nav-icon {
+}
+.nav-selected {
+    background:rgb(255,197,0);
+}
+
+.nav-icon {
     height: 40px;
     width: 40px;
     margin: 30px 10px 30px 10px;
-  }
+}
+  
