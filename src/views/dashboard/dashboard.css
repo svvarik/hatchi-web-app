@@ -60,12 +60,16 @@
     padding-top: 10px;
 }
 
+h5 {
+    color: #ffffff;
+}
+
 #calendarBox {
     padding: 20px 10px 40px 20px;
     margin: 20px 20px 20px 20px;
     overflow-y: scroll;
     max-height: 480px;
-    width: 70%;
+    flex-basis: 70%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; 
@@ -93,9 +97,55 @@
     color: #999999;
 }
 
-.time-space {
+.time-space { 
     flex-basis: 95%;
     border-top-style: solid;
     border-top-width: 1px;
     border-top-color: #C0C0C0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#calDisplay {
+    display: flex;
+    flex-direction: row;
+}
+
+#calEventDisplay {
+    flex-basis: 30%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-left: 1em;
+} 
+
+.cal-event { 
+    flex-basis: 100%;
+    max-height: 100%;
+    flex-flow: fill;
+    border-radius: 5px;
+    margin: 0px 5px 0px 5px;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+
+#noEventAlert { 
+    text-align: center;
+    margin-top: 50%;
+}
+
+.cal-event-info {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    justify-content: center;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 20%;
+}
+
+.due-date {
+    min-height: 10vh;
 }
