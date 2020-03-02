@@ -1,7 +1,7 @@
 const profiles  = [
   {
-    username: "user1",
-    password: "user1",
+    username: "user",
+    password: "user",
     authorization: "user",
     email: "user1@hachi.com"
   },
