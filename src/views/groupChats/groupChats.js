@@ -4,6 +4,7 @@ const groupChats = [
     {
         id:1,
         groupName: 'CSC309',
+        isBlocked: false,
         messages: [['hi', 'A'], 
                   ['this is csc309 group chat', 'B'],
                   ['Lorem ipsum dolor sit amet, conslentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas', 'x'],
@@ -14,19 +15,11 @@ const groupChats = [
     {
         id:2,
         groupName: 'CSC373',
+        isBlocked: false,
         messages: [['hi', 'A'], 
                   ['this is csc373 group chat', 'B'],
                   ['Lorem ipsum dolor sit amet, consectetur adipis. Pellentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas', 'x'],
-                  ['this is csc373 group chat', 'B'],
-                  ['this is csc373 group chat', 'B'],
-                  ['this is csc373 group chat', 'x'],
-                  ['this is csc373 group chat', 'A'],
-                  ['this is csc373 group chat', 'B'],
-                  ['this is csc373 group chat', 'x'],
-                  ['this is csc373 group chat', 'B'],
-                  ['this is csc373 group chat', 'B'],
-                  ['this is csc373 group chat', 'x'],
-                  ['this is csc373 group chat', 'A'],
+                  ['this is csc373 group chat', 'user'],
                   ['this is csc373 group chat', 'B'],
                   ['this is csc373 group chat', 'x'],
                   ['this is csc373 group chat', 'A']
@@ -36,10 +29,12 @@ const groupChats = [
     {
         id:3,
         groupName: 'STA248',
+        isBlocked: true,
         messages: [['hi', 'A'], 
                   ['this is sta248 group chat', 'B']]
     }
 ]
+const reports = [];
 const profileImg = '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'
 //random color generator function
 function generateColor(){
@@ -63,8 +58,9 @@ groupChats.map((groupChat) => {
 
 //show chat window for clicked group chat
 $('.groupChat').click(function(){
-    $('#chatWindow').empty();
     const group = findgroup(this.firstChild.innerText)
+    
+    $('#chatWindow').empty();
     const courseNameContainer = '<div id="courseNameContainer"><h3>' + group.groupName + '</h3></div>';
     $('#chatWindow').append(courseNameContainer);
 
@@ -79,7 +75,7 @@ $('.groupChat').click(function(){
 
         }else{
             profile = '<div class="user">' + profileImg + '<p>' + msg[1] + '</p></div>';
-            msgContent = '<div class="msgContent"><p class="msgText">' + msg[0] + '</p></div>';
+            msgContent = '<div class="msgContent"><p class="msgText">' + msg[0] + '</p><h3 class="report-btn">report</h3></div>';
 
         }
         const msgEle = '<div class="msg">' + profile + msgContent + '</div>';
@@ -102,19 +98,37 @@ function findgroup(groupChatName){
 }
 //send message functionality
 $(document).on('click', '#sendButton', function(){
+
     const msgToSend = $('#msgInput').val();
     const profile = '<div class="userMe">' + profileImg + '<p>' + myID + '</p></div>';
     const msgContent = '<div class="myMsgContent"><p class="msgText">' + msgToSend + '</p></div>';
     const msgEle = '<div class="msg">' + profile + msgContent + '</div>';
-    $('#msgsContainer').append(msgEle);
     const courseName = $('#courseNameContainer')[0].firstChild.innerText;
-    addMsgToChat(courseName, msgToSend);
+    groupChats.map((group) => {
+        if(group.groupName === courseName){
+            if(group.isBlocked){
+                alert("You are muted due to one of your previous messages contained inappropiate content!")
+                
+            }else{
+                group.messages.push([msgToSend, myID]);
+                $('#msgsContainer').append(msgEle);
+            }
+            
+        }
+    })
+    
 })
 //helper fucntion for the above function
 function addMsgToChat(courseName, msg){
     groupChats.map((group) => {
         if(group.groupName === courseName){
-            group.messages.push([msg, myID])
+            if(group.isBlocked){
+                alert("You are muted due to your previous message contained inappropiate content ")
+                
+            }else{
+                group.messages.push([msg, myID])
+            }
+            
         }
     })
 }
@@ -122,5 +136,10 @@ function addMsgToChat(courseName, msg){
 $('#currPage').click(function( event ) {
     event.preventDefault();
 })
-
-/// one course is blocked  (cannot open chat box)
+//report functionality
+$(document).on('click', '.report-btn', function(e){
+    alert("Report is sent to the administrator.");
+    const userName = $(e.target).parent().parent().find('.user p')[0].innerText;
+    const message = $(e.target).parent().find('p')[0].innerText
+    reports.push({user: userName, reportedMsg: message})
+} )
