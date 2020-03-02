@@ -20,29 +20,7 @@
     margin-top: 20px;
 }
 
-.navbar-content {
-    flex-basis: 4%;
-    height: 100%;
-    background: #ffffff;
-    order: 1;
-}
 
-
-#topElement {
-    margin-top: 180px;
-}
-
-.nav-block {
-    height: 100px;
-    width: 100%;
-    background:#ffffff;
-}
-
-.nav-icon {
-    height: 40px;
-    width: 40px;
-    margin: 30px 10px 30px 10px;
-}
 /* #search-input {
     display: inline;
     height: 5vh;
