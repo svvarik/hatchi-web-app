@@ -122,7 +122,7 @@
     background-color: rgba(0,0,0,0.5); /*dim the background*/
 }
 .task-detail, .add-task {
-    margin: 20% 25% 0 25%;
+    margin: 10% 25% 0 25%;
     padding: 20px;
     width: 50%;
     height: 600px;
