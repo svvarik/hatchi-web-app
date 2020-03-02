@@ -44,7 +44,19 @@ function clearAllNotices() {
 const tabBar = document.getElementById("tabBarContainer");
 tabBar.addEventListener('click', switchBar);
 
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
 let signup = false;
+if (getUrlVars()['signup'] == "true"){
+  switchBar();
+}
+
 function switchBar(){
   const bar = document.getElementById("ChosenTab");
   if (!signup){

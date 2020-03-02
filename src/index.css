@@ -1,0 +1,74 @@
+#introduction{
+  position: absolute;
+  width: 756px;
+  height: 112px;
+  left: 338px;
+  top: 156px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 56px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}
+
+#topBar{
+  position: absolute;
+  width: 1338px;
+  height: 56px;
+  left: 40px;
+  top: 40px;
+}
+
+#HACHI{
+  position: absolute;
+  width: 174px;
+  height: 56px;
+  left: 0px;
+  top: 0px;
+
+  /* Web App Title */
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 56px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-feature-settings: 'cpsp' on;
+
+  color: #000000;
+}
+
+button{
+  position: absolute;
+  font-family: Roboto;
+  font-size: 24px;
+  top:14px;
+  height:  28px;
+  width: 82px;
+  text-align: center;
+  background-color: white;
+  border: none;
+  display: inline-block;
+  text-decoration: none;
+}
+#about{
+  left:1030px;
+}
+#login{
+  left: 1140px;
+}
+#signup{
+  left:1276px;
+  background-color: #FFCE1C;
+  border-radius: 10px;
+}
