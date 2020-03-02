@@ -37,9 +37,6 @@
     width: 100%;
     background:#ffffff;
 }
-.nav-selected {
-    background:#D5D7F4;
-}
 
 .nav-icon {
     height: 40px;
@@ -77,6 +74,7 @@
     border-radius: 20px;
     border-left: 20px solid #000000; 
     height: 25vh;
+    min-height: min-content;
     flex: 0 0 21%;
     flex-wrap: nowrap;
 }
