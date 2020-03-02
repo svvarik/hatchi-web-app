@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ 	<meta charset="utf-8">
+    <title>Hachi | Log In</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="../../global.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js">
+   </script>
+ </head>
+ <body>
+   <div id="pageContainer">
+       <div id="tabBarContainer">
+           <p id="login">Log In</p>
+           <p id="signup">Sign up</p>
+           <svg>
+             <rect id="tabRect"/>
+             <rect id="ChosenTab"/>
+           </svg>
+       </div>
+       <div id="logoContainer">
+         <div id="bee"></div>
+         <p id="HACHI">HACHI</p>
+       </div>
+       <div id="Form">
+         <div id="wrongPassword" class="inputError">
+           <p>Please Check Your Password.</p>
+         </div>
+         <div id="accountNotExists" class="inputError">
+           <p>Account Not Exists, Please Check Your Username.</p>
+           </div>
+           <div id="signupSuccessfully">
+             <p>You Successfully Signed Up!!</p><br>
+             <p>Log In to Start Your HACHI Trip!!!</p>
+           </div>
+           <div id="usernameOccupied" class="inputError">
+             <p>Username Occupied, Please Choose Another One.</p>
+           </div>
+         <form id="LoginForm" action="index.html" method="post">
+           <label for="username">Username: </label>
+           <input id="lusername" type="text" name="lusername">
+           <br><br><br>
+           <label for="password">Password: </label>
+           <input id="lpassword" type="text" name="lpassword">
+           <input class="submit" type="submit" name="login" value="LOG IN">
+         </form>
+         <form id="SignupForm" action="index.html" method="post">
+           <label for="username">Username: </label>
+           <input id="susername" type="text" name="susername">
+           <br><br><br>
+           <label for="email">Email: </label>
+           <input id="email" type="text" name="email">
+           <br><br><br>
+           <label for="password">Password: </label>
+           <input id="spassword" type="text" name="spassword">
+           <input class="submit" type="submit" name="signup" value="SIGN UP">
+         </form>
+       </div>
+   </div>
+
+   <script type="text/javascript" src="login.js"></script>
+
+ </body>
+</html>

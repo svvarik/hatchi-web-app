@@ -1,0 +1,180 @@
+body{
+  background: #E5E5E5;
+}
+#pageContainer{
+  position: absolute;
+  width: 743px;
+  height: 752px;
+  left: 349px;
+  top: 74px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+#tabBarContainer {
+  position: absolute;
+  width: 318px;
+  height: 45px;
+  left: 212px;
+  top: 214px;
+}
+#login{
+  position: absolute;
+  width: 78px;
+  height: 32px;
+  left: 40px;
+  top: 1px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}
+
+#signup{
+  position: absolute;
+  width: 113px;
+  height: 34px;
+  left: 183px;
+  top: 1px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}
+#tabRect{
+  position: absolute;
+  width: 318px;
+  height: 6px;
+  x: 0px;
+  y: 39px;
+
+  fill: #F1F1F1;
+}
+#ChosenTab{
+  position: absolute;
+  width: 159px;
+  height: 6px;
+  x: 0px;
+  y: 39px;
+
+  fill: #FFCE1C;
+}
+
+#logoContainer{
+  position: absolute;
+  width: 407px;
+  height: 163px;
+  left: 192px;
+  top: 51px;
+}
+
+#bee{
+  position: absolute;
+  width: 132.5px;
+  height: 116px;
+  left: 24px;
+  top: 14px;
+
+  background: url(./bee.png);
+}
+
+#HACHI{
+  position: absolute;
+  width: 202px;
+  height: 76px;
+  left: 183px;
+  top: 32px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 56px;
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}
+#Form{
+  position: absolute;
+  left: 174px;
+  top:  292px;
+  width:425px;
+  bottom: 57px;
+}
+
+#LoginForm{
+  display:block;
+}
+
+#SignupForm{
+  display: none;
+}
+
+label{
+  font-size: 1.2em;
+
+  position: absolute;
+  left:0px;
+  margin-top: 10px;
+
+}
+
+input{
+  width: 281px;
+  height: 57px;
+  border-radius: 10px;
+  background: #F1F1F1;
+  border-width: 0px;
+
+  position: absolute;
+  left: 128px;
+}
+
+.submit{
+  background: #FFCE1C;
+  width: 223px;
+  height: 83px;
+
+  position: absolute;
+  bottom: 0px;
+  left: 268px;
+  font-size: 24px;
+}
+
+.inputError{
+  border-radius: 3px;
+  border-color: red;
+  color: red;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: pink;
+  font-weight: bold;
+  text-align: center;
+  display: none;
+}
+#signupSuccessfully{
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+  text-align: center;
+  min-height: 300px;
+  display: none;
+  background: #F1F1F1;
+
+}
