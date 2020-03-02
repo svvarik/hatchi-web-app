@@ -29,8 +29,8 @@
   position: absolute;
   width: 174px;
   height: 56px;
-  left: 0px;
-  top: 0px;
+  left: 70px;
+  top: 5px;
 
   /* Web App Title */
 
@@ -100,4 +100,14 @@ button{
   line-height: 35px;
   font-size: 35px;
   text-align: center;
+}
+
+#bee{
+  position: absolute;
+  /* width: 132.5px; */
+  height: 60px;
+  /* left: 5px;
+  top: 5px; */
+
+  /* background: url(./images/bee.png); */
 }
