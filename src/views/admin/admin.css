@@ -1,57 +1,15 @@
-/* main body */
-
 body {
-    background-color: white;
-    margin: 0em;
+    font-size: 1.5em;
 }
-
-#info {
-    width: 250px;
-    text-align: left;
+li {
+    list-style: none;
 }
-
-
-/* banner and log out button */
-
-#banner {
-    border: 10px;
+.page-content{
+    margin: 10vh;
+}
+table {
     width: 100%;
-    height: 30px;
-    margin-top: 0;
 }
-
-#banner a {
-    border-radius: 30px !important;
-    float: right;
-}
-
-
-/* edit modal */
-
-label {
-    width: 130px;
-    text-align: right;
-}
-
-input {
-    width: 250px;
-}
-
-
-/* edit delete and mute button */
-
-#edit {
-    color: blue;
-}
-
-#delete {
-    color: red;
-}
-
-#courses {
-    color: blue;
-}
-
-i {
-    cursor: pointer;
+th,td {
+    border-bottom: 1px solid #ddd;
 }
