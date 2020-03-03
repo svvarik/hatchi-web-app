@@ -29,9 +29,29 @@
     flex-basis: 64%;
 }
 
-.card-title {
+
+.calendar-options {
     margin: 1em 2em 1em 2em;
     padding-top: 10px;
+    display: flex;
+    flex-direction: row;  
+    align-items: center;
+}
+
+#calTitle { 
+    margin-right: 5%;
+    margin-bottom: 0px;
+}
+
+.calendar-button {
+    border: none;
+    background: none;
+    margin: 0;
+}
+
+.selected-button {
+    border-radius: 5px;
+    background: rgb(255,197,0);
 }
 
 h5 {
@@ -66,7 +86,7 @@ h5 {
 }
 
 .time-stamp {
-    flex-basis: 5%;
+    flex-basis: 2%;
     padding: 0px 10px 10px 5px;
     color: #999999;
 }
@@ -102,6 +122,12 @@ h5 {
     margin: 0px 5px 0px 5px;
     padding-top: 10px;
     padding-left: 5px;
+    overflow: hidden;
+    min-height: 100%;
+}
+
+.week-cal-event {
+    padding: 2% 1% 1% 1%;
 }
 
 
@@ -122,4 +148,86 @@ h5 {
 
 .due-date {
     min-height: 10vh;
+}
+
+.calendar-column-label { 
+    display: flex; 
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-basis: 2%;
+    min-height: 800px;
+}
+.calendar-column-day { 
+    display: flex; 
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-basis: 13.5%;
+    text-align: center;
+    border-left: 1px solid #C0C0C0;
+}
+
+.day-time-block { 
+    min-width: 100%;
+    flex-basis: 5%;
+    border-radius: 5px;
+    max-height: 100%;
+}
+
+.time-label-block {
+    flex-basis: 5%;
+    min-width: 100%;
+}
+
+.day-label {
+    margin-bottom: 0px;
+    flex-basis: 5%;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+.week-time-label {
+    flex-basis: 5%;
+    padding: 0px 10px 0px 5px;
+    color: #999999;
+}
+
+.month-day-labels {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    min-height: 20px;
+}
+
+.month-day-indv-label {
+    flex-basis: 14.2%;
+    text-align: center
+}
+
+
+.month-day-slots {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.month-day-indv-slot {
+    flex-basis: 14.2%;
+    text-align: right;
+    min-height: 70px;
+}
+
+.week-day-text {
+    font-size: .75em;
+    margin: 0;
+    text-align: center;
+}
+
+.month-event { 
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+}
+
+#placeHolder {
+    border-bottom: 1px solid #C0C0C0;
 }
