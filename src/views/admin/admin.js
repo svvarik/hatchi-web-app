@@ -92,23 +92,25 @@ body.forEach(element => {
 
 // delete a user
 function del(row) {
+  console.log("del(row)");
     var i = row.parentNode.parentNode;
     i.parentNode.removeChild(i);
 }
 
 // initial muteCourses modal
 function allCourses(username) {
+  console.log("allCourses("+username+")");
     let body = "";
     for (u of users) {
         if (u.username === username) {
             for (c of u.course) {
                 if (c.mute) {
-                    body += `<p> ${c.course} 
+                    body += `<p> ${c.course}
                                 <i id="${username}${c.course}" class="el-icon-turn-off-microphone" onclick="changeStatus('${username}', '${c.course}')">
                                 </i>
                             </p>`;
                 } else if (!c.mute) {
-                    body += `<p> ${c.course} 
+                    body += `<p> ${c.course}
                                 <i id="${username}${c.course}" class="el-icon-microphone" alt="nMute" onclick="changeStatus('${username}', '${c.course}')">
                                 </i>
                             </p>`;
@@ -120,12 +122,13 @@ function allCourses(username) {
 }
 
 function changeStatus(username, course) {
+  console.log("changeStatus("+username+", "+ course+")");
     // change status in user
     let status;
     for (u of users) {
         if (u.username === username) {
             for (c of u.course) {
-                if (c.course = course) {
+                if (c.course == course) {
                     c.mute = !c.mute;
                     status = c.mute;
                     break;
