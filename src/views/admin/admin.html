@@ -11,33 +11,16 @@
 
 <body>
     <div id="banner">
-        <button>Sign out</button>
+        <a href="../login/login.html">Sign out</a>
     </div>
     <table class="table">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Email</th>
+                <th id="info">Username</th>
+                <th id="info">Email</th>
             </tr>
         </thead>
-        <tbody id="tableBody">
-            <tr>
-                <td>Yun</td>
-                <td>yun@mail.com</td>
-                <td>
-                    <i id="courses" class="el-icon-notebook-1" data-toggle="modal" data-target="#muteModal"></i>
-                </td>
-                <td>
-                    <i id="edit" class="el-icon-edit" data-toggle="modal" data-target="#editModal"></i>
-                </td>
-                <td>
-                    <i id="delete" onclick="del(this)" class="el-icon-delete" data-toggle="modal" data-target="deleteModal"></i>
-                </td>
-            </tr>
-
-        </tbody>
-
-
+        <tbody id="tableBody"></tbody>
 
     </table>
     <!-- mute modal -->
@@ -46,18 +29,17 @@
             <div class="modal-content">
                 <!-- modal header -->
                 <div class="modal-header">
-                    <h5 class="modal-title">Mute</h5>
+                    <h5 class="modal-title">Groups</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                 </div>
                 <!-- modal body -->
-                <div class="modal-body">
-                    <p>CSC 309</p>
+                <div class="modal-body" id="courseBody">
                 </div>
                 <!-- modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -70,11 +52,12 @@
             <div class="modal-content">
                 <!-- modal header -->
                 <div class="modal-header">
-                    <h5 class="modal-title">Yun</h5>
+                    <h5 id="editTitle" class="modal-title">
+                    </h5>
                 </div>
                 <!-- modal body -->
                 <div class="modal-body">
-                    <form action="" class="profolio">
+                    <form action="./admin.js" id="profolio">
                         <label for="name">Username: </label>
                         <input type="text" id="username" name="uname"><br>
                         <label for="email">Email: </label>
@@ -85,13 +68,12 @@
                 </div>
                 <!-- modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" type="button" class="btn btn-primary" onclick="saveEdit(this)" data-dismiss="modal">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
 
     <script src="../admin/admin.js"></script>
     <!-- modal -->

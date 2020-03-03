@@ -1,7 +1,17 @@
+/* main body */
+
 body {
     background-color: white;
     margin: 0em;
 }
+
+#info {
+    width: 250px;
+    text-align: left;
+}
+
+
+/* banner and log out button */
 
 #banner {
     border: 10px;
@@ -10,22 +20,38 @@ body {
     margin-top: 0;
 }
 
-#banner button {
+#banner a {
     border-radius: 30px !important;
     float: right;
 }
 
+
+/* edit modal */
+
+label {
+    width: 130px;
+    text-align: right;
+}
+
+input {
+    width: 250px;
+}
+
+
+/* edit delete and mute button */
+
 #edit {
-    cursor: pointer;
     color: blue;
 }
 
 #delete {
-    cursor: pointer;
     color: red;
 }
 
 #courses {
-    cursor: pointer;
     color: blue;
+}
+
+i {
+    cursor: pointer;
 }
