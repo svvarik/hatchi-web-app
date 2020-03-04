@@ -70,7 +70,7 @@
                 </div>
                 <!-- modal body -->
                 <div class="modal-body">
-                    <form action="./admin.js" id="profolio">
+                    <form autocomplete="off" id="profolio">
                         <label for="name">Username: </label>
                         <input type="text" id="editUName" name="uname" placeholder="new userName"><br>
                         <label for="email">Email: </label>
@@ -111,9 +111,62 @@
 
 
     <!-- report message modal -->
-    <!-- <div class="modal" id="reportModal"> -->
-    <!-- username, groupchat, message -->
-    <!-- </div> -->
+    <div id="reportMsg" style.display="none">
+        <!-- username, groupchat, message -->
+        <table>
+            <thead>
+                <th>Username</th>
+                <th>Groupchat</th>
+                <th>Message</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>a1</td>
+                    <td>csc309</td>
+                    <td>i swear :P</td>
+                </tr>
+                <tr>
+                    <td>a2</td>
+                    <td>csc233</td>
+                    <td>reprot me!!!</td>
+                </tr>
+                <tr>
+                    <td>a2</td>
+                    <td>csc233</td>
+                    <td>reprot me!!!</td>
+                </tr>
+                <tr>
+                    <td>a2</td>
+                    <td>csc233</td>
+                    <td>reprot me!!!</td>
+                </tr>
+                <tr>
+                    <td>a2</td>
+                    <td>csc233</td>
+                    <td>reprot me!!!</td>
+                </tr>
+                <tr>
+                    <td>a2</td>
+                    <td>csc233</td>
+                    <td>reprot me!!!</td>
+                </tr>
+                <tr>
+                    <td>a2</td>
+                    <td>csc233</td>
+                    <td>reprot me!!!</td>
+                </tr>
+                <tr>
+                    <td>a2</td>
+                    <td>csc233</td>
+                    <td>reprot me!!!</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <img src="./notification.svg" id="noteIcon" alt="notification" onclick="popUpNotification()">
+
+
 
 
 

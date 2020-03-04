@@ -191,3 +191,13 @@ function saveEdit(saveButton) {
     }
     closeUpdateModal();
 }
+
+// show/hide the notification box
+function popUpNotification() {
+    var pop = document.getElementById("reportMsg");
+    if (pop.style.display == "none") {
+        pop.style.display = "block";
+    } else {
+        pop.style.display = "none";
+    }
+}
