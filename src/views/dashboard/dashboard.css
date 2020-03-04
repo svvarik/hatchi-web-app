@@ -10,7 +10,7 @@
     margin-bottom: 0;
 }
 
-.page-content { 
+.page-content {
     flex-basis: 96%;
     order: 2;
     display: flex;
@@ -30,20 +30,19 @@
     min-height: 150px;
 }
 
-#contentCalendar { 
+#contentCalendar {
     flex-basis: 64%;
 }
-
 
 .calendar-options {
     margin: 1em 2em 1em 2em;
     padding-top: 10px;
     display: flex;
-    flex-direction: row;  
+    flex-direction: row;
     align-items: center;
 }
 
-#calTitle { 
+#calTitle {
     margin-right: 5%;
     margin-bottom: 0px;
 }
@@ -56,7 +55,7 @@
 
 .selected-button {
     border-radius: 5px;
-    background: rgb(255,197,0);
+    background: rgb(255, 197, 0);
 }
 
 h5 {
@@ -71,7 +70,7 @@ h5 {
     flex-basis: 70%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 #calendarBox:after {
@@ -96,7 +95,7 @@ h5 {
     color: #999999;
 }
 
-.time-space { 
+.time-space {
     flex-basis: 95%;
     border-top-style: solid;
     border-top-width: 1px;
@@ -117,9 +116,9 @@ h5 {
     flex-direction: column;
     flex-wrap: nowrap;
     margin-left: 1em;
-} 
+}
 
-.cal-event { 
+.cal-event {
     flex-basis: 100%;
     max-height: 100%;
     flex-flow: fill;
@@ -129,14 +128,14 @@ h5 {
     padding-left: 5px;
     overflow: hidden;
     min-height: 100%;
+    cursor: pointer;
 }
 
 .week-cal-event {
     padding: 2% 1% 1% 1%;
 }
 
-
-#noEventAlert { 
+#noEventAlert {
     text-align: center;
     margin-top: 50%;
 }
@@ -155,15 +154,16 @@ h5 {
     min-height: 10vh;
 }
 
-.calendar-column-label { 
-    display: flex; 
+.calendar-column-label {
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     flex-basis: 2%;
     min-height: 800px;
 }
-.calendar-column-day { 
-    display: flex; 
+
+.calendar-column-day {
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     flex-basis: 13.5%;
@@ -171,7 +171,7 @@ h5 {
     border-left: 1px solid #C0C0C0;
 }
 
-.day-time-block { 
+.day-time-block {
     min-width: 100%;
     flex-basis: 5%;
     border-radius: 5px;
@@ -207,7 +207,6 @@ h5 {
     text-align: center
 }
 
-
 .month-day-slots {
     flex-basis: 100%;
     display: flex;
@@ -228,10 +227,11 @@ h5 {
     text-align: center;
 }
 
-.month-event { 
+.month-event {
     border-radius: 50%;
     height: 20px;
     width: 20px;
+    cursor: pointer;
 }
 
 #placeHolder {
