@@ -1,37 +1,45 @@
 // variables
+const courseColors = {
+    CSC309: "rgb(0, 75, 0)",
+    CSC301: "rgb(255, 107, 0)",
+    MAT235: "rgb(255, 192, 0)",
+    INI318: "rgb(187, 0, 0)", 
+    STA247: "rgb(0, 174, 17)"
+};
+
 const myID = 'user'
 const groupChats = [
     {
         id:1,
-        groupName: 'CSC309',
+        groupName: 'INI318',
         isBlocked: false,
         messages: [['hi', 'A'], 
-                  ['this is csc309 group chat', 'B'],
+                  ['this is INI318 group chat', 'B'],
                   ['Lorem ipsum dolor sit amet, conslentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas', 'x'],
-                  ['this is csc309 group chat', 'B'],
-                  ['this is csc309 group chat', 'B'],
+                  ['this is INI318 group chat', 'B'],
+                  ['this is INI318 group chat', 'B'],
                 ]
     },
     {
         id:2,
-        groupName: 'CSC373',
+        groupName: 'MAT235',
         isBlocked: false,
         messages: [['hi', 'A'], 
-                  ['this is csc373 group chat', 'B'],
+                  ['this is MAT235 group chat', 'B'],
                   ['Lorem ipsum dolor sit amet, consectetur adipis. Pellentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas', 'x'],
-                  ['this is csc373 group chat', 'user'],
-                  ['this is csc373 group chat', 'B'],
-                  ['this is csc373 group chat', 'x'],
-                  ['this is csc373 group chat', 'A']
+                  ['this is MAT235 group chat', 'user'],
+                  ['this is MAT235 group chat', 'B'],
+                  ['this is MAT235 group chat', 'x'],
+                  ['this is MAT235 group chat', 'A']
                 
                 ]
     },
     {
         id:3,
-        groupName: 'STA248',
+        groupName: 'STA247',
         isBlocked: true,
         messages: [['hi', 'A'], 
-                  ['this is sta248 group chat', 'B']]
+                  ['this is sta247 group chat', 'B']]
     }
 ]
 const reports = [];
@@ -49,9 +57,8 @@ function generateColorValue(){
 }
 //List all the groupchats (this info should get from the database)
 groupChats.map((groupChat) => {
-    const groupChatEle = $('<div class="groupChat card-styling"><h2>' + groupChat.groupName + '</h2></div>');
-    const topBorderStyle = "10px solid " + generateColor();
-    console.log(topBorderStyle)
+    const groupChatEle = $('<div class="groupChat card-styling chat-style"><h2>' + groupChat.groupName + '</h2></div>');
+    const topBorderStyle = "20px solid " + courseColors[groupChat.groupName];
     groupChatEle.css("border-top", topBorderStyle);
     $('#groupChatsList').append(groupChatEle)
 })
@@ -116,7 +123,6 @@ $(document).on('click', '#sendButton', function(){
             
         }
     })
-    
 })
 //helper fucntion for the above function
 function addMsgToChat(courseName, msg){
