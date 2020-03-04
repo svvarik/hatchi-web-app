@@ -1,0 +1,15 @@
+body {
+    font-size: 1.5em;
+}
+li {
+    list-style: none;
+}
+.page-content{
+    margin: 10vh;
+}
+table {
+    width: 100%;
+}
+th,td {
+    border-bottom: 1px solid #ddd;
+}

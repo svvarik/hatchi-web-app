@@ -53,7 +53,7 @@ li {
 
 .groupChat h2 {
     text-align: center;
-    padding-top: 8%;
+    padding-top: 5%;
 }
 
 #courseNameContainer {
@@ -160,4 +160,12 @@ li {
 
 .report-btn:hover {
     background-color: rgba(139, 0, 0, 0.4);
+}
+
+.report-btn:hover {
+    background-color: rgba(139, 0, 0, 0.4);
+}
+
+.chat-style {
+    margin-top: 1em;
 }
