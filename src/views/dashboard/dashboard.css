@@ -237,3 +237,6 @@ h5 {
 #placeHolder {
     border-bottom: 1px solid #C0C0C0;
 }
+#notification-box {
+    padding: 10px;
+}
