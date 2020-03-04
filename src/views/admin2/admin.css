@@ -1,0 +1,74 @@
+/* main body */
+
+body {
+    background-color: white;
+    margin: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#info {
+    width: 250px;
+    text-align: center;
+}
+
+
+/* elements of banner*/
+
+#banner {
+    border: 10px;
+    width: 100%;
+    height: 70px;
+    margin-top: 0;
+}
+
+#bee {
+    height: 60px;
+    position: absolute;
+    display: inline-block;
+    left: 10px;
+}
+
+#banner p {
+    font-weight: bold;
+    font-size: 3em;
+    position: absolute;
+    display: inline-block;
+    left: 90px;
+}
+
+#signOut {
+    border-radius: 20px !important;
+    font-size: 20px;
+    padding: 15px;
+    background-color: #ffce1c;
+    position: absolute;
+    display: inline-block;
+    right: 10px;
+    color: black;
+}
+
+
+/* edit modal */
+
+label {
+    width: 130px;
+    text-align: right;
+}
+
+input {
+    width: 250px;
+}
+
+
+/* edit delete and mute button */
+
+.groupIcon {
+    cursor: pointer;
+    color: navy;
+}
+
+.editIcon {
+    cursor: pointer;
+    color: orange;
+}
