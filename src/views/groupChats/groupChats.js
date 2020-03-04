@@ -123,8 +123,10 @@ $(document).on('click', '#sendButton', function(){
             
         }
     })
-    var elem = document.getElementById('msgsContainer');
+    const elem = document.getElementById('msgsContainer');
     elem.scrollTop = elem.scrollHeight;
+    const textInput = document.getElementById('msgInput');
+    textInput.value = '';
 })
 //helper fucntion for the above function
 function addMsgToChat(courseName, msg){
