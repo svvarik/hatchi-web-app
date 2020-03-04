@@ -108,3 +108,7 @@ input {
     border-radius: 10px;
     border: solid;
 }
+
+.el-icon-turn-off-microphone .el-icon-microphone {
+    cursor: pointer;
+}
