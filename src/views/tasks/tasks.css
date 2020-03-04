@@ -42,6 +42,7 @@
     justify-content: flex-start;
     padding: 10px 50px 0 50px;
     align-content: flex-start;
+    overflow-y: scroll;
 }
 
 .box { 
@@ -106,6 +107,7 @@
     border-radius: 102x;
     text-align: center;
     z-index: 11;
+    overflow-y: scroll;
 }
 .task-detail div, .add-task #close-btn-container {
     width: 10%;
