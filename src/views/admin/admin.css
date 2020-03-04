@@ -1,15 +1,110 @@
+/* main body */
+
 body {
-    font-size: 1.5em;
+    background-color: white;
+    margin: 10px;
+    text-align: center;
+    margin-bottom: 10px;
 }
-li {
-    list-style: none;
+
+#info {
+    width: 250px;
+    text-align: center;
 }
-.page-content{
-    margin: 10vh;
-}
-table {
+
+
+/* elements of banner*/
+
+#banner {
+    border: 10px;
     width: 100%;
+    height: 70px;
+    margin-top: 0;
 }
-th,td {
-    border-bottom: 1px solid #ddd;
+
+#bee {
+    height: 60px;
+    position: absolute;
+    display: inline-block;
+    left: 10px;
+}
+
+#banner p {
+    font-weight: bold;
+    font-size: 3em;
+    position: absolute;
+    display: inline-block;
+    left: 90px;
+}
+
+#signOut {
+    border-radius: 20px !important;
+    font-size: 20px;
+    padding: 15px;
+    background-color: #ffce1c;
+    position: absolute;
+    display: inline-block;
+    right: 10px;
+    color: black;
+}
+
+
+/* edit modal */
+
+label {
+    width: 130px;
+    text-align: right;
+}
+
+input {
+    width: 250px;
+}
+
+
+/* edit delete and mute button */
+
+.groupIcon {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.editIcon {
+    cursor: pointer;
+    width: 23px;
+    height: 23px;
+}
+
+.delIcon {
+    cursor: pointer;
+    width: 23px;
+    height: 23px;
+}
+
+#noteIcon {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 50%;
+    background-color: gold;
+    color: gold;
+}
+
+#reportMsg {
+    background-color: whitesmoke;
+    width: 350px;
+    height: 250px;
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
+    overflow: auto;
+    border-color: black;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid;
 }
