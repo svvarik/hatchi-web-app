@@ -1,5 +1,19 @@
 body{
-  background: #E5E5E5;
+  background-image: url("bg.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  
+}
+body::after {
+  content: "";
+  background-color: white;
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 #pageContainer{
   position: absolute;
