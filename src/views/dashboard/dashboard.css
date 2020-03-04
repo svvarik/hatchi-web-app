@@ -5,6 +5,11 @@
     flex-wrap: nowrap;
 }
 
+.card-title {
+    padding: 1em 2em .5em 2em;
+    margin-bottom: 0;
+}
+
 .page-content { 
     flex-basis: 96%;
     order: 2;
@@ -214,6 +219,7 @@ h5 {
     flex-basis: 14.2%;
     text-align: right;
     min-height: 70px;
+    padding-left: 1.25em;
 }
 
 .week-day-text {
