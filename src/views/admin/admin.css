@@ -60,39 +60,42 @@ input {
     width: 250px;
 }
 
-
-/* edit delete and mute button */
-
-.groupIcon {
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
+/* mute modal*/
+#courseInfo {
+    font-size: 20px;
 }
 
-.editIcon {
+/* edit, delete, mute, notification icon */
+
+.fas.fa-comment-slash,
+.fas.fa-pencil-alt,
+.fas.fa-trash-alt{
     cursor: pointer;
-    width: 23px;
-    height: 23px;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    padding: 0;
 }
 
-.delIcon {
-    cursor: pointer;
-    width: 23px;
-    height: 23px;
+.fas.fa-pencil-alt{
+    color: navy;
+}
+
+.fas.fa-trash-alt{
+    color: red;
+}
+
+.fas.fa-comment-slash{
+    color: darkgray;
 }
 
 #noteIcon {
     cursor: pointer;
-    width: 100px;
-    height: 100px;
     position: absolute;
-    right: 10px;
-    bottom: 10px;
-    padding: 10px;
-    margin: 20px;
-    border-radius: 50%;
-    background-color: gold;
-    color: gold;
+    right: 40px;
+    bottom: 40px;
+    color: #ffce1c;
+    font-size: 100px;
 }
 
 #reportMsg {
@@ -109,6 +112,11 @@ input {
     border: solid;
 }
 
-.el-icon-turn-off-microphone .el-icon-microphone {
+.fas.fa-microphone-slash,
+.fas.fa-microphone-alt {
     cursor: pointer;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    padding: 0px;
 }
