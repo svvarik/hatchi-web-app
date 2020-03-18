@@ -241,3 +241,14 @@ h5 {
 #notifications {
     padding: 0em 2em .5em 2em;
 }
+
+#logOut {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 15px;
+    background-color: #ffce1c;
+    color: black;
+}
