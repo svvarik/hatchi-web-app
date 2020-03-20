@@ -15,6 +15,11 @@ const { User } = require('./models/user')
 const { Course } = require('./models/course')
 const { Message } = require('./models/message')
 
+// Import routes
+const { user } = require('./routes/user')
+
+app.use('/user', user);
+
 // body-parser: middleware for parsing HTTP JSON body into a usable object
 const bodyParser = require('body-parser') 
 app.use(bodyParser.json())
