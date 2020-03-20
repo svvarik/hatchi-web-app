@@ -1,12 +1,23 @@
-/* server.js - Express server*/
+/* server.js, with mongodb API and static directories */
 'use strict';
 const log = console.log
-log('Express server')
-require('dotenv').config()
+const path = require('path')
 
 const express = require('express')
-
+// starting the express server
 const app = express();
+
+// mongoose and mongo connection
+const { mongoose } = require('./db/mongoose')
+
+// import the mongoose models
+const { User } = require('./models/user')
+const { Course } = require('./models/course')
+const { Message } = require('./models/message')
+
+// body-parser: middleware for parsing HTTP JSON body into a usable object
+const bodyParser = require('body-parser') 
+app.use(bodyParser.json())
 
 // Setting up a static directory for the html file in /pub
 // using Express middleware
