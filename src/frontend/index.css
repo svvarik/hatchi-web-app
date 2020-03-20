@@ -1,9 +1,16 @@
+/* body{
+  background-image: url("../../images/bg.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+} */
+
 #introduction{
   position: absolute;
-  width: 756px;
+  width: 70%;
   height: 112px;
-  left: 338px;
-  top: 100px;
+  left: 15%;
+  right: 15%;
+  top: 120px;
 
   font-family: Roboto;
   font-style: normal;
@@ -11,17 +18,17 @@
   font-size: 48px;
   line-height: 56px;
   display: flex;
-  align-items: center;
   text-align: center;
 
   color: #000000;
+  float: initial;
 }
 
 #topBar{
-  position: absolute;
-  width: 1338px;
+  position: relative;
+  width: 90%;
   height: 56px;
-  left: 40px;
+  left: 5%;
   top: 40px;
 }
 
@@ -49,7 +56,7 @@
 }
 
 button{
-  position: absolute;
+  position: relative;
   font-family: Roboto;
   font-size: 24px;
   top:14px;
@@ -58,44 +65,39 @@ button{
   text-align: center;
   background-color: white;
   border: none;
-  display: inline-block;
+  display: block;
   text-decoration: none;
+  float: right;
+  font-weight: 700;
 }
-#about{
-  left:1030px;
-}
-#login{
-  left: 1140px;
-}
+
 #signup{
-  left:1276px;
   background-color: #FFCE1C;
   border-radius: 10px;
 }
 
 #slideShowing{
   position: absolute;
-  height: 500px;
+  top: 290px;
   width: 60%;
-  top:228px;
   left:20%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: pink;
 }
 
 #slide{
-  position: absolute;
   align-items: center;
   /* height: 400px; */
   max-height: 390px;
   width: 80%;
-  left:10%;
-  bottom: 100px;
+  margin: 10%;
+  margin-top: 5%;
+  margin-bottom: 0;
 }
 
 #description{
-  position:absolute;
-  top:400px;
+  display: block;
+  bottom:400px;
   margin: 20px;
   line-height: 35px;
   font-size: 35px;

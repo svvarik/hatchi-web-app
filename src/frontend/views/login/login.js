@@ -60,12 +60,12 @@ if (getUrlVars()['signup'] == "true"){
 function switchBar(){
   const bar = document.getElementById("ChosenTab");
   if (!signup){
-    bar.style.x = 159;
+    bar.style.x = '50%';
     lForm.style.display = "none";
     sForm.style.display = "block";
     signup = true;
   } else{
-    bar.style.x = 0;
+    bar.style.x = '0%';
     lForm.style.display = "block";
     sForm.style.display = "none";
     signup = false;
