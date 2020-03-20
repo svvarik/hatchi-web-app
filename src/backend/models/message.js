@@ -5,3 +5,7 @@ const messageSchema = new Schema({
     course: [ObjectID],
     reported: Boolean
 });
+
+const Message = mongoose.model('Message', messageSchema)
+
+module.exports = { Message }

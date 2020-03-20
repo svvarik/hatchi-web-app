@@ -20,3 +20,7 @@ const userSchema = new Schema({
     courses: [ObjectID],
     tasks: [taskSchema]
 });
+
+const User = mongoose.model('User', userSchema)
+
+module.exports = { User }
