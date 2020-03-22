@@ -6,7 +6,7 @@
    /* Connnect to our database */
    // Get the URI of the local database, or the one specified on deployment.
 //    const mongoURI = process.env.MONGODB_URI
-   const mongoURI = "MONGODB_URI=mongodb+srv://admin_0:admin_0@hachi0-vbufp.azure.mongodb.net/test?retryWrites=true&w=majority"
+   const mongoURI = "mongodb+srv://admin_0:admin_0@hachi0-vbufp.azure.mongodb.net/test?retryWrites=true&w=majority"
    
    mongoose.connect(mongoURI, 
        { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
