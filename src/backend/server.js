@@ -18,7 +18,7 @@ const { Message } = require('./models/message')
 // Import routes
 const { user } = require('./routes/user')
 
-app.use('/user', user);
+// app.use('/user', user);
 
 // body-parser: middleware for parsing HTTP JSON body into a usable object
 const bodyParser = require('body-parser') 
@@ -26,7 +26,14 @@ app.use(bodyParser.json())
 
 // Setting up a static directory for the html file in /pub
 // using Express middleware
-app.use(express.static(__dirname + '/pub'))
+// app.use(express.static(__dirname + '/pub'))
+
+app.use('../frontend', express.static(path.join(__dirname, 'frontend')))
+app.get('/', function(req, res){
+   log("我有一句mmp")
+   log(__dirname);
+   res.sendFile('index.html', {'root': '../frontend/'})
+})
 
 // will use an 'environmental variable', process.env.PORT, for deployment.
 const port = process.env.PORT || 5000
