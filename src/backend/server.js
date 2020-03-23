@@ -16,7 +16,8 @@ const { Course } = require('./models/course')
 const { Message } = require('./models/message')
 
 // Import routes
-const { user } = require('./routes/user')
+// app.use(require('./routes/user'))
+app.use(require('./routes/admin'))
 
 // app.use('/user', user);
 
@@ -28,11 +29,15 @@ app.use(bodyParser.json())
 // using Express middleware
 // app.use(express.static(__dirname + '/pub'))
 
-app.use('../frontend', express.static(path.join(__dirname, 'frontend')))
-app.get('/', function(req, res){
-   log("我有一句mmp")
-   log(__dirname);
-   res.sendFile('index.html', {'root': '../frontend/'})
+const frontendPath = path.join(__dirname, '../frontend');
+const imagesPath = path.join(__dirname, '../../images');
+log(__dirname)
+log(imagesPath)
+app.use('/images', express.static(imagesPath));
+app.use(express.static(frontendPath))
+
+app.get('/', (req, res) => {
+   res.sendFile(frontendPath + '/index.html');
 })
 
 // will use an 'environmental variable', process.env.PORT, for deployment.
