@@ -1,82 +1,96 @@
-// initial list of user
-const course1 = [{
-    course: "CSC309",
-    mute: true
-},
-{
-    course: "STA302",
-    mute: true
-},
-{
-    course: "MAT344",
-    mute: false
-},
-{
-    course: "MAT315",
-    mute: false
-}
-]
+// // initial list of user
+// const course1 = [{
+//     course: "CSC309",
+//     mute: true
+// },
+// {
+//     course: "STA302",
+//     mute: true
+// },
+// {
+//     course: "MAT344",
+//     mute: false
+// },
+// {
+//     course: "MAT315",
+//     mute: false
+// }
+// ]
 
-const course2 = [{
-    course: "CSC309",
-    mute: false
-},
-{
-    course: "INI318",
-    mute: false
-},
-{
-    course: "CSC373",
-    mute: false
-},
-{
-    course: "CSC301",
-    mute: false
-}
-]
+// const course2 = [{
+//     course: "CSC309",
+//     mute: false
+// },
+// {
+//     course: "INI318",
+//     mute: false
+// },
+// {
+//     course: "CSC373",
+//     mute: false
+// },
+// {
+//     course: "CSC301",
+//     mute: false
+// }
+// ]
 
-const course3 = [{
-    course: "CSC309",
-    mute: false
-},
-{
-    course: "STA247",
-    mute: false
-},
-{
-    course: "CSC311",
-    mute: false
-}
-]
+// const course3 = [{
+//     course: "CSC309",
+//     mute: false
+// },
+// {
+//     course: "STA247",
+//     mute: false
+// },
+// {
+//     course: "CSC311",
+//     mute: false
+// }
+// ]
 
-const USERS = [{
-    username: "Yun1",
-    email: "yun@mail.com",
-    password: "yun1",
-    groups: course1
-},
-{
-    username: "Yun2",
-    email: "yun2@mail.com",
-    password: "yun2",
-    groups: course2
-},
-{
-    username: "Yun3",
-    email: "yun3@mail.com",
-    password: "yun3",
-    groups: course3
-}
-];
+// const USERS = [{
+//     username: "Yun1",
+//     email: "yun@mail.com",
+//     password: "yun1",
+//     groups: course1
+// },
+// {
+//     username: "Yun2",
+//     email: "yun2@mail.com",
+//     password: "yun2",
+//     groups: course2
+// },
+// {
+//     username: "Yun3",
+//     email: "yun3@mail.com",
+//     password: "yun3",
+//     groups: course3
+// }
+// ];
 
 
-// initialize table body
-{/* <img class="groupIcon" id="courses-${index}" src=group.svg data-toggle="modal" data-target="#muteModal" onclick=muteBody(this.id)> */}
-{/* <img class="editIcon" id="edit-${index}" src=pencil.svg data-toggle="modal" data-target="#updateModal" onclick=getIndex(this.id)> */}
-{/* <img class="delIcon" id="delete-${index}" src=trash.svg data-toggle="modal" data-target="#deleteModal" onclick=confirmDelete(this)> */}
+// -----------------------------------------------------------------
+var dataDisplay;
+$.ajax({
+    type: "GET",
+    url: "/userInfo",
+    async: false,
+    success: function (data, status) {
+        if (true) {
+            console.log(data);
+            dataDisplay = data;
+        }
+    }
+})
+console.log(dataDisplay)
+// -----------------------------------------------------------------
+
+
 let html = ""
+USERS = dataDisplay.username
 for (const index in USERS) {
-html += `<tr id=${index}> 
+    html += `<tr id=${index}> 
             <td>${USERS[index].username}</td>
             <td>${USERS[index].email}</td>
             <td>
@@ -94,113 +108,123 @@ document.getElementById("mainTB").innerHTML = html;
 
 // closing modal
 function closeMuteModal() {
-$('#muteModal').modal('hide');
+    $('#muteModal').modal('hide');
 }
 
 function closeUpdateModal() {
-$('#updateModal').modal('hide');
+    $('#updateModal').modal('hide');
 }
 
 function closeDeleteModal() {
-$('#deleteModal').modal('hide');
+    $('#deleteModal').modal('hide');
 }
 
 // confirm delete
 function confirmDelete(row) {
-let i = row.parentNode.parentNode;
-i.parentNode.removeChild(i);
-closeDeleteModal();
+    let i = row.parentNode.parentNode;
+    i.parentNode.removeChild(i);
+    closeDeleteModal();
 }
 
 // mute-Modal body
 // muteID = course-0, course-1.....
 function muteBody(rowIndex) {
-console.log(rowIndex);
-let body = "";
-const index = rowIndex.split("-")[1];
-const username = USERS[index].username;
-for (u of USERS) {
-    if (u.username === username) {
-        for (c of u.groups) {
-            if (c.mute) {
-                body += `<p> ${c.course}
-                            <i id="${username}-${c.course}" class="fas fa-microphone-slash" onclick="changeStatus('${username}', '${c.course}')">
-                            </i>
-                        </p>`;
-            } else if (!c.mute) {
-                body += `<p> ${c.course}
-                            <i id="${username}-${c.course}" class="fas fa-microphone-alt" alt="nMute" onclick="changeStatus('${username}', '${c.course}')">
-                            </i>
-                        </p>`;
+    console.log(rowIndex);
+    let body = "";
+    const index = rowIndex.split("-")[1];
+    const username = USERS[index].username;
+    for (u of USERS) {
+        if (u.username === username) {
+            for (crs of u.groups) {
+                var crName, mute;
+                for (ky in crs){
+                    crName = ky;
+                    mute = crs[ky];
+                }
+                if (mute) {
+                    body += `<p> ${crName}
+                                <i id="${username}-${crName}" class="fas fa-microphone-slash" onclick="changeStatus('${username}', '${crName}')">
+                                </i>
+                            </p>`;
+                } else if (!mute) {
+                    body += `<p> ${crName}
+                                <i id="${username}-${crName}" class="fas fa-microphone-alt" alt="nMute" onclick="changeStatus('${username}', '${crName}')">
+                                </i>
+                            </p>`;
+                }
             }
+            console.log(body);
+            document.getElementById("courseInfo").innerHTML = body;
         }
-        console.log(body);
-        document.getElementById("courseInfo").innerHTML = body;
     }
-}
 }
 
 // change status
-function changeStatus(uname, cname) {
-// console.log("changeStatus(" + uname + ", " + cname + ")");
-for (u of USERS) {
-    if (u.username === uname) {
-        for (c of u.groups) {
-            if (c.course == cname) {
-                c.mute = !c.mute;
-                break;
+function changeStatus(uName, cName) {
+    // console.log("changeStatus(" + uname + ", " + cname + ")");
+    for (u of USERS) {
+        if (u.username === uName) {
+            for (eachCourse of u.groups) {
+                var crName, mute;
+                for (ky in eachCourse){
+                    crName = ky;
+                    mute = eachCourse[ky];
+                }
+                if (crName == cName) {
+                    eachCourse[ky] = !eachCourse[ky];
+                    break;
+                }
             }
+            break;
         }
-        break;
     }
-}
 
-// change image
-let x = document.getElementById(`${uname}-${cname}`);
-console.log(x);
-console.log(x.className);
-if (c.mute) {
-    x.alt = "Mute";
-    x.className = "fas fa-microphone-slash";
-} else {
-    x.alt = "nMute";
-    x.className = "fas fa-microphone-alt";
-}
+    // change image
+    let x = document.getElementById(`${uName}-${cName}`);
+    console.log(x);
+    console.log(x.className);
+    if (mute) {
+        x.alt = "Mute";
+        x.className = "fas fa-microphone-slash";
+    } else {
+        x.alt = "nMute";
+        x.className = "fas fa-microphone-alt";
+    }
 }
 
 var editRow;
 
 function getIndex(row_id) {
-editRow = row_id;
+    editRow = row_id;
 }
 // save edit information
 function saveEdit(saveButton) {
-console.log(saveButton);
-// modified value
-const newName = document.getElementById("editUName").value;
-const newEmail = document.getElementById("editEmail").value;
-const newPasswd = document.getElementById("editPw").value;
+    // console.log(saveButton);
+    // modified value
+    const newName = document.getElementById("editUName").value;
+    const newEmail = document.getElementById("editEmail").value;
+    const newPasswd = document.getElementById("editPw").value;
 
-// user modified
-const currNode = document.getElementById(editRow).parentNode;
-const mailNode = currNode.previousElementSibling.previousElementSibling;
-const nameNode = mailNode.previousElementSibling;
+    // user modified
+    const currNode = document.getElementById(editRow).parentNode;
+    const mailNode = currNode.previousElementSibling.previousElementSibling;
+    const nameNode = mailNode.previousElementSibling;
 
-if (newName != "") {
-    nameNode.textContent = newName;
-}
-if (newEmail != "") {
-    mailNode.textContent = newEmail;
-}
-closeUpdateModal();
+    if (newName != "") {
+        nameNode.textContent = newName;
+    }
+    if (newEmail != "") {
+        mailNode.textContent = newEmail;
+    }
+    closeUpdateModal();
 }
 
 // show/hide the notification box
 function popUpNotification() {
-var pop = document.getElementById("reportMsg");
-if (pop.style.display == "none") {
-    pop.style.display = "block";
-} else {
-    pop.style.display = "none";
-}
+    var pop = document.getElementById("reportMsg");
+    if (pop.style.display == "none") {
+        pop.style.display = "block";
+    } else {
+        pop.style.display = "none";
+    }
 }

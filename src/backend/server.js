@@ -2,13 +2,21 @@
 'use strict';
 const log = console.log
 const path = require('path')
-
-const express = require('express')
-// starting the express server
-const app = express();
+const express = require('express');
+const app = express();     // starting the express server
+const port = process.env.PORT || 5000;    // will use an 'environmental variable', process.env.PORT, for deployment.
+const bodyParser = require('body-parser');      // body-parser: middleware for parsing HTTP JSON body into a usable object
+const frontendPath = path.join(__dirname, '../frontend');
+const imagesPath = path.join(__dirname, '../../images');
 
 // mongoose and mongo connection
 const { mongoose } = require('./db/mongoose')
+mongoose.connection.on('open', function(ref){
+   log("connected to mongoDB");
+})
+mongoose.connection.on('error', function(ref){
+   log("connection failed");
+})
 
 // import the mongoose models
 const { User } = require('./models/user')
@@ -19,29 +27,16 @@ const { Message } = require('./models/message')
 // app.use(require('./routes/user'))
 app.use(require('./routes/admin'))
 
-// app.use('/user', user);
-
-// body-parser: middleware for parsing HTTP JSON body into a usable object
-const bodyParser = require('body-parser') 
 app.use(bodyParser.json())
 
-// Setting up a static directory for the html file in /pub
-// using Express middleware
-// app.use(express.static(__dirname + '/pub'))
-
-const frontendPath = path.join(__dirname, '../frontend');
-const imagesPath = path.join(__dirname, '../../images');
-log(__dirname)
-log(imagesPath)
+// Setting up a static directory for the html file using Express middleware
 app.use('/images', express.static(imagesPath));
-app.use(express.static(frontendPath))
+app.use(express.static(frontendPath));
+app.use(express.static(frontendPath + '/views/admin'));
 
 app.get('/', (req, res) => {
    res.sendFile(frontendPath + '/index.html');
 })
-
-// will use an 'environmental variable', process.env.PORT, for deployment.
-const port = process.env.PORT || 5000
 
 app.listen(port, () => {
 	log(`Listening on port ${port}...`)
