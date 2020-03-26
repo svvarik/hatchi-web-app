@@ -1,3 +1,5 @@
+import * as loginRoutes from "../../../backend/routes/login.js";
+
 const profiles  = [
   {
     username: "user",
@@ -28,16 +30,11 @@ const profiles  = [
 const lForm = document.getElementById("LoginForm");
 const sForm = document.getElementById("SignupForm");
 
-
-const wrongPassword = document.querySelector("#wrongPassword");
-const accountNotExists = document.querySelector("#accountNotExists");
 const signupSuccessfully = document.querySelector("#signupSuccessfully");
-const usernameOccupied = document.querySelector("#usernameOccupied");
+const error = document.querySelector("#errorNotice");
 function clearAllNotices() {
-  wrongPassword.style.display = "none";
-  accountNotExists.style.display = "none";
+  error.style.display = "none";
   signupSuccessfully.style.display = "none";
-  usernameOccupied.style.display = "none";
 }
 
 
@@ -80,31 +77,47 @@ sForm.addEventListener('submit', signupSubmit);
 function loginSubmit(e){
   e.preventDefault();
   clearAllNotices();
+
+  // get the input values
   const lusername = document.querySelector("#lusername").value;
-  // console.log(username);
   const lpassword = document.querySelector("#lpassword").value;
 
-  let foundUsername = false;
-  for (let i = 0; i < profiles.length; i++){
-    // console.log(profiles[i]);
-    if (profiles[i].username == lusername){
-      foundUsername = true;
-      if (profiles[i].password == lpassword) {
-        if (profiles[i].authorization == "user"){
-          window.location = "../dashboard/dashboard.html";
-        } else {
-          window.location = "../admin/admin.html";
-        }
-      } else {
-        // Wrong PASSWORD!!!!  TODO
-        wrongPassword.style.display = "block";
-      }
+  // login action
+  let code = loginRoutes.adminLogin(lusername, lpassword);
+  if (typeof(code) == "string"){
+    errorNotice(code);
+  } else if (code == false) {
+    code = loginRoutes.login(lusername, lpassword);
+    if (typeof(code) == "string"){
+      errorNotice(code);
+    } else {
+      sessionStorage.setitem('user', code);
+      window.location = "../dashboard/dashboard.html";
     }
+  } else {
+    sessionStorage.setItem('admin', code);
+    window.location = "../admin/admin.html";
   }
-  // Account Does Not Exists!!!  TODO
-  if (!foundUsername){
-    accountNotExists.style.display = "block";
-  }
+  // let foundUsername = false;
+  // for (let i = 0; i < profiles.length; i++){
+  //   if (profiles[i].username == lusername){
+  //     foundUsername = true;
+  //     if (profiles[i].password == lpassword) {
+  //       if (profiles[i].authorization == "user"){
+  //         window.location = "../dashboard/dashboard.html";
+  //       } else {
+  //         window.location = "../admin/admin.html";
+  //       }
+  //     } else {
+  //       // Wrong PASSWORD!!!!  TODO
+  //       errorNotice('WRONG_PASSWORD')
+  //     }
+  //   }
+  // }
+  // // Account Does Not Exists!!!  TODO
+  // if (!foundUsername){
+  //   errorNotice('ACCT_NOT_EXISTS')
+  // }
 }
 
 function signupSubmit(e){
@@ -113,24 +126,47 @@ function signupSubmit(e){
   const susername = document.querySelector("#susername").value;
   const semail = document.querySelector("#email").value;
   const spassword = document.querySelector("#spassword").value;
-  let canRegister = true;
-  for (let i = 0; i < profiles.length; i++){
-    if (profiles[i].username == susername){
-      canRegister = false;
-    }
-  }
-  if (canRegister){
-    profiles[profiles.length] = {
-        username: susername,
-        password: spassword,
-        email: semail,
-        authorization: "user"
-    };
-    //signupSuccessfully
+  const code = loginRoutes.signup(susername, semail, spassword);
+  if (code == 'SUCCESS'){
     signupSuccessfully.style.display = "block";
     sForm.style.display = "none";
   } else {
-    //Username Occupied, please Choose another one;
-    usernameOccupied.style.display = "block";
+    errorNotice(code);
   }
+  // let canRegister = true;
+  // for (let i = 0; i < profiles.length; i++){
+  //   if (profiles[i].username == susername){
+  //     canRegister = false;
+  //   }
+  // }
+  // if (canRegister){
+  //   profiles[profiles.length] = {
+  //       username: susername,
+  //       password: spassword,
+  //       email: semail,
+  //       authorization: "user"
+  //   };
+  //   //signupSuccessfully
+  //   signupSuccessfully.style.display = "block";
+  //   sForm.style.display = "none";
+  // } else {
+  //   errorNotice("USERNAME_OCCUPIED")
+  // }
+}
+
+
+function errorNotice(errorMessage){
+  const notice = document.getElementById('errorNotice');
+  switch (errorMessage){
+    case 'USERNAME_OCCUPIED':
+      notice.firstChild.textContent = "Username Occupied, Please Choose Another One.";
+      break;
+    case "WRONG_PASSWORD":
+      notice.firstChild.textContent = 'Password Does Not Match, Please Check Your Password.';
+      break;
+    case "ACCT_NOT_EXISTS":
+      notice.firstChild.textContent = "Account Not Exists, Please Check Your Username.";
+      break;
+  }
+  notice.style.display = "block";
 }
