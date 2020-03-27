@@ -56,12 +56,12 @@ li {
     padding-top: 5%;
 }
 
-#courseNameContainer {
+.courseNameContainer {
     background-color: rgba(59, 72, 74, 1);
     height: 5vh;
 }
 
-#courseNameContainer h3 {
+.courseNameContainer h3 {
     color: rgba(255, 206, 28, 1);
     padding: 10px;
     text-align: center;

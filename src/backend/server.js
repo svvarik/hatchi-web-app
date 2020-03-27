@@ -22,12 +22,14 @@ mongoose.connection.on('error', function(ref){
 const { User } = require('./models/user')
 const { Course } = require('./models/course')
 const { Message } = require('./models/message')
+const { Admin } = require('./models/admin')
+
+app.use(bodyParser.json()) //need to be placed before the imported routes
 
 // Import routes
 // app.use(require('./routes/user'))
 app.use(require('./routes/admin'))
-
-app.use(bodyParser.json())
+app.use(require('./routes/groupChat'))
 
 // Setting up a static directory for the html file using Express middleware
 app.use('/images', express.static(imagesPath));
