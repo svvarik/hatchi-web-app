@@ -1,5 +1,3 @@
-import * as loginRoutes from "../../../backend/routes/login.js";
-
 const profiles  = [
   {
     username: "user",
@@ -82,42 +80,34 @@ function loginSubmit(e){
   const lusername = document.querySelector("#lusername").value;
   const lpassword = document.querySelector("#lpassword").value;
 
-  // login action
-  let code = loginRoutes.adminLogin(lusername, lpassword);
-  if (typeof(code) == "string"){
-    errorNotice(code);
-  } else if (code == false) {
-    code = loginRoutes.login(lusername, lpassword);
-    if (typeof(code) == "string"){
-      errorNotice(code);
-    } else {
-      sessionStorage.setitem('user', code);
-      window.location = "../dashboard/dashboard.html";
-    }
-  } else {
-    sessionStorage.setItem('admin', code);
-    window.location = "../admin/admin.html";
+  const url = '/views/login/login.html/login';
+  const data = {
+    username: lusername,
+    password: lpassword
   }
-  // let foundUsername = false;
-  // for (let i = 0; i < profiles.length; i++){
-  //   if (profiles[i].username == lusername){
-  //     foundUsername = true;
-  //     if (profiles[i].password == lpassword) {
-  //       if (profiles[i].authorization == "user"){
-  //         window.location = "../dashboard/dashboard.html";
-  //       } else {
-  //         window.location = "../admin/admin.html";
-  //       }
-  //     } else {
-  //       // Wrong PASSWORD!!!!  TODO
-  //       errorNotice('WRONG_PASSWORD')
-  //     }
-  //   }
-  // }
-  // // Account Does Not Exists!!!  TODO
-  // if (!foundUsername){
-  //   errorNotice('ACCT_NOT_EXISTS')
-  // }
+  const request = new Request(url, {
+    method: 'post',
+    body: JSON.stringify(data),
+    headers:{
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  });
+
+  fetch(request).then(function(res) {
+    if (res.notice === null){
+      sessionStorage.setItem('user', res.userid);
+      if (res.admin === false){
+        window.location = '../dashboard/dashboard.html';
+      } else {
+        window.location = '../admin/admin.html';
+      }
+    } else {
+      errorNotice(res.notice);
+    }
+  }).catch((error) => {
+    console.log(error);
+  })
 }
 
 function signupSubmit(e){
@@ -126,32 +116,33 @@ function signupSubmit(e){
   const susername = document.querySelector("#susername").value;
   const semail = document.querySelector("#email").value;
   const spassword = document.querySelector("#spassword").value;
-  const code = loginRoutes.signup(susername, semail, spassword);
-  if (code == 'SUCCESS'){
-    signupSuccessfully.style.display = "block";
-    sForm.style.display = "none";
-  } else {
-    errorNotice(code);
+
+  const url = '/views/login/login.html/signup';
+  const data = {
+    username: susername,
+    email: semail,
+    password: spassword
   }
-  // let canRegister = true;
-  // for (let i = 0; i < profiles.length; i++){
-  //   if (profiles[i].username == susername){
-  //     canRegister = false;
-  //   }
-  // }
-  // if (canRegister){
-  //   profiles[profiles.length] = {
-  //       username: susername,
-  //       password: spassword,
-  //       email: semail,
-  //       authorization: "user"
-  //   };
-  //   //signupSuccessfully
-  //   signupSuccessfully.style.display = "block";
-  //   sForm.style.display = "none";
-  // } else {
-  //   errorNotice("USERNAME_OCCUPIED")
-  // }
+  const request = new Request(url, {
+    method: 'post',
+    body: JSON.stringify(data),
+    headers:{
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  });
+  fetch(request).then(function(res) {
+     if(res.status === 200){
+       if (res.notice === null){
+         signupSuccessfully.style.display = "block";
+         sForm.style.display = "none";
+       } else {
+         errorNotice(res.notice);
+       }
+     } 
+  }).catch((error) => {
+    console.log(error);
+  })
 }
 
 
