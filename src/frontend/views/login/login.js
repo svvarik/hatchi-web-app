@@ -97,6 +97,7 @@ function loginSubmit(e){
   fetch(request).then(function(res) {
     if (res.notice === null){
       sessionStorage.setItem('user', res.userid);
+      sessionStorage.setItem('admin', res.admin);
       if (res.admin === false){
         window.location = '../dashboard/dashboard.html';
       } else {
