@@ -74,4 +74,110 @@ router.post('/views/login/login.html/signup', (req, res) => {
    })
 })
 
+router.post('/views/setting/setting.html/changeName', (req, res) =>{
+    if (!ObjectID.isValid(req.body.userid)){
+        res.status(404).send()
+        return;
+    }
+    console.log(req.body.userid);
+
+    User.exists({username: req.body.username}).then((exist) => {
+        res.notice = null;
+        if (exist) {
+            res.notice = 'Username Occupied, Please Choose Another One.'
+            res.status(200).send()
+        } else {
+            User.findByIdAndUpdate(req.body.userid, {username: req.body.newName}).then((user) => {
+                res.newName = user.username;
+                res.status(200).send()
+            }).catch((error) => {
+                res.status(500).send()
+            })
+        }
+    }, (err) => {
+        res.status(400).send()
+    })
+    
+    
+})
+
+
+router.post('/views/setting/setting.html/changeEmail', (req, res) =>{
+    if (!ObjectID.isValid(req.body.userid)){
+        res.status(404).send()
+        return;
+    }
+    console.log(req.body.userid);
+    User.findByIdAndUpdate(req.body.userid, {email: req.body.newEmail}).then((user) => {
+        res.newEmail = user.email;
+        res.status(200).send();
+    }).catch((error) => {
+        res.status(500).send();
+    })
+    
+})
+
+
+router.post('/views/setting/setting.html/changePassword', (req, res) => {
+    if (!ObjectID.isValid(req.body.userid)){
+        res.status(404).send();
+        return;
+    }
+    console.log(req.body.userid);
+    res.notice = null;
+    User.findById(req.body.userid).then((user) => {
+        if (user === null) {
+            res.status(400).send();
+        } else {
+            if (user.password == req.body.oldPassword) {
+                User.findByIdAndUpdate(req.body.userid, {password: req.body.newPassword}).then((user) => {
+                    res.status(200).send();
+                }).catch((error) => {
+                    res.status(500).send();
+                })
+
+            } else {
+                res.notice = 'Wrong Password, Please Try Again.'
+                res.status(200).send();
+            }
+        }
+    }).catch((error)=> {
+        res.status(500).send();
+    })
+    
+})
+
+router.post('/views/setting/setting.html/getUsername', (req, res) => {
+    if (!ObjectID.isValid(req.body.userid)){
+        res.status(404).send();
+        return;
+    }
+    console.log(req.body.userid);
+    User.findById(req.body.userid).then((user) => {
+        if (user === null) {
+            res.status(400).send();
+        } else {
+            res.username = user.username;
+        }
+    }).catch((error)=> {
+        res.status(500).send();
+    })
+})
+
+router.post('/views/setting/setting.html/getEmail', (req, res) => {
+    if (!ObjectID.isValid(req.body.userid)){
+        res.status(404).send();
+        return;
+    }
+    console.log(req.body.userid);
+    User.findById(req.body.userid).then((user) => {
+        if (user === null) {
+            res.status(400).send();
+        } else {
+            res.email = user.email;
+        }
+    }).catch((error)=> {
+        res.status(500).send();
+    })
+})
 module.exports = router
