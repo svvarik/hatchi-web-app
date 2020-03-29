@@ -39,6 +39,9 @@ app.use(express.static(frontendPath + '/views/admin'));
 app.get('/', (req, res) => {
    res.sendFile(frontendPath + '/index.html');
 })
+app.get('/admin', (req, res)=>{
+   res.sendFile(frontendPath + "/views/admin/admin.html")
+})
 
 app.listen(port, () => {
 	log(`Listening on port ${port}...`)

@@ -1,76 +1,5 @@
-// // initial list of user
-// const course1 = [{
-//     course: "CSC309",
-//     mute: true
-// },
-// {
-//     course: "STA302",
-//     mute: true
-// },
-// {
-//     course: "MAT344",
-//     mute: false
-// },
-// {
-//     course: "MAT315",
-//     mute: false
-// }
-// ]
-
-// const course2 = [{
-//     course: "CSC309",
-//     mute: false
-// },
-// {
-//     course: "INI318",
-//     mute: false
-// },
-// {
-//     course: "CSC373",
-//     mute: false
-// },
-// {
-//     course: "CSC301",
-//     mute: false
-// }
-// ]
-
-// const course3 = [{
-//     course: "CSC309",
-//     mute: false
-// },
-// {
-//     course: "STA247",
-//     mute: false
-// },
-// {
-//     course: "CSC311",
-//     mute: false
-// }
-// ]
-
-// const USERS = [{
-//     username: "Yun1",
-//     email: "yun@mail.com",
-//     password: "yun1",
-//     groups: course1
-// },
-// {
-//     username: "Yun2",
-//     email: "yun2@mail.com",
-//     password: "yun2",
-//     groups: course2
-// },
-// {
-//     username: "Yun3",
-//     email: "yun3@mail.com",
-//     password: "yun3",
-//     groups: course3
-// }
-// ];
-
-
-// -----------------------------------------------------------------
+const log = console.log;
+// -------------------------- User table ----------------------------
 var dataDisplay;
 $.ajax({
     type: "GET",
@@ -83,12 +12,10 @@ $.ajax({
         }
     }
 })
-console.log(dataDisplay)
-// -----------------------------------------------------------------
-
+console.log(`dataDisplay: ${dataDisplay}`)
 
 let html = ""
-USERS = dataDisplay.username
+USERS = dataDisplay
 for (const index in USERS) {
     html += `<tr id=${index}> 
             <td>${USERS[index].username}</td>
@@ -101,30 +28,21 @@ for (const index in USERS) {
             </td>
             <td>
                 <i class='fas fa-trash-alt' id="delete-${index}" data-toggle="modal" data-target="#deleteModal" onclick=confirmDelete(this)>
+                <i class='fas fa-trash-alt' id="delete-${index}" data-toggle="modal" data-target="#deleteModal" onclick=showDeleteModal(this)>
             </td>
         </tr>`
 }
 document.getElementById("mainTB").innerHTML = html;
 
-// closing modal
-function closeMuteModal() {
-    $('#muteModal').modal('hide');
-}
+// -------------------------- /User table ----------------------------
 
-function closeUpdateModal() {
-    $('#updateModal').modal('hide');
-}
-
+// -------------------------- closing modal ----------------------------
 function closeDeleteModal() {
     $('#deleteModal').modal('hide');
 }
+// -------------------------- /closing modal ----------------------------
 
-// confirm delete
-function confirmDelete(row) {
-    let i = row.parentNode.parentNode;
-    i.parentNode.removeChild(i);
-    closeDeleteModal();
-}
+// -------------------------- Mute Modal ----------------------------
 
 // mute-Modal body
 // muteID = course-0, course-1.....

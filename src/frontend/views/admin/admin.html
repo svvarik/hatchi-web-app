@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="/admin.css">
     <title>Hachi | Administrator</title>
@@ -24,7 +25,7 @@
         <thead>
             <th class="info">Username</th>
             <th class="info">E-mail Address</th>
-            <th class="icon">Groups</th>
+            <th class="icon">Disable Sending Msg</th>
             <th class="icon">Edit Profile</th>
             <th class="icon">Delete</th>
         </thead>
@@ -40,15 +41,15 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4>Groups</h4>
-                    <button id="muteDialog" onclick="closeMuteModal()">&times;</button>
+                    <h4>Mute</h4>
+                    <button id="muteDialog" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal Body -->
                 <div id="courseInfo" class="modal-body">
                 </div>
                 <div>
                     <div class="modal-footer">
-                        <button id="muteDialog" onclick="closeMuteModal()" class="btn btn-primary">Save Changes</button>
+                        <button id="muteDialog" class="btn btn-primary" onclick="changeStatus(this)">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -66,19 +67,20 @@
                     <h4 id="editTitle" class="modal-title">User Profile</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                      </button>
+                    </button>
                 </div>
                 <!-- modal body -->
                 <div class="modal-body">
-                    <form autocomplete="off" id="profolio">
+                    <form autocomplete="off" id="profolio" action="/updateUserInfo">
                         <label for="name">Username: </label>
-                        <input type="text" id="editUName" name="uname" placeholder="new userName"><br>
+                        <input type="text" id="editUName" name="uname" placeholder="new username"><br>
                         <label for="email">Email: </label>
                         <input type="text" id="editEmail" name="email" placeholder="new email address"><br>
                         <label for="password">Password: </label>
-                        <input type="text" id="editPw" name="pw" placeholder="new password"><br>
+                        <input type="text" id="editPw" name="pw" readonly placeholder="Cannot modify"><br>
                     </form>
-                    <button type="submit" type="button" class="btn btn-primary" onclick="saveEdit(this)" data-dismiss="modal">Save changes</button>
+                    <button type="submit" type="button" class="btn btn-primary" onclick="saveEdit(this)"
+                        data-dismiss="modal">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -107,58 +109,25 @@
             </div>
         </div>
 
-    </div> -->
+    </div>
 
 
     <!-- report message modal -->
-    <div id="reportMsg" style.display="none">
+    <div id="reportMsg" style.display="block">
         <!-- username, groupchat, message -->
         <table>
             <thead>
                 <th>Username</th>
                 <th>Groupchat</th>
                 <th>Message</th>
+                <th>Read<th>
             </thead>
-            <tbody>
+            <tbody id="message">
                 <tr>
                     <td>a1</td>
                     <td>csc309</td>
                     <td>i swear :P</td>
-                </tr>
-                <tr>
-                    <td>a2</td>
-                    <td>csc233</td>
-                    <td>reprot me!!!</td>
-                </tr>
-                <tr>
-                    <td>a2</td>
-                    <td>csc233</td>
-                    <td>reprot me!!!</td>
-                </tr>
-                <tr>
-                    <td>a2</td>
-                    <td>csc233</td>
-                    <td>reprot me!!!</td>
-                </tr>
-                <tr>
-                    <td>a2</td>
-                    <td>csc233</td>
-                    <td>reprot me!!!</td>
-                </tr>
-                <tr>
-                    <td>a2</td>
-                    <td>csc233</td>
-                    <td>reprot me!!!</td>
-                </tr>
-                <tr>
-                    <td>a2</td>
-                    <td>csc233</td>
-                    <td>reprot me!!!</td>
-                </tr>
-                <tr>
-                    <td>a2</td>
-                    <td>csc233</td>
-                    <td>reprot me!!!</td>
+                    <td><span type="button">√</span><td>
                 </tr>
             </tbody>
         </table>
@@ -173,9 +142,14 @@
     <script type="text/javascript" src="./admin.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <!-- modal -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
