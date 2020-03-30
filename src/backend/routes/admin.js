@@ -11,6 +11,7 @@ const { Admin } = require('../models/admin') // get report message
 
 /* get admin page */
 router.get('/userInfo', (req, res) => {
+    log("admin page")
     // const c2 = {
     //     courseCode: 'sta247',
     //     courseName: 'probability',
@@ -31,7 +32,7 @@ router.get('/userInfo', (req, res) => {
     User.find({}).then(
         (usersInfo) => {
             const allUsers = [];
-            for(const u in usersInfo){
+            for (const u in usersInfo) {
                 const user = {
                     userid: '',
                     username: '',
@@ -42,12 +43,12 @@ router.get('/userInfo', (req, res) => {
                 user.username = usersInfo[u].username;
                 user.email = usersInfo[u].email;
                 // get user groups
-                for (const g in usersInfo[u].courses){
+                for (const g in usersInfo[u].courses) {
                     // const cId = usersInfo[u].courses[g][0]
                     const courseCode = usersInfo[u].courses[g][1]
                     const mute = usersInfo[u].courses[g][2]
                     user.groups.push({
-                        key : courseCode,
+                        key: courseCode,
                         value: mute
                     });
                 }
@@ -56,14 +57,62 @@ router.get('/userInfo', (req, res) => {
             }
             res.send(allUsers)
         },
-        (error)=>{res.status(500).send(error)} // server error
+        (error) => { res.status(500).send(error) } // server error
     )
 
 })
 
-    }
 
 
+router.post('/updateUserInfo', (req, res) => {
+    log("update user information")
+    const body = req.body
+    const username = body.username
+    const newName = body.newName
+    const newEmail = body.newEmail
+    log("update username:" + username)
+    log("new username:" + newName)
+    log("new email:" + newEmail)
+
+    log(username, newName, newEmail)
+    /* 
+        A.findOneAndUpdate(conditions, update, options, callback)
+        var query = { name: 'borne' };
+        Model.findOneAndUpdate(query, { name: 'jason bourne' }, options, callback)
+    */
+    User.findOneAndUpdate(
+        { username: `${username}` },
+        { username: `${newName}`, email: `${newEmail}` },
+    ).then(
+        (userFound) => {
+            if (!userFound) {
+                res.status(404).send()
+            } else {
+                res.send("success")
+                log("info changed")
+            }
+        }
+    ).catch((error) => {
+        res.status(500).send()
+    })
+})
+
+
+router.post('/deleteUser', (req, res) => {
+    log("delete user", req.body.username)
+    const username = req.body.username
+    User.findOneAndDelete({ username: username }).then(
+        (userFound) => {
+            if (!userFound) {
+                res.status(404).send()
+            } else {
+                res.send("success")
+                log("user deleted")
+            }
+        }
+    ).catch((error) => {
+        res.status(500).send()
+    })
 })
 
 module.exports = router;

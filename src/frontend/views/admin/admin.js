@@ -24,7 +24,7 @@ for (const index in USERS) {
                 <i class='fas fa-comment-slash' id="courses-${index}" data-toggle="modal" data-target="#muteModal" onclick=muteBody(this.id)></i>
             </td>
             <td>
-                <i class='fas fa-pencil-alt' id="edit-${index}" data-toggle="modal" data-target="#updateModal" onclick=getIndex(this.id)></i>
+                <i class='fas fa-pencil-alt' id="edit-${index}" data-toggle="modal" data-target="#updateModal" onclick=editModal(this.id)></i>
             </td>
             <td>
                 <i class='fas fa-trash-alt' id="delete-${index}" data-toggle="modal" data-target="#deleteModal" onclick=confirmDelete(this)>
@@ -44,7 +44,6 @@ function closeDeleteModal() {
 
 // -------------------------- Mute Modal ----------------------------
 
-// mute-Modal body
 // muteID = course-0, course-1.....
 function muteBody(rowIndex) {
     console.log(rowIndex);
@@ -112,30 +111,59 @@ function changeStatus(uName, cName) {
 
 var editRow;
 
-function getIndex(row_id) {
+function editModal(row_id) {
     editRow = row_id;
+    log(editRow)
 }
 // save edit information
 function saveEdit(saveButton) {
     // console.log(saveButton);
     // modified value
-    const newName = document.getElementById("editUName").value;
-    const newEmail = document.getElementById("editEmail").value;
-    const newPasswd = document.getElementById("editPw").value;
+    var newName = document.getElementById("editUName").value;
+    var newEmail = document.getElementById("editEmail").value;
+    var newPasswd = document.getElementById("editPw").value;
 
     // user modified
     const currNode = document.getElementById(editRow).parentNode;
+    log(currNode)
     const mailNode = currNode.previousElementSibling.previousElementSibling;
+    log(mailNode)
     const nameNode = mailNode.previousElementSibling;
+    log(nameNode)
 
-    if (newName != "") {
-        nameNode.textContent = newName;
+    const username = nameNode.textContent
+    const email = mailNode.textContent
+
+    if (newName == "") {
+        newName = username;
     }
-    if (newEmail != "") {
-        mailNode.textContent = newEmail;
+    if (newEmail == "") {
+        newEmail = email;
     }
-    closeUpdateModal();
+    log("username:" + username)
+    log("new name:" + newName)
+    log("new email:" + newEmail)
+
+    $.ajax({
+        type: "POST",
+        url: "/updateUserInfo",
+        async: false,
+        contentType: "application/json",
+        data: JSON.stringify({ "username": `${username}`, "newName": `${newName}`, "newEmail": `${newEmail}`, }),
+        success: function (data, status) {
+            if (status == "success") {
+                location.reload(true);
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
 }
+
+
+// -------------------------- /Edit Modal ----------------------------
+
 
 // show/hide the notification box
 function popUpNotification() {

@@ -9,6 +9,6 @@ const mongoose = require('mongoose');
 const mongoURI = "mongodb+srv://admin_0:admin_0@hachi0-vbufp.azure.mongodb.net/Hachi?retryWrites=true&w=majority";
 
 mongoose.connect(mongoURI, 
-    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
 
    module.exports = { mongoose }  // Export the active connection.
