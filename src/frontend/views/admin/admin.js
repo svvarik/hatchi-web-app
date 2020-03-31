@@ -28,7 +28,6 @@ for (const index in USERS) {
             </td>
             <td>
                 <i class='fas fa-trash-alt' id="delete-${index}" data-toggle="modal" data-target="#deleteModal" onclick=confirmDelete(this)>
-                <i class='fas fa-trash-alt' id="delete-${index}" data-toggle="modal" data-target="#deleteModal" onclick=showDeleteModal(this)>
             </td>
         </tr>`
 }
@@ -139,6 +138,7 @@ function changeIcon(uName, cName) {
 // -------------------------- /Mute Modal ----------------------------
 
 
+// -------------------------- Edit Modal ----------------------------
 var editRow;
 
 function editModal(row_id) {
@@ -204,3 +204,41 @@ function popUpNotification() {
         pop.style.display = "none";
     }
 }
+// -------------------------- Delete modal ----------------------------
+// confirm delete
+function confirmDelete(icon) {
+    var txt;
+    const row = icon.parentNode.parentNode;
+    const username = row.getElementsByTagName("td")[0].textContent
+    if (confirm(`Do you want to delete user ${username}?`)) {
+        // const currNode = document.getElementById(del).parentNode;
+        // const mailNode = currNode.previousElementSibling.previousElementSibling;
+        // const nameNode = mailNode.previousElementSibling;
+        // closeDeleteModal();
+
+        $.ajax({
+            type: "POST",
+            url: "/deleteUser",
+            async: false,
+            contentType: "application/json",
+            data: JSON.stringify({ "username": `${username}` }),
+            success: function (data, status) {
+                if (status == "success") {
+
+                    location.reload(true);
+                    // closeDeleteModal();
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+        txt = `you delete user ${username}`;
+    } else {
+        txt = "You pressed Cancel!";
+    }
+    log(txt)
+}
+
+
+// -------------------------- /Delete modal ----------------------------
