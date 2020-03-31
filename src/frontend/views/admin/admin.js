@@ -6,7 +6,7 @@ $.ajax({
     url: "/userInfo",
     async: false,
     success: function (data, status) {
-        if (true) {
+        if (data) {
             console.log(data);
             dataDisplay = data;
         }
@@ -32,6 +32,7 @@ for (const index in USERS) {
         </tr>`
 }
 document.getElementById("mainTB").innerHTML = html;
+popUpNotification()
 
 // -------------------------- /User table ----------------------------
 
@@ -195,15 +196,75 @@ function saveEdit(saveButton) {
 // -------------------------- /Edit Modal ----------------------------
 
 
+// -------------------------- Notification ----------------------------
 // show/hide the notification box
 function popUpNotification() {
-    var pop = document.getElementById("reportMsg");
-    if (pop.style.display == "none") {
-        pop.style.display = "block";
+    var reportMsg;
+    $.ajax({
+        type: "GET",
+        url: "/reportMessage",
+        async: false,
+        success: function (data, status) {
+            if (status=="success") {
+                // data: list of message {username, groupCode, msg}
+                // console.log(data);
+                reportMsg = data;
+            }
+        }
+    })
+    reportMsg = [
+        { username: 'yun', groupCode: 'csc309', msg: 'hahahaha' },
+        { username: 'guan', groupCode: 'csc209', msg: '???' }
+    ]
+
+    // shake the icon
+    var classname;
+    if (reportMsg.length != 0) {
+        classname = 'far fa-bell shake'
     } else {
-        pop.style.display = "none";
+        var classname = 'far fa-bell'
+    }
+    document.getElementById("noteIcon").className = classname
+    log(document.getElementById("noteIcon").className)
+
+    const pop = document.getElementById("message");
+    var html = ``
+    for (const m of reportMsg) {
+        html += `<tr>
+                    <td>${m.username}</td>
+                    <td>${m.groupCode}</td>
+                    <td>${m.msg}</td>
+                    <td><span type="button" onclick=deleteMsg(${m.msg})>&#10003</span><td>
+                </tr>`
+    }
+    pop.innerHTML = html
+
+    const modal = document.getElementById('reportMsg');
+    if (modal.style.display == "none") {
+        modal.style.display = "block";
+    } else {
+        modal.style.display = "none";
     }
 }
+
+function deleteMsg(msg){
+    $.ajax({
+        type: "POST",
+        url: "/deleteMsg",
+        async: false,
+        data: JSON.stringify({ "msg": `${msg}` }),
+        success: function (data, status) {
+            if (status =="success") {
+                location.reload(true)
+                document.getElementById("reportMsg").style.display == "block"
+            }
+        }
+    })
+}
+
+// -------------------------- /Notification ----------------------------
+
+
 // -------------------------- Delete modal ----------------------------
 // confirm delete
 function confirmDelete(icon) {
@@ -224,7 +285,6 @@ function confirmDelete(icon) {
             data: JSON.stringify({ "username": `${username}` }),
             success: function (data, status) {
                 if (status == "success") {
-
                     location.reload(true);
                     // closeDeleteModal();
                 }

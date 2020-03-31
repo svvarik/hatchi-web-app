@@ -80,9 +80,9 @@ router.post('/changeStatus', (req, res) => {
                 log(`----${count}----`)
                 var inside = []
                 inside.push(docCourse[0])  // course id
-                inside.push(courseCodeList[count*2])  // course code
-                inside.push(courseCodeList[count * 2 + 1]=='true')  // course status
-                
+                inside.push(courseCodeList[count * 2])  // course code
+                inside.push(courseCodeList[count * 2 + 1] == 'true')  // course status
+
                 result.push(inside)
                 count++;
             }
@@ -90,8 +90,8 @@ router.post('/changeStatus', (req, res) => {
             log(result)
             log(doc.courses[0][0])
             doc.courses = result
-            doc.save(function(err){
-                if(err){
+            doc.save(function (err) {
+                if (err) {
                     return handleError(err);
                 }
             })
@@ -152,6 +152,39 @@ router.post('/deleteUser', (req, res) => {
         }
     ).catch((error) => {
         res.status(500).send()
+    })
+})
+
+router.get('/reportMessage', (req, res) => {
+    log("reportMessage")
+    Admin.find({}).then(function (adminList) {
+        const msgGet = adminList[0].notifications
+        const allMsg = [];
+        for (const i of msgGet) {
+            const msg = {
+                username: i.userID,
+                groupCode: i.courseID,
+                msg: i.text,
+            }
+            allMsg.push(msg);
+        }
+        res.send(allMsg)
+    })
+})
+
+router.post('/deleteMsg', (req, res) => {
+    const msg = req.body.msg
+    Admin.find({}).then(function (adminList) {
+        var msgGet = adminList[0].notifications
+        var index = arr.indexOf(msg);
+        if (index > -1) {
+            msgGet.splice(index, 1);
+        }
+        adminList[0].save(function (err) {
+            if (err) {
+                return handleError(err);
+            }
+        })
     })
 })
 
