@@ -46,6 +46,7 @@ function closeDeleteModal() {
 
 // muteID = course-0, course-1.....
 function muteBody(rowIndex) {
+    console.log("muteBoday()")
     console.log(rowIndex);
     let body = "";
     const index = rowIndex.split("-")[1];
@@ -53,61 +54,90 @@ function muteBody(rowIndex) {
     for (u of USERS) {
         if (u.username === username) {
             for (crs of u.groups) {
+                console.log(crs)
                 var crName, mute;
-                for (ky in crs){
-                    crName = ky;
-                    mute = crs[ky];
-                }
+                crName = crs['key']
+                mute = crs['value']
                 if (mute) {
                     body += `<p> ${crName}
-                                <i id="${username}-${crName}" class="fas fa-microphone-slash" onclick="changeStatus('${username}', '${crName}')">
+                                <i id="${username}-${crName}" class="fas fa-microphone-slash" onclick="changeIcon('${username}', '${crName}')">
                                 </i>
                             </p>`;
                 } else if (!mute) {
                     body += `<p> ${crName}
-                                <i id="${username}-${crName}" class="fas fa-microphone-alt" alt="nMute" onclick="changeStatus('${username}', '${crName}')">
+                                <i id="${username}-${crName}" class="fas fa-microphone-alt" alt="nMute" onclick="changeIcon('${username}', '${crName}')">
                                 </i>
                             </p>`;
                 }
             }
-            console.log(body);
             document.getElementById("courseInfo").innerHTML = body;
         }
     }
 }
 
-// change status
-function changeStatus(uName, cName) {
-    // console.log("changeStatus(" + uname + ", " + cname + ")");
-    for (u of USERS) {
-        if (u.username === uName) {
-            for (eachCourse of u.groups) {
-                var crName, mute;
-                for (ky in eachCourse){
-                    crName = ky;
-                    mute = eachCourse[ky];
-                }
-                if (crName == cName) {
-                    eachCourse[ky] = !eachCourse[ky];
-                    break;
-                }
-            }
-            break;
-        }
-    }
+// change the status of users in their group chat
+function changeStatus(modal) {
+    log("changeStatus")
+    // get array of course data in the form ['csc108','true','csc309','false']
+    var icons = document.getElementById('courseInfo').getElementsByTagName('i')
+    log(icons)
+    // if the user enrolled in courses
+    if (icons.length != 0) {
+        const courseCode = [];
+        var username = icons[0].id.split('-')[0];
 
-    // change image
-    let x = document.getElementById(`${uName}-${cName}`);
-    console.log(x);
-    console.log(x.className);
-    if (mute) {
-        x.alt = "Mute";
-        x.className = "fas fa-microphone-slash";
+        // get the course code and it's status
+        for (const i of icons) {
+            var status;
+            const course = i.id.split('-')[1]
+            // course is not mute
+            if (i.className == "fas fa-microphone-alt") {
+                status = 'false';
+            } else { // course is mute
+                status = 'true';
+            }
+            courseCode.push(course)
+            courseCode.push(status)
+        }
+        // send and get data from backend
+        $.ajax({
+            type: "POST",
+            url: "/changeStatus",
+            async: false,
+            contentType: "application/json",
+            data: JSON.stringify({ "username": `${username}`, "courseCode": `${courseCode}` }),
+            traditional: true,
+            success: function (data, status) {
+                if (status == "success") {
+                    console.log(`ussfully change ${courseCode} of ${username}`)
+                    $('#muteModal').modal('hide');
+                    log(icons[0].id)
+                    location.reload(true);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
     } else {
-        x.alt = "nMute";
-        x.className = "fas fa-microphone-alt";
+        $('#muteModal').modal('hide');
+    }
+    // 页面的mute modal信息没改
+}
+
+function changeIcon(uName, cName) {
+    let icon = document.getElementById(`${uName}-${cName}`);
+    if (icon.className == "fas fa-microphone-slash") {
+        icon.alt = "nMute";
+        icon.className = "fas fa-microphone-alt";
+    } else {
+        icon.alt = "Mute";
+        icon.className = "fas fa-microphone-slash";
     }
 }
+
+// -------------------------- /Mute Modal ----------------------------
+
 
 var editRow;
 

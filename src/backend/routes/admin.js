@@ -62,6 +62,46 @@ router.get('/userInfo', (req, res) => {
 
 })
 
+router.post('/changeStatus', (req, res) => {
+    log("change status")    // const courseCode = req.params.courseCode;
+    // log(username, courseCode)
+    const body = req.body
+    const username = body.username
+    const courseCodeList = body.courseCode.split(',')
+
+    User.findOne({ username: `${username}` }, function (err, doc) {
+        if (doc) {
+            // const doc.courses = [["5e7d5a1ba26605011613a087", "csc373", true], ["5e7d5a1935577101064fa229", "csc108", false]]
+            // const courseCodeList = ['csc373', 'false', 'csc108', 'true']
+            log(courseCodeList)
+            var result = []
+            var count = 0;
+            for (var docCourse of doc.courses) {
+                log(`----${count}----`)
+                var inside = []
+                inside.push(docCourse[0])  // course id
+                inside.push(courseCodeList[count*2])  // course code
+                inside.push(courseCodeList[count * 2 + 1]=='true')  // course status
+                
+                result.push(inside)
+                count++;
+            }
+            log("result: ")
+            log(result)
+            log(doc.courses[0][0])
+            doc.courses = result
+            doc.save(function(err){
+                if(err){
+                    return handleError(err);
+                }
+            })
+            res.send("success")
+        } else {
+            log("cannot find user")
+            res.send(err)
+        }
+    })
+})
 
 
 router.post('/updateUserInfo', (req, res) => {
