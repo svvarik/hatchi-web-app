@@ -232,18 +232,27 @@ router.get('/reportMessage', (req, res) => {
 })
 
 router.post('/deleteMsg', (req, res) => {
-    const msg = req.body.msg
+    const id = req.body.mId
     Admin.find({}).then(function (adminList) {
         var msgGet = adminList[0].notifications
-        var index = arr.indexOf(msg);
+        var index;
+        for (const i of msgGet){
+            if(i._id == id){
+                index = msgGet.indexOf(i)
+            }
+        }
+        // var index = arr.indexOf(msg);
         if (index > -1) {
             msgGet.splice(index, 1);
         }
         adminList[0].save(function (err) {
             if (err) {
-                return handleError(err);
+                res.status(400).send("cannot save delete msg");
             }
         })
+        res.send("success")
+    }).catch((err) => {
+        res.status(500).send();
     })
 })
 

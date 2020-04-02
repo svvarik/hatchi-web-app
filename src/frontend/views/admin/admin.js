@@ -249,12 +249,13 @@ function popUpNotification() {
     }
 }
 
-function deleteMsg(msg){
+function deleteMsg(btn, mId){
     $.ajax({
         type: "POST",
         url: "/deleteMsg",
         async: false,
-        data: JSON.stringify({ "msg": `${msg}` }),
+        contentType: "application/json",
+        data: JSON.stringify({ "mId": `${mId}` }),
         success: function (data, status) {
             if (status =="success") {
                 location.reload(true)
@@ -262,6 +263,7 @@ function deleteMsg(msg){
             }
         }
     })
+    // $(btn).closest("tr").remove();
 }
 
 // -------------------------- /Notification ----------------------------
