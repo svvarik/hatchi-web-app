@@ -306,3 +306,8 @@ function confirmDelete(icon) {
 
 
 // -------------------------- /Delete modal ----------------------------
+
+$("#signOut").click(function(){
+    sessionStorage.setItem('admin', null);
+    
+})
