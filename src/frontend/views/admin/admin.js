@@ -1,3 +1,5 @@
+import { Router } from "express";
+
 const log = console.log;
 // -------------------------- User table ----------------------------
 var dataDisplay;
@@ -122,7 +124,6 @@ function changeStatus(modal) {
     } else {
         $('#muteModal').modal('hide');
     }
-    // 页面的mute modal信息没改
 }
 
 function changeIcon(uName, cName) {
@@ -152,7 +153,7 @@ function saveEdit(saveButton) {
     // modified value
     var newName = document.getElementById("editUName").value;
     var newEmail = document.getElementById("editEmail").value;
-    var newPasswd = document.getElementById("editPw").value;
+    // var newPasswd = document.getElementById("editPw").value;
 
     // user modified
     const currNode = document.getElementById(editRow).parentNode;
@@ -207,15 +208,15 @@ function popUpNotification() {
         success: function (data, status) {
             if (status=="success") {
                 // data: list of message {username, groupCode, msg}
-                // console.log(data);
+                log(data)
                 reportMsg = data;
             }
         }
     })
-    reportMsg = [
-        { username: 'yun', groupCode: 'csc309', msg: 'hahahaha' },
-        { username: 'guan', groupCode: 'csc209', msg: '???' }
-    ]
+    // reportMsg = [
+    //     { username: 'user1', groupCode: 'csc309', msg: 'hahahaha' },
+    //     { username: 'user2', groupCode: 'csc209', msg: '???' }
+    // ]
 
     // shake the icon
     var classname;
@@ -229,12 +230,13 @@ function popUpNotification() {
 
     const pop = document.getElementById("message");
     var html = ``
+    var index=0;
     for (const m of reportMsg) {
-        html += `<tr>
+        html += `<tr id="msg-${index}">
                     <td>${m.username}</td>
                     <td>${m.groupCode}</td>
                     <td>${m.msg}</td>
-                    <td><span type="button" onclick=deleteMsg(${m.msg})>&#10003</span><td>
+                    <td><span type="button" onclick="deleteMsg(this,'${m.id}')">&#10003</span><td>
                 </tr>`
     }
     pop.innerHTML = html

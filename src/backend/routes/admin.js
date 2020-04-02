@@ -63,7 +63,8 @@ router.get('/userInfo', (req, res) => {
 })
 
 router.post('/changeStatus', (req, res) => {
-    log("change status")    // const courseCode = req.params.courseCode;
+    log("change status")
+    // const courseCode = req.params.courseCode;
     // log(username, courseCode)
     const body = req.body
     const username = body.username
@@ -77,7 +78,6 @@ router.post('/changeStatus', (req, res) => {
             var result = []
             var count = 0;
             for (var docCourse of doc.courses) {
-                log(`----${count}----`)
                 var inside = []
                 inside.push(docCourse[0])  // course id
                 inside.push(courseCodeList[count * 2])  // course code
@@ -86,9 +86,9 @@ router.post('/changeStatus', (req, res) => {
                 result.push(inside)
                 count++;
             }
-            log("result: ")
-            log(result)
-            log(doc.courses[0][0])
+            // log("result: ")
+            // log(result)
+            // log(doc.courses[0][0])
             doc.courses = result
             doc.save(function (err) {
                 if (err) {
@@ -157,18 +157,77 @@ router.post('/deleteUser', (req, res) => {
 
 router.get('/reportMessage', (req, res) => {
     log("reportMessage")
-    Admin.find({}).then(function (adminList) {
-        const msgGet = adminList[0].notifications
+    /* 
+    const Message = mongoose.model('Message', {
+	userID: {
+		type: ObjectID,
+		required: true,
+		minlegth: 1
+	},
+    text: {
+        type: String,
+        required: true
+    },
+    courseID: {
+        type: ObjectID,
+        required: true
+    }
+})
+    */
+    Admin.find({}).then(async function (adminList) {
+        const msgGet = adminList[0].notifications // array of message object
         const allMsg = [];
         for (const i of msgGet) {
-            const msg = {
-                username: i.userID,
-                groupCode: i.courseID,
+    //         /*
+    //         {"_id":{"$oid":"5e7d5a1ba26605011613a088"},
+    //         "notifications":[
+    //                 {"_id":{"$oid":"5e7d5df24a9281021fe47479"},
+    //                 "userID":{"$oid":"5e7d5a1ba26605011613a084"},
+    //                 "text":"108: message 2",
+    //                 "courseID":{"$oid":"5e7d5a1935577101064fa229"},
+    //                 "__v":{"$numberInt":"0"}
+    //             },
+    //                 {"_id":{"$oid":"5e7d5df24a9281021fe47478"},
+    //                 "userID":{"$oid":"5e7d5a1ba26605011613a084"},
+    //                 "text":"108: message 1",
+    //                 "courseID":{"$oid":"5e7d5a1935577101064fa229"},
+    //                 "__v":{"$numberInt":"0"}
+    //             }],
+    //         "adminName":"admin",
+    //         "password":"admin",
+    //         "__v":{"$numberInt":"0"}}
+    //         */
+            var msg = {
+                id: i._id,
+                username: '',
+                groupCode: '',
                 msg: i.text,
             }
+            
+            // find username of user
+            await User.findById(i.userID, function(err, user){
+                if(err){
+                    res.status(404).send("user not found")
+                } else {
+                    msg.username = user.username
+                }
+            })
+
+            // get the message's group code
+            await Course.findById(i.courseID, function (err, course) {
+                if(err){
+                    res.status(404).send("course not found")
+                } else {
+                    msg.groupCode = course.courseCode
+                    // log(msg)
+                }
+            })
             allMsg.push(msg);
         }
+        log(allMsg)
         res.send(allMsg)
+    }).catch((error) => {
+        res.status(500).send();
     })
 })
 

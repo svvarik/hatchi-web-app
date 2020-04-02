@@ -30,6 +30,9 @@ app.use(bodyParser.json()) //need to be placed before the imported routes
 // app.use(require('./routes/user'))
 app.use(require('./routes/admin'))
 app.use(require('./routes/groupChat'))
+app.use(require('./routes/user'))
+app.use(require('./routes/courses'))
+app.use(require('./routes/index'))
 
 // Setting up a static directory for the html file using Express middleware
 app.use('/images', express.static(imagesPath));
@@ -39,6 +42,7 @@ app.use(express.static(frontendPath + '/views/admin'));
 app.get('/', (req, res) => {
    res.sendFile(frontendPath + '/index.html');
 })
+
 app.get('/admin', (req, res)=>{
    res.sendFile(frontendPath + "/views/admin/admin.html")
 })
