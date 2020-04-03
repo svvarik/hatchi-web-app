@@ -155,6 +155,7 @@ td input {
 #check-btn {
     height: 50px;
     width: 50px;
+    cursor: pointer;
 }
 
 #check-btn:hover {
@@ -199,3 +200,7 @@ td input {
 .edit-btn {
     cursor: pointer;
 }
+
+#check-btn-container:hover .tooltiptext {
+    visibility: visible;
+  }

@@ -88,7 +88,10 @@ function showTaskDetail(task){
     task.breakdowns.map(breakdown => {
         table.append(generateTableRow(breakdown.partName, breakdown.startTime.toDateString(), breakdown.endTime.toDateString()));
     })
-    $('.task-detail').append('<div id="check-btn-container"><img id="check-btn" src="check_circle_outline-24px.svg" alt=""></div>')
+    $('.task-detail').append(`<div id="check-btn-container">
+                                <img id="check-btn" src="check_circle_outline-24px.svg" alt="">
+                                <span class="tooltiptext">Complete</span>
+                            </div>`)
 }
 function findTask(taskID){
     return tasks.filter(task => task.id == taskID)[0];
