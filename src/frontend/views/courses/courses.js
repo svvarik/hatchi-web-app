@@ -35,7 +35,7 @@ const log = console.log
 
 // server call to get all courses information
 const userID = sessionStorage.getItem("user")
-var courses;
+
 $.ajax({
     type: "GET",
     url: "/courseInfo",
