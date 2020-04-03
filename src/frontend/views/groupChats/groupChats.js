@@ -1,4 +1,3 @@
-// const socket = io.connect()
 
 // variables
 const courseColors = {
@@ -9,7 +8,6 @@ const courseColors = {
     STA247: "rgb(0, 174, 17)"
 };
 const tempColor = "rgb(255, 192, 0)";
-const myID = 'Elisa'
 const myRealID = '5e77884b67878059494966a2'
 const currUserID = '5e7d5a1935577101064fa228'
 const groupChats = [
@@ -157,32 +155,77 @@ function openChatBox(courseCode, courseID, msgs){
 $(document).on('click', '#sendButton', function(){
 
     const msgToSend = $('#msgInput').val();
-    const courseCode = $('#courseNameContainer')[0].firstChild.innerText;
-    const courseID = findCourseID(courseCode)
+    const courseID = $('.courseNameContainer').attr('id')
 
-    const profile = '<div class="userMe">' + profileImg + '<p>' + myID + '</p></div>';
-    const msgContent = '<div class="myMsgContent"><p class="msgText">' + msgToSend + '</p></div>';
-    const msgEle = '<div class="msg">' + profile + msgContent + '</div>';
-   
-    localGroups.map(course => {
-        if(course[courseCodeIndex] === courseCode){
-            if(course[courseMutedIndex]){
-                alert("You are muted due to one of your previous messages contained inappropiate content!")
-                
-            }else{
-                socket.emit('send message', {ID: "5", text: msgToSend, userID: myRealID, courseID: courseID, reported: false});
-                //group.messages.push([msgToSend, myID]);
-                $('#msgsContainer').append(msgEle);
-            }
-            
-        }
+    const url = '/views/groupChats/groupChats.html/sendMsg';
+    let data = {
+        courseID: courseID,
+        text: msgToSend, 
+        userID: currUserID
+    }
+    const request = new Request(url, {
+        method: 'post', 
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+    });
+
+    fetch(request)
+    .then((res) => { 
+        if (res.status === 200) {
+           return res.json()
+       } else {
+            alert('Could not send the message')
+       }                
     })
+    .then((json) => {  // the resolved promise with the JSON body
+        const msg = json.msgInfo
+        if(msg.muted){
+            alert('You have been muted.')
+        }else{
+            const profile = '<div class="userMe">' + profileImg + '<p>' + msg.username + '</p></div>';
+            const msgContent = '<div class="myMsgContent"><p class="msgText">' + msg.text + '</p></div>';
+            const msgEle = '<div class="msg">' + profile + msgContent + '</div>';
+            $('#msgsContainer').append(msgEle);
+            const elem = document.getElementById('msgsContainer');
+            elem.scrollTop = elem.scrollHeight;
+        }
+        
+        
+    }).catch((error) => {
+        console.log(error)
+    })
+
     const elem = document.getElementById('msgsContainer');
     elem.scrollTop = elem.scrollHeight;
     const textInput = document.getElementById('msgInput');
     textInput.value = '';
 })
 
+// upon receive new message
+Pusher.logToConsole = false;
+var pusher = new Pusher('dcccc60c3687f9c8066f', {
+    cluster: 'us2',
+    forceTLS: true
+});
+var channel = pusher.subscribe('msg');
+channel.bind('send-msg', function(data) {
+    if(data.userID == currUserID){
+        console.log('same id')
+        return
+    }
+    groupChatEleList = $('.groupChat')
+    if($('.courseNameContainer').attr('id') == data.courseID){//need to display msg
+        const profile = '<div class="user">' + profileImg + '<p>' + data.username + '</p></div>';
+        const msgContent = '<div class="MsgContent"><p class="msgText">' + data.text + '</p></div>';
+        const msgEle = '<div class="msg">' + profile + msgContent + '</div>';
+        $('#msgsContainer').append(msgEle);
+        const elem = document.getElementById('msgsContainer');
+        elem.scrollTop = elem.scrollHeight;
+    }
+});
 
 
 
@@ -246,26 +289,26 @@ $(document).on('click', '.report-btn', function(e){
 
 //socketio
 //receiving incoming messages 
-socket.on('new message', data => {
-    console.log(data)
-    if(data.userID === myID){
-        return
-    }
-    console.log(data)
-    const msgReceived = data.text;
-    const userID = data.userID;
-    const profile = '<div class="user">' + profileImg + '<p>' + userID + '</p></div>';
-    const msgContent = '<div class="MsgContent"><p class="msgText">' + msgReceived + '</p></div>';
-    const msgEle = '<div class="msg">' + profile + msgContent + '</div>';
-    const groupToFindID = data.groupID
-    groupChats.map((group) => {
-        if(group.id === groupToFindID){
+// socket.on('new message', data => {
+//     console.log(data)
+//     if(data.userID === myID){
+//         return
+//     }
+//     console.log(data)
+//     const msgReceived = data.text;
+//     const userID = data.userID;
+//     const profile = '<div class="user">' + profileImg + '<p>' + userID + '</p></div>';
+//     const msgContent = '<div class="MsgContent"><p class="msgText">' + msgReceived + '</p></div>';
+//     const msgEle = '<div class="msg">' + profile + msgContent + '</div>';
+//     const groupToFindID = data.groupID
+//     groupChats.map((group) => {
+//         if(group.id === groupToFindID){
                 
-                group.messages.push([msgReceived, userID]);
-                $('#msgsContainer').append(msgEle);
+//                 group.messages.push([msgReceived, userID]);
+//                 $('#msgsContainer').append(msgEle);
             
-        }
-    })
-    const elem = document.getElementById('msgsContainer');
-    elem.scrollTop = elem.scrollHeight;
-})
+//         }
+//     })
+//     const elem = document.getElementById('msgsContainer');
+//     elem.scrollTop = elem.scrollHeight;
+// })

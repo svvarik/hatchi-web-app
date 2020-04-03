@@ -2,6 +2,15 @@ const express = require('express');
 const app = express();
 const router = express.Router()
 const { ObjectID } = require('mongodb')
+//pusher
+const Pusher = require('pusher')
+const pusher = new Pusher({
+    appId: '975704',
+    key: 'dcccc60c3687f9c8066f',
+    secret: 'fbbcde194ee4d2eb0c58',
+    cluster: 'us2',
+    encrypted: true
+})
 
 // body-parser: middleware for parsing HTTP JSON body into a usable object
 const bodyParser = require('body-parser') 
@@ -58,26 +67,32 @@ router.get('/views/groupChats/groupChats.html/user/:userID', (req, res) => {
         res.status(404).send()
         return; 
     }
-    console.log(courseID)
     Course.findById(new ObjectID(courseID)).then((course) => {
-        console.log("found: courses is ", course)
         if (course === null) {
             res.status(404).send()  // could not find this course
         } else {
             const msgList = []
             let counter = course.messages.length
-            course.messages.map((msgID) => {
+            let msgID
+            for(let i = 0; i < course.messages.length; i++){
+                 msgID = course.messages[i]
                 //find message
                 Message.findById(new ObjectID(msgID)).then((msg) => {
                     //find user
                     User.findById(new ObjectID(msg.userID)).then((user) => {
                         msgList.push({
+                            msgID: msg._id,
                             text: msg.text,
                             userID: user._id,
                             username: user.username
                         })
                         counter -= 1
                         if(counter === 0){
+                            msgList.sort((a, b) => {
+                                if(a.msgID < b.msgID){return -1}
+                                if(a.msgID > b.msgID){return 1}
+                                return 0
+                            })
                             res.send({ msgList })
                         }
                     }, (error) => {
@@ -86,7 +101,7 @@ router.get('/views/groupChats/groupChats.html/user/:userID', (req, res) => {
                 }, (error) => {
                     res.status(400).send(error) // 400 for bad request??
                 })
-            })
+            }
         }
     }).catch((error) => {
         res.status(500).send()  // server error
@@ -111,5 +126,42 @@ router.get('/views/groupChats/groupChats.html/user/:userID', (req, res) => {
     })
  
  })
+
+// a POST route to send a message 
+router.post('/views/groupChats/groupChats.html/sendMsg', (req, res)=> {
+    const msg = req.body
+    User.findById(new ObjectID(msg.userID)).then((user) => {
+        
+        const targetCourse = user.courses.filter(course => course[0] == new ObjectID(msg.courseID))
+        const msgInfo = {
+            username: user.username,
+            userID: msg.userID,
+            courseID: msg.courseID,
+            text: msg.text,
+            muted: targetCourse[2]
+        }
+        if(!msgInfo.muted){
+            const newMsg = new Message(msg)
+            newMsg.save().then((result) => {
+                //get the id and put it in course document
+                const msgID = result._id
+                Course.findByIdAndUpdate(new ObjectID(msg.courseID), 
+                                    {$push: {messages: msgID}})
+                .then((result) => {
+                    res.send({ msgInfo })
+                    pusher.trigger('msg', 'send-msg', msgInfo);
+                }, (error) => {
+                    res.status(400).send(error) // 400 for bad request
+                })
+            }, (error) => {
+                res.status(400).send(error) // 400 for bad request
+            })
+        }
+        
+    }, (err) => {
+        res.status(400).send()
+    })
+})
+
 
  module.exports = router
