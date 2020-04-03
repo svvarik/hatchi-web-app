@@ -18,10 +18,9 @@ const {Admin} = require('../models/admin');
 router.post('/views/login/login.html/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    Admin.find({username: username}).then((admin) => {
-        console.log(admin);
-        
-        if (admin !== null) {
+    Admin.find({adminName: username}).then((admin) => {
+        // admin found
+        if (admin.length != 0) {
             res.userid = admin._id;
             res.admin = true;
             if (admin.password == password){
@@ -30,6 +29,7 @@ router.post('/views/login/login.html/login', (req, res) => {
                 res.notice = 'WRONG_PASSWORD';
             }
         } else {
+            console.log("find user")
             res.admin = false;
             User.find({username: username}).then((user) => {
                 console.log(user);
