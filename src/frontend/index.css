@@ -3,7 +3,9 @@
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
 } */
-
+body{
+  background-color: rgb(249, 250, 204);
+}
 #introduction{
   position: absolute;
   width: 70%;
@@ -11,11 +13,12 @@
   left: 15%;
   right: 15%;
   top: 120px;
+  margin: 10px;
 
   font-family: Roboto;
   font-style: normal;
   font-weight: 900;
-  font-size: 48px;
+  font-size: 46px;
   line-height: 56px;
   display: flex;
   text-align: center;
@@ -23,21 +26,23 @@
   color: #000000;
   float: initial;
 }
+#introduction.p{
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+}
 
 #topBar{
   position: relative;
   width: 90%;
   height: 56px;
   left: 5%;
-  top: 40px;
+  top: 30px;
 }
 
 #HACHI{
   position: absolute;
-  width: 174px;
-  height: 56px;
-  left: 70px;
-  top: 5px;
+
 
   /* Web App Title */
 
@@ -46,8 +51,7 @@
   font-weight: 900;
   font-size: 48px;
   line-height: 56px;
-  display: flex;
-  align-items: center;
+  left: 100px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-feature-settings: 'cpsp' on;
@@ -56,24 +60,29 @@
 }
 
 button{
-  position: relative;
+  position: absolute;
   font-family: Roboto;
-  font-size: 24px;
+  font-size: 23px;
   top:14px;
   height:  28px;
   width: 82px;
-  text-align: center;
   background-color: white;
   border: none;
-  display: block;
-  text-decoration: none;
-  float: right;
-  font-weight: 700;
-}
-
-#signup{
-  background-color: #FFCE1C;
+  font-weight: 600;
+  cursor: pointer;
   border-radius: 10px;
+  padding: 0px;
+}
+button:hover{
+  background-color: #FFCE1C;
+}
+#login{
+  right: 100px;
+}
+#signup{
+  display: inline-block;
+  width: 100px;
+  right: 0px;
 }
 
 #slideShowing{
@@ -82,7 +91,7 @@ button{
   width: 60%;
   left:20%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: pink;
+  background-color: white;
 }
 
 #slide{

@@ -1,5 +1,3 @@
-import { Router } from "express";
-
 const log = console.log;
 // -------------------------- User table ----------------------------
 var dataDisplay;

@@ -1,3 +1,0 @@
-/**
- * File for main routes
- */

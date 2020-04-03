@@ -32,11 +32,11 @@ app.use(require('./routes/admin'))
 app.use(require('./routes/groupChat'))
 app.use(require('./routes/user'))
 app.use(require('./routes/courses'))
-app.use(require('./routes/index'))
+// app.use(require('./routes/index'))
 
 // Setting up a static directory for the html file using Express middleware
-app.use('/images', express.static(imagesPath));
 app.use(express.static(frontendPath));
+// app.use(express.static(frontendPath + '/images'))
 app.use(express.static(frontendPath + '/views/admin'));
 
 app.get('/', (req, res) => {
