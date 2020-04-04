@@ -73,13 +73,15 @@ lForm.addEventListener('submit', loginSubmit);
 sForm.addEventListener('submit', signupSubmit);
 
 function loginSubmit(e){
+  console.log('Log In Submit');
+  
   e.preventDefault();
   clearAllNotices();
 
   // get the input values
   const lusername = document.querySelector("#lusername").value;
   const lpassword = document.querySelector("#lpassword").value;
-
+  
   const url = '/views/login/login.html/login';
   const data = {
     username: lusername,
@@ -93,8 +95,9 @@ function loginSubmit(e){
       'Content-Type': 'application/json'
     },
   });
-
-  fetch(request).then(function(res) {
+  fetch(request).then((response) => {
+    return response.json();
+  }).then((res)=> {
     if (res.notice === null){
       sessionStorage.setItem('user', res.userid);
       sessionStorage.setItem('admin', res.admin);
@@ -106,8 +109,6 @@ function loginSubmit(e){
     } else {
       errorNotice(res.notice);
     }
-  }).catch((error) => {
-    console.log(error);
   })
 }
 

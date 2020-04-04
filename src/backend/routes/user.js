@@ -18,33 +18,38 @@ const {Admin} = require('../models/admin');
 router.post('/views/login/login.html/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    Admin.find({adminName: username}).then((admin) => {
+    let result = {admin: false, notice: null, userid: null};
+
+    Admin.find({adminName: username}).then((admins) => {
         // admin found
-        if (admin.length != 0) {
-            res.userid = admin._id;
-            res.admin = true;
+        if (admins.length != 0) {
+            admin = admins[0]
+            result.userid = admin._id;
+            result.admin = true;
             if (admin.password == password){
-                res.notice = null;
+                result.notice = null;
             } else {
-                res.notice = 'WRONG_PASSWORD';
+                result.notice = 'WRONG_PASSWORD';
             }
+            res.send(result)
         } else {
-            console.log("find user")
-            res.admin = false;
-            User.find({username: username}).then((user) => {
-                console.log(user);
-                
-                if (user === null) {
-                    res.notice = 'ACCT_NOT_EXISTS';
-                    res.userid = null;
+            result.admin = false;
+            User.find({username: username}).then((users) => {         
+                if (users.length === 0) {
+                    result.notice = 'ACCT_NOT_EXISTS';
+                    result.userid = null;
+                    res.send(result)
                 } else {
-                    res.userid = user._id;
+                    user = users[0];
+                    result.userid = user._id;
                     if (user.password == password) {
-                        res.notice = null;
+                        result.notice = null;
                     } else {
-                        res.notice = 'WRONG_PASSWORD';
+                        result.notice = 'WRONG_PASSWORD';
                     }
+                    res.send(result)
                 }
+                
             }).catch((error) => {
                 res.status(400).send()
             })
@@ -79,8 +84,6 @@ router.post('/views/setting/setting.html/changeName', (req, res) =>{
         res.status(404).send()
         return;
     }
-    console.log(req.body.userid);
-
     User.exists({username: req.body.username}).then((exist) => {
         res.notice = null;
         if (exist) {
@@ -107,7 +110,6 @@ router.post('/views/setting/setting.html/changeEmail', (req, res) =>{
         res.status(404).send()
         return;
     }
-    console.log(req.body.userid);
     User.findByIdAndUpdate(req.body.userid, {email: req.body.newEmail}).then((user) => {
         res.newEmail = user.email;
         res.status(200).send();
@@ -123,7 +125,6 @@ router.post('/views/setting/setting.html/changePassword', (req, res) => {
         res.status(404).send();
         return;
     }
-    console.log(req.body.userid);
     res.notice = null;
     User.findById(req.body.userid).then((user) => {
         if (user === null) {
@@ -152,7 +153,6 @@ router.post('/views/setting/setting.html/getUsername', (req, res) => {
         res.status(404).send();
         return;
     }
-    console.log(req.body.userid);
     User.findById(req.body.userid).then((user) => {
         if (user === null) {
             res.status(400).send();
@@ -169,7 +169,6 @@ router.post('/views/setting/setting.html/getEmail', (req, res) => {
         res.status(404).send();
         return;
     }
-    console.log(req.body.userid);
     User.findById(req.body.userid).then((user) => {
         if (user === null) {
             res.status(400).send();
