@@ -11,10 +11,10 @@ const imagesPath = path.join(__dirname, '../../images');
 
 // mongoose and mongo connection
 const { mongoose } = require('./db/mongoose')
-mongoose.connection.on('open', function(ref){
+mongoose.connection.on('open', function (ref) {
    log("connected to mongoDB");
 })
-mongoose.connection.on('error', function(ref){
+mongoose.connection.on('error', function (ref) {
    log("connection failed");
 })
 
@@ -43,9 +43,9 @@ app.get('/', (req, res) => {
    res.sendFile(frontendPath + '/index.html');
 })
 
-app.get('/admin', (req, res)=>{
-   res.sendFile(frontendPath + "/views/admin/admin.html")
-})
+// app.get('/admin', (req, res)=>{
+//    res.sendFile(frontendPath + "/views/admin/admin.html")
+// })
 
 app.listen(port, () => {
 	log(`Listening on port ${port}...`)

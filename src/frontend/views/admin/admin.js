@@ -1,4 +1,9 @@
 const log = console.log;
+
+// redirect to login page if admin is sign out
+if(sessionStorage.getItem('admin') == 'null'){
+    window.location.href = "/views/login/login.html"
+}
 // -------------------------- User table ----------------------------
 var dataDisplay;
 $.ajax({
@@ -36,13 +41,15 @@ popUpNotification()
 
 // -------------------------- /User table ----------------------------
 
-// -------------------------- closing modal ----------------------------
+
+// -------------------------- [closing modal] ----------------------------
 function closeDeleteModal() {
     $('#deleteModal').modal('hide');
 }
 // -------------------------- /closing modal ----------------------------
 
-// -------------------------- Mute Modal ----------------------------
+
+// -------------------------- [Mute Modal] ----------------------------
 
 // muteID = course-0, course-1.....
 function muteBody(rowIndex) {
@@ -138,7 +145,7 @@ function changeIcon(uName, cName) {
 // -------------------------- /Mute Modal ----------------------------
 
 
-// -------------------------- Edit Modal ----------------------------
+// -------------------------- [Edit Modal] ----------------------------
 var editRow;
 
 function editModal(row_id) {
@@ -195,7 +202,7 @@ function saveEdit(saveButton) {
 // -------------------------- /Edit Modal ----------------------------
 
 
-// -------------------------- Notification ----------------------------
+// -------------------------- [Notification] ----------------------------
 // show/hide the notification box
 function popUpNotification() {
     var reportMsg;
@@ -267,7 +274,7 @@ function deleteMsg(btn, mId){
 // -------------------------- /Notification ----------------------------
 
 
-// -------------------------- Delete modal ----------------------------
+// -------------------------- [Delete modal] ----------------------------
 // confirm delete
 function confirmDelete(icon) {
     var txt;
@@ -307,5 +314,4 @@ function confirmDelete(icon) {
 
 $("#signOut").click(function(){
     sessionStorage.setItem('admin', null);
-    
 })
