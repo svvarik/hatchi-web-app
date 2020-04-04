@@ -133,18 +133,31 @@ function signupSubmit(e){
       'Content-Type': 'application/json'
     },
   });
-  fetch(request).then(function(res) {
-     if(res.status === 200){
-       if (res.notice === null){
-         signupSuccessfully.style.display = "block";
-         sForm.style.display = "none";
-       } else {
-         errorNotice(res.notice);
-       }
-     } 
-  }).catch((error) => {
-    console.log(error);
-  })
+  // fetch(request).then(function(res) {
+  //   console.log(res);
+    
+    //  if(res.status === 200){
+    //    if (res.notice === null){
+    //      signupSuccessfully.style.display = "block";
+    //      sForm.style.display = "none";
+    //    } else {
+    //      errorNotice(res.notice);
+    //    }
+    //  } 
+  // }).catch((error) => {
+  //   console.log(error);
+  // })
+  fetch(request).then((response) => {
+    return response.json();
+  }).then((res)=> {
+    console.log(res.status);
+      if (res.notice === null){
+        signupSuccessfully.style.display = "block";
+        sForm.style.display = "none";
+      } else {
+        errorNotice(res.notice);
+      }
+    })
 }
 
 

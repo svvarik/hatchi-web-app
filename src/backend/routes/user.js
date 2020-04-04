@@ -62,14 +62,14 @@ router.post('/views/login/login.html/login', (req, res) => {
 router.post('/views/login/login.html/signup', (req, res) => {
    User.exists({username: req.body.username}).then((exist) => {
        if (exist) {
-           res.notice = 'USERNAME_OCCUPIED'
+           res.send({notice: 'USERNAME_OCCUPIED'});
            res.status(200).send()
        } else {
            User.create(req.body, function(err){
                if (err) {
                    res.status(400).send()
                } else {
-                   res.notice = null
+                   res.send({notice:null});
                    res.status(200).send()
                }
            })
