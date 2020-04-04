@@ -32,6 +32,8 @@ app.use(require('./routes/admin'))
 app.use(require('./routes/groupChat'))
 app.use(require('./routes/user'))
 app.use(require('./routes/courses'))
+app.use(require('./routes/tasks'))
+
 // app.use(require('./routes/index'))
 
 // Setting up a static directory for the html file using Express middleware

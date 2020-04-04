@@ -1,6 +1,7 @@
 /* User mongoose model */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+mongoose.Schema.Types.Boolean.convertToFalse.add('');
 
 const notificationSchema = {
     text: {
@@ -44,7 +45,6 @@ const taskSchema = {
     },
     completed: {
         type: Boolean,
-
     },
     weight: {
         type: Number
@@ -54,8 +54,14 @@ const taskSchema = {
     },
 }
 
+
 userCourseSchema = {
     courseId: mongoose.Schema.Types.ObjectId,
+
+    courseCode:{
+        type: String,
+    },
+
     courseTitle: {
         type: String,
     },
