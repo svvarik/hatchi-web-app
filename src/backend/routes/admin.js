@@ -32,21 +32,24 @@ router.get('/userInfo', (req, res) => {
     User.find({}).then(
         (usersInfo) => {
             const allUsers = [];
-            for (const u in usersInfo) {
+            for (const u of usersInfo) {
                 const user = {
                     userid: '',
                     username: '',
                     email: '',
+                    password: '',
                     groups: [],
                 }
-                user.userid = usersInfo[u]._id;
-                user.username = usersInfo[u].username;
-                user.email = usersInfo[u].email;
+                user.userid = u._id;
+                user.username = u.username;
+                user.password = u.password;
+                user.email = u.email;
                 // get user groups
-                for (const g in usersInfo[u].courses) {
+                for (const obj of u.courses) {
                     // const cId = usersInfo[u].courses[g][0]
-                    const courseCode = usersInfo[u].courses[g][1]
-                    const mute = usersInfo[u].courses[g][2]
+                    log("!!!!!!!!!!!!!!!!loop!!!!!!!!!!!!!!!!!!!!")
+                    var courseCode = obj.courseCode;
+                    var mute = obj.muted
                     user.groups.push({
                         key: courseCode,
                         value: mute
@@ -69,32 +72,33 @@ router.post('/changeStatus', (req, res) => {
     const body = req.body
     const username = body.username
     const courseCodeList = body.courseCode.split(',')
+    log("courseCodeList")
+    log(courseCodeList)
 
     User.findOne({ username: `${username}` }, function (err, doc) {
         if (doc) {
-            // const doc.courses = [["5e7d5a1ba26605011613a087", "csc373", true], ["5e7d5a1935577101064fa229", "csc108", false]]
-            // const courseCodeList = ['csc373', 'false', 'csc108', 'true']
-            log(courseCodeList)
-            var result = []
+            log(doc.username)
+            log(doc.courses)
+            // courseCodeList = ['csc373', 'false', 'csc108', 'true']
             var count = 0;
             for (var docCourse of doc.courses) {
                 var inside = []
-                inside.push(docCourse[0])  // course id
-                inside.push(courseCodeList[count * 2])  // course code
-                inside.push(courseCodeList[count * 2 + 1] == 'true')  // course status
-
-                result.push(inside)
+                const courseChange = docCourse.courseCode
+                const statusIndex = courseCodeList.indexOf(courseChange)+1
+                var muted = courseCodeList[statusIndex] === 'true';
+                
+                docCourse.muted = muted
+                log(docCourse)
+                // inside.push(docCourse[0])  // course id
+                // inside.push(courseCodeList[count * 2])  // course code
+                // inside.push(courseCodeList[count * 2 + 1] == 'true')  // course status
                 count++;
             }
             // log("result: ")
             // log(result)
             // log(doc.courses[0][0])
-            doc.courses = result
-            doc.save(function (err) {
-                if (err) {
-                    return handleError(err);
-                }
-            })
+            // doc.courses = result
+            doc.save()
             res.send("success")
         } else {
             log("cannot find user")
@@ -157,51 +161,15 @@ router.post('/deleteUser', (req, res) => {
 
 router.get('/reportMessage', (req, res) => {
     log("reportMessage")
-    /* 
-    const Message = mongoose.model('Message', {
-	userID: {
-		type: ObjectID,
-		required: true,
-		minlegth: 1
-	},
-    text: {
-        type: String,
-        required: true
-    },
-    courseID: {
-        type: ObjectID,
-        required: true
-    }
-})
-    */
     Admin.find({}).then(async function (adminList) {
         const msgGet = adminList[0].notifications // array of message object
         const allMsg = [];
+        // log(msgGet)
         for (const i of msgGet) {
-    //         /*
-    //         {"_id":{"$oid":"5e7d5a1ba26605011613a088"},
-    //         "notifications":[
-    //                 {"_id":{"$oid":"5e7d5df24a9281021fe47479"},
-    //                 "userID":{"$oid":"5e7d5a1ba26605011613a084"},
-    //                 "text":"108: message 2",
-    //                 "courseID":{"$oid":"5e7d5a1935577101064fa229"},
-    //                 "__v":{"$numberInt":"0"}
-    //             },
-    //                 {"_id":{"$oid":"5e7d5df24a9281021fe47478"},
-    //                 "userID":{"$oid":"5e7d5a1ba26605011613a084"},
-    //                 "text":"108: message 1",
-    //                 "courseID":{"$oid":"5e7d5a1935577101064fa229"},
-    //                 "__v":{"$numberInt":"0"}
-    //             }],
-    //         "adminName":"admin",
-    //         "password":"admin",
-    //         "__v":{"$numberInt":"0"}}
-    //         */
             var msg = {
-                id: i._id,
                 username: '',
                 groupCode: '',
-                msg: i.text,
+                msg: i.msgContent,
             }
             
             // find username of user
@@ -224,7 +192,7 @@ router.get('/reportMessage', (req, res) => {
             })
             allMsg.push(msg);
         }
-        log(allMsg)
+        // log(allMsg)
         res.send(allMsg)
     }).catch((error) => {
         res.status(500).send();
@@ -232,13 +200,18 @@ router.get('/reportMessage', (req, res) => {
 })
 
 router.post('/deleteMsg', (req, res) => {
-    const id = req.body.mId
+    log("del message!!!!!!!!!!!!!!!!!!!!")
+    const del = req.body.msg
+    log(del)
     Admin.find({}).then(function (adminList) {
         var msgGet = adminList[0].notifications
+        log("message get")
+        log(msgGet)
         var index;
         for (const i of msgGet){
-            if(i._id == id){
+            if(i.msgContent === del){
                 index = msgGet.indexOf(i)
+                log(index)
             }
         }
         // var index = arr.indexOf(msg);

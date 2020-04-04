@@ -241,7 +241,7 @@ function popUpNotification() {
                     <td>${m.username}</td>
                     <td>${m.groupCode}</td>
                     <td>${m.msg}</td>
-                    <td><span type="button" onclick="deleteMsg(this,'${m.id}')">&#10003</span><td>
+                    <td><span type="button" onclick="deleteMsg('${m.username}', '${m.groupCode}', '${m.msg}')">&#10003</span><td>
                 </tr>`
     }
     pop.innerHTML = html
@@ -254,13 +254,13 @@ function popUpNotification() {
     }
 }
 
-function deleteMsg(btn, mId){
+function deleteMsg(username, groupCode, msg){
     $.ajax({
         type: "POST",
         url: "/deleteMsg",
         async: false,
         contentType: "application/json",
-        data: JSON.stringify({ "mId": `${mId}` }),
+        data: JSON.stringify({ "username": `${username}`, "groupCode": `${groupCode}`, "msg": `${msg}` }),
         success: function (data, status) {
             if (status =="success") {
                 location.reload(true)
