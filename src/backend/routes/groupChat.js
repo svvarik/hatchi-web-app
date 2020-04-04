@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const router = express.Router()
 const { ObjectID } = require('mongodb')
-//pusher
+//pusher initialization
 const Pusher = require('pusher')
 const pusher = new Pusher({
     appId: '975704',
@@ -41,7 +41,7 @@ router.get('/views/groupChats/groupChats.html/user/:userID', (req, res) => {
            let counter = user.courses.length
            user.courses.map((course) => {
                
-                Course.findById(new ObjectID(course[0])).then((courseFound) => {
+                Course.findById(new ObjectID(course.courseId)).then((courseFound) => {
                     courseCodeList.push({
                         courseCode: courseFound.courseCode,
                         courseID: courseFound._id
