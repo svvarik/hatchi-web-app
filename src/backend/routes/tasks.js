@@ -88,8 +88,8 @@ router.post('/user-tasks/:userId/:taskId', (req, res) => {
                     tasksInCourse[k].subTasks.push(newSubTask);
                 }
             }
-            
         }
+        student.save()
         // const task = student.courses.tasks.id(taskId)
         // task.subTasks.push(newSubTask);
         // student.save(function (err) {
