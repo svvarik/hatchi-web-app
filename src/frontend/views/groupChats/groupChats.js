@@ -1,5 +1,22 @@
+
+const currUserID = sessionStorage.getItem('user')
+console.log(currUserID)
+if(currUserID == null){
+    document.location.href="/";
+    // const url = '/'
+    // fetch(url)
+    // .then((res)=> {
+    //     if(res.status === 200){
+    //         console.log(res)
+    //     }else{
+    //         alert('could not get to the page')
+    //     }
+    // })
+}
+
+
 // variables
-const currUserID = '5e7d5a1935577101064fa228'
+
 const profileImg = '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'
 
 //random color generator function
@@ -31,7 +48,7 @@ function getUserCourses() {
         const courses = json.courses
         courses.map((course) => {
             const groupChatEle = $('<div class="groupChat card-styling chat-style" id=' + course.courseID + '><h2>' + course.courseCode + '</h2></div>');
-            const topBorderStyle = "20px solid " + tempColor;
+            const topBorderStyle = "20px solid " + generateColor();
             groupChatEle.css("border-top", topBorderStyle);
             $('#groupChatsList').append(groupChatEle)
         })
