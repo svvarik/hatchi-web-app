@@ -84,7 +84,7 @@ const User = mongoose.model('User', {
 
     },
     courses: {
-        type: [taskSchema]
+        type: [userCourseSchema]
     },
     //notificatin is added when a user is muted/unmuted 
     //(dashboard only display last n notifications in this notification list)
