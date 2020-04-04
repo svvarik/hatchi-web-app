@@ -111,13 +111,7 @@ router.get('/views/groupChats/groupChats.html/user/:userID', (req, res) => {
  // a POST route to add a notification to admin (a message is reported)
  router.post('/views/groupChats/groupChats.html/report', (req, res) => {
     
-    const notification = {
-        courseID: new ObjectID(req.body.courseID),
-        courseCode: req.body.courseCode,
-        userID: new ObjectID(req.body.userID),
-        msgContent: req.body.msgContent
-    }
-    // console.log(typeof notification.userID )
+    const notification = req.body
  
    Admin.find().then((adminList) => {
         const admin = adminList[0]
