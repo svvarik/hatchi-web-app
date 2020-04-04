@@ -1,57 +1,6 @@
-
 // variables
-const courseColors = {
-    CSC309: "rgb(0, 75, 0)",
-    CSC301: "rgb(255, 107, 0)",
-    MAT235: "rgb(255, 192, 0)",
-    INI318: "rgb(187, 0, 0)", 
-    STA247: "rgb(0, 174, 17)"
-};
-const tempColor = "rgb(255, 192, 0)";
-const myRealID = '5e77884b67878059494966a2'
 const currUserID = '5e7d5a1935577101064fa228'
-const groupChats = [
-    {
-        id:1,
-        groupName: 'INI318',
-        isBlocked: false,
-        messages: [['hi', 'A'], //should store user id
-                  ['this is INI318 group chat', 'B'],
-                  ['Lorem ipsum dolor sit amet, conslentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas', 'x'],
-                  ['this is INI318 group chat', 'B'],
-                  ['this is INI318 group chat', 'B'],
-                ]
-    },
-    {
-        id:2,
-        groupName: 'MAT235',
-        isBlocked: false,
-        messages: [['hi', 'A'], 
-                  ['this is MAT235 group chat', 'B'],
-                  ['Lorem ipsum dolor sit amet, consectetur adipis. Pellentesque ut mas, consectetur adipiscing elit. Pellentesque ut mas', 'x'],
-                  ['this is MAT235 group chat', 'user'],
-                  ['this is MAT235 group chat', 'B'],
-                  ['this is MAT235 group chat', 'x'],
-                  ['this is MAT235 group chat', 'A']
-                
-                ]
-    },
-    {
-        id:3,
-        groupName: 'STA247',
-        isBlocked: true,
-        messages: [['hi', 'A'], 
-                  ['this is sta247 group chat', 'B']]
-    }
-]
-
-const reports = [];
 const profileImg = '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'
-
-let localGroups = [];//["2", "csc108", false]
-const courseIDIndex = 0;
-const courseCodeIndex = 1;
-const courseMutedIndex = 2;
 
 //random color generator function
 function generateColor(){
@@ -67,15 +16,12 @@ function generateColorValue(){
 
 //get the courses of the current user and display them on the page
 function getUserCourses() {
-    console.log("getCurrUser called")
-    // the URL for the request
     const url = '/views/groupChats/groupChats.html/user/' + currUserID;
 
     // Since this is a GET request, simply call fetch on the URL
     fetch(url)
     .then((res) => { 
         if (res.status === 200) {
-            // return a promise that resolves with the JSON body
            return res.json()
        } else {
             alert('Could not get groupChats')
@@ -100,7 +46,6 @@ getUserCourses()
 $(document).on('click', '.groupChat', function(){
     const courseCode = this.firstChild.innerText;
     const courseID = $(this).attr('id')
-    console.log(courseID)
 
     //find course object in the database with courseID
     const url = '/views/groupChats/groupChats.html/course' + '/' + courseID;
@@ -115,14 +60,12 @@ $(document).on('click', '.groupChat', function(){
        }                
     })
     .then((json) => {  // the resolved promise with the JSON body
-        console.log(json)
         const msgs = json.msgList
         openChatBox(courseCode, courseID, msgs)
         
     }).catch((error) => {
         console.log(error)
     })
-    
 })
 
 function openChatBox(courseCode, courseID, msgs){
@@ -148,6 +91,8 @@ function openChatBox(courseCode, courseID, msgs){
     })
     const sendContainer = '<div id="sendContainer"><form><input type="text" id="msgInput" /><div id="sendButton">Send</div></form></div>';
     $('#chatWindow').append(sendContainer)
+    const elem = document.getElementById('msgsContainer');
+    elem.scrollTop = elem.scrollHeight;
 }
 
 
@@ -193,7 +138,6 @@ $(document).on('click', '#sendButton', function(){
             elem.scrollTop = elem.scrollHeight;
         }
         
-        
     }).catch((error) => {
         console.log(error)
     })
@@ -213,7 +157,6 @@ var pusher = new Pusher('dcccc60c3687f9c8066f', {
 var channel = pusher.subscribe('msg');
 channel.bind('send-msg', function(data) {
     if(data.userID == currUserID){
-        console.log('same id')
         return
     }
     groupChatEleList = $('.groupChat')
@@ -226,7 +169,6 @@ channel.bind('send-msg', function(data) {
         elem.scrollTop = elem.scrollHeight;
     }
 });
-
 
 
 //do not refresh the page if group chat icon in the menu is clicked 
@@ -275,40 +217,4 @@ $(document).on('click', '.report-btn', function(e){
     }).catch((error) => {
         console.log(error)
     })
-
-
-
-
-    // reports.push({user: userName, reportedMsg: message})
-
-
-    //save to admin 
-
-    //save to course
 } )
-
-//socketio
-//receiving incoming messages 
-// socket.on('new message', data => {
-//     console.log(data)
-//     if(data.userID === myID){
-//         return
-//     }
-//     console.log(data)
-//     const msgReceived = data.text;
-//     const userID = data.userID;
-//     const profile = '<div class="user">' + profileImg + '<p>' + userID + '</p></div>';
-//     const msgContent = '<div class="MsgContent"><p class="msgText">' + msgReceived + '</p></div>';
-//     const msgEle = '<div class="msg">' + profile + msgContent + '</div>';
-//     const groupToFindID = data.groupID
-//     groupChats.map((group) => {
-//         if(group.id === groupToFindID){
-                
-//                 group.messages.push([msgReceived, userID]);
-//                 $('#msgsContainer').append(msgEle);
-            
-//         }
-//     })
-//     const elem = document.getElementById('msgsContainer');
-//     elem.scrollTop = elem.scrollHeight;
-// })
