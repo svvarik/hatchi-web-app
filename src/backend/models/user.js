@@ -56,6 +56,11 @@ const taskSchema = {
 
 userCourseSchema = {
     courseId: mongoose.Schema.Types.ObjectId,
+
+    courseCode:{
+        type: String,
+    },
+
     courseTitle: {
         type: String,
     },
