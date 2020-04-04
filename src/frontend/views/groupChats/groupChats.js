@@ -200,7 +200,6 @@ $(document).on('click', '.report-btn', function(e){
     const userID = $(e.target).parent().parent().find('.user').attr('id')
     const message = $(e.target).parent().find('p')[0].innerText
     const courseID =$(e.target).parent().parent().parent().parent().find('.courseNameContainer').attr('id')
-    const courseCode = $(e.target).parent().parent().parent().parent().find('.courseNameContainer h3')[0].innerText
 
     // the URL for the request
     const url = '/views/groupChats/groupChats.html/report';
@@ -209,8 +208,7 @@ $(document).on('click', '.report-btn', function(e){
     let data = {
         courseID: courseID,
         msgContent: message, 
-        userID: userID,
-        courseCode: courseCode
+        userID: userID
     }
     // Create our request constructor with all the parameters we need
     const request = new Request(url, {
