@@ -28,7 +28,10 @@ const Course = mongoose.model('Course', {
     },
     messages: {
         type: Array
-    }
+    },
+    color: {
+		type: String
+	},
 })
 
 module.exports = { Course }

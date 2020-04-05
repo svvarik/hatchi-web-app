@@ -14,6 +14,19 @@ const { Course } = require('../models/course')
 const { Message } = require('../models/message')
 const { Admin } = require('../models/admin')
 
+
+function generateColor(){
+    const color = "rgb(" + generateColorValue().toString() + ", " +
+                        generateColorValue().toString() + ", " + 
+                        generateColorValue().toString() +
+            ")";
+    return color;
+}
+function generateColorValue(){
+    return Math.floor(Math.random() * 255);
+}
+
+
 // a GET route to get a user by userID (for displaying courses)
 router.get('/views/courses/courses.html/user/:userID', (req, res) => {
     const userID = req.params.userID
@@ -62,7 +75,8 @@ router.post('/views/courses/courses.html/addCourse', (req, res)=> {
             const newCourse = new Course({
                 courseCode: req.body.courseCode,
                 courseName: req.body.courseName,
-                enrolledUsers: [userIDobj]
+                enrolledUsers: [userIDobj],
+                color: generateColor()
             })
             newCourse.save().then((result) => {
                 courseID = result._id
@@ -87,7 +101,7 @@ router.post('/views/courses/courses.html/addCourse', (req, res)=> {
                 muted:false,
                 courseId : new ObjectID(courseID),
                 courseTitle: req.body.courseCode,
-                tasks: []
+                tasks: [],
             }
             User.findByIdAndUpdate(userIDobj, {$push: {courses: userCourse}}).then((user) => {
                 console.log('user', user)
