@@ -73,8 +73,10 @@ router.get('/views/groupChats/groupChats.html/user/:userID', (req, res) => {
         } else {
             const msgList = []
             let counter = course.messages.length
+            if(counter === 0){res.send({msgList})}
             let msgID
             for(let i = 0; i < course.messages.length; i++){
+                
                  msgID = course.messages[i]
                 //find message
                 Message.findById(new ObjectID(msgID)).then((msg) => {
