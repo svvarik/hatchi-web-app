@@ -83,7 +83,8 @@ router.post('/views/courses/courses.html/addCourse', (req, res)=> {
                 const userCourse = {
                     muted:false,
                     courseId : new ObjectID(courseID),
-                    courseTitle: req.body.courseCode,
+                    courseCode: req.body.courseCode,
+                    courseTitle: req.body.courseName,
                     tasks: []
                 }
                 User.findByIdAndUpdate(userIDobj, {$push: {courses: userCourse}}).then((user) => {
@@ -100,8 +101,9 @@ router.post('/views/courses/courses.html/addCourse', (req, res)=> {
             const userCourse = {
                 muted:false,
                 courseId : new ObjectID(courseID),
-                courseTitle: req.body.courseCode,
-                tasks: [],
+                courseTitle: req.body.courseName,
+                courseCode: req.body.courseCode,
+                tasks: []
             }
             User.findByIdAndUpdate(userIDobj, {$push: {courses: userCourse}}).then((user) => {
                 console.log('user', user)

@@ -98,7 +98,12 @@ router.post('/changeStatus', (req, res) => {
             // log(result)
             // log(doc.courses[0][0])
             // doc.courses = result
-            doc.save()
+            doc.save(function (err){
+                if(err){
+                    res.status(400).send("cannot save changing status")
+                }
+            }) 
+
             res.send("success")
         } else {
             log("cannot find user")
