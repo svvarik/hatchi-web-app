@@ -40,10 +40,11 @@ fetch(getTasksUrl).then((res) => {
             })
         })
     })
-    console.log(calEvents);
+    displayNotifications();
 }).catch((error) => {
     console.log(error)
 });
+
 
 // Calendar Event Objects (Hard Coded Event Data) 
 // const calEventInfo1 = {
@@ -431,6 +432,20 @@ function displayEventInfo(e){
     eventInfoDisplay.appendChild(startEndTime);
     eventInfoDisplay.classList.add("cal-event-info")
     eventInfo.appendChild(eventInfoDisplay);
+}
+
+function displayNotifications(){
+    const numEvents = calEvents.length;
+    const notif = document.getElementById("notifications");
+    if(numEvents < 5) {
+        const notifEasy = document.createElement("p");
+        notifEasy.appendChild(document.createTextNode("You have " + numEvents + " this month. " + "Looking like a easy ride for a while!"));
+        notif.appendChild(notifEasy);
+    } else {
+        const notifBusy = document.createElement("p");
+        notifBusy.appendChild(document.createTextNode("You have " + numEvents + " tasks this month. " + "Looking like things are busy!"));
+        notif.appendChild(notifBusy);
+    }
 }
 
 document.querySelectorAll("button.calendar-button").forEach (button => {
