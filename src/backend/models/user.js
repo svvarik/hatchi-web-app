@@ -25,6 +25,14 @@ const subTaskSchema = {
     },
     completed: {
         type: Boolean,
+    },
+    startTime: {
+        type: String,
+        required: false
+    },
+    endTime: {
+        type: String,
+        required: false
     }
 }
 

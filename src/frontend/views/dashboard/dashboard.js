@@ -33,6 +33,9 @@ fetch(getTasksUrl).then((res) => {
                 newSubTask.course = courseTitle;
                 newSubTask.mainTask = mainTitle;
                 newSubTask.name = subTask.title;
+                if(subTask.startTime){
+                    newSubTask.startTime = subTask.startTime;
+                }
                 newSubTask.date = new Date(subTask.startDate);
                 newSubTask.endDate = new Date(subTask.endDate);
                 newSubTask.id = subTask._id
@@ -318,7 +321,7 @@ function populateDayView(listOfEvents){
     const today = new Date();
     listOfEvents.forEach(calEvent => {
         if(calEvent.date.getDate() == today.getDate()){
-            const timeSlotId = convertDateToDayId(calEvent.date);
+            const timeSlotId = convertDateToDayId(calEvent);
             console.log(timeSlotId);
             const timeSlot = document.getElementById(timeSlotId);
             const calEventDisplay = document.createElement("div");
@@ -384,8 +387,13 @@ function populateMonthView(listOfEvents) {
     })
 }
 
-function convertDateToDayId(date){
-    return date.getFullYear() + "-"+date.getMonth() + "-" + date.getDate() + "-" + date.getHours();
+function convertDateToDayId(calEvent){
+    if(calEvent.startTime){
+    const newArray = calEvent.startTime.split(":");
+    return calEvent.date.getFullYear() + "-" +calEvent.date.getMonth() + "-" + calEvent.date.getDate() + "-" + newArray[0];
+    } else {
+        return calEvent.date.getFullYear() + "-" +calEvent.date.getMonth() + "-" + calEvent.date.getDate() + "-" + calEvent.date.getHours();
+    }
 }
 
 function convertDateToMonthId(date){

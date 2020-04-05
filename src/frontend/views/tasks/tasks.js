@@ -295,8 +295,10 @@ $(document).on('click', '#finish-add-btn', function(){
     const eTime = $('#subtask-end-time').val();
     const newSubTask = {
         title: breakdownName,
-        startDate: new Date(sDate.slice(0, 4), sDate.slice(5, 7)-1, sDate.slice(8, 10), sTime.slice(0, 2), sTime.slice(3,5)),
-        endDate: new Date(eDate.slice(0, 4), eDate.slice(5, 7)-1, eDate.slice(8, 10), eTime.slice(0, 2), eTime.slice(3,5)), 
+        startDate: new Date(sDate.slice(0, 4), sDate.slice(5, 7)-1, sDate.slice(8, 10), sTime),
+        endDate: new Date(eDate.slice(0, 4), eDate.slice(5, 7)-1, eDate.slice(8, 10), eTime), 
+        startTime: sTime,
+        endTime: eTime,
         completed: false
     };
 
