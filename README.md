@@ -3,7 +3,7 @@
 ## Instructions to Use the Application
 
 ### Starting Point
-The starting point for the application is the `index.html` file, found in the `src` directory. Upon logging in as a user, users will be directed to the dashboard / homepage. There, they can access the features of the app.
+The starting point for the application is https://fast-crag-76695.herokuapp.com. Upon logging in as a user, users will be directed to the dashboard / homepage. There, they can access the features of the app.
 
 ### User Credentials
 User credentials for the application adhere to assignment requirements:
@@ -34,7 +34,7 @@ User features can be broken down conveniently by the different tabbed sections t
 **Modify Course Breakdown** - Users can edit the course breakdown, adding assignments, changing weight percentages, and received grades, to view a final estimated grade. By clicking the table cell, you will be able to change its value.
 
 ### Group Chats - Fourth Tab on Side Navbar
-**Message Other Students** - Users, upon adding a course, are able to access the groupchat. Users can send messages to other students in each chat. If the user is muted in a group chat, he/she will get an alert when attempting to send a message. This is demonstrated in the STA248 group chat.  \
+**Message Other Students** - Users, upon adding a course, are able to access the groupchat. Users can send messages to other students in each chat. If the user is muted in a group chat, he/she will get an alert when attempting to send a message.  \
 **Report Messages** - Users are able to report messages, which will then be received by an admin.
 
 ### Settings - Fifth Tab on Side Navbar
