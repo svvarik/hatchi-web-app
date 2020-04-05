@@ -219,6 +219,8 @@ h5 {
     text-align: right;
     min-height: 70px;
     padding-left: 1.25em;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .week-day-text {
@@ -232,6 +234,7 @@ h5 {
     height: 20px;
     width: 20px;
     cursor: pointer;
+    background-color: rgb(255, 192, 0);
 }
 
 #placeHolder {

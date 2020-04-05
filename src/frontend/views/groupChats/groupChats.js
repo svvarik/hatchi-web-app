@@ -34,7 +34,6 @@ function generateColorValue(){
 //get the courses of the current user and display them on the page
 function getUserCourses() {
     const url = '/views/groupChats/groupChats.html/user/' + currUserID;
-
     // Since this is a GET request, simply call fetch on the URL
     fetch(url)
     .then((res) => { 

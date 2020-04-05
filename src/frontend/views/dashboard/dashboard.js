@@ -7,52 +7,82 @@ const courseColors = {
     STA247: "rgb(0, 174, 17)"
 };
 
-window.onload = () => { 
-    const url = 'views/tasks/tasks.html/tasks' + currUserID;
-    fetch(url).then((res) => {
-        const tasks = JSON.parse(res);
-        console.log(tasks);
+const currUserID = sessionStorage.getItem('user')
+console.log(currUserID);
+
+
+const getTasksUrl = '/tasks/course-tasks/' + currUserID
+
+const calEvents = []
+
+fetch(getTasksUrl).then((res) => {
+    if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+       return res.json()
+   } else {
+        alert('Could not get the specified group')
+   }   
+}).then((json) => {  // the resolved promise with the JSON body
+    console.log(json);
+    json.map(x => {
+        const courseTitle = x.courseTitle;
+        x.tasks.map(task => {
+            const mainTitle = task.title;
+            task.subTasks.map(subTask => {
+                newSubTask = {}
+                newSubTask.course = courseTitle;
+                newSubTask.mainTask = mainTitle;
+                newSubTask.name = subTask.title;
+                newSubTask.date = new Date(subTask.startDate);
+                newSubTask.endDate = new Date(subTask.endDate);
+                newSubTask.id = subTask._id
+                calEvents.push(newSubTask);
+            })
+        })
     })
-}
+    console.log(calEvents);
+}).catch((error) => {
+    console.log(error)
+});
 
 // Calendar Event Objects (Hard Coded Event Data) 
-const calEventInfo1 = {
-    id: 0,
-    mainTask: "Essay on Effects of Obesity", 
-    name: "Brainstorm",
-    course: "INI318", 
-    date: new Date("March 3, 2020 12:00"),
-    endDate: new Date("March 3, 2020 13:00")
-};
+// const calEventInfo1 = {
+//     id: 0,
+//     mainTask: "Essay on Effects of Obesity", 
+//     name: "Brainstorm",
+//     course: "INI318", 
+//     date: new Date("March 3, 2020 12:00"),
+//     endDate: new Date("March 3, 2020 14:00")
+// };
 
-const calEventInfo2 = {
-    id: 1,
-    mainTask: "Essay on Effects of Obesity", 
-    name: "Research",
-    course: "INI318", 
-    date: new Date("March 4, 2020 16:00"),
-    endDate: new Date("March 4, 2020 17:00")
-};
+// const calEventInfo2 = {
+//     id: 1,
+//     mainTask: "Essay on Effects of Obesity", 
+//     name: "Research",
+//     course: "INI318", 
+//     date: new Date("April 5, 2020 8:00"),
+//     endDate: new Date("April 5, 2020 10:00")
+// };
 
-const calEventInfo3 = {
-    id: 2,
-    mainTask: "Problem Set", 
-    name: "Q1",
-    course: "STA247", 
-    date: new Date("March 5, 2020 16:00"),
-    endDate: new Date("March 5, 2020 17:00")
-};
+// const calEventInfo3 = {
+//     id: 2,
+//     mainTask: "Problem Set", 
+//     name: "Q1",
+//     course: "STA247", 
+//     date: new Date("March 5, 2020 16:00"),
+//     endDate: new Date("March 5, 2020 17:00")
+// };
 
-const calEventInfo4 = {
-    id: 3,
-    mainTask: "Problem Set", 
-    name: "Q2",
-    course: "STA247", 
-    date: new Date("March 6, 2020 12:00"),
-    endDate: new Date("March 6, 2020 13:00")
-};
+// const calEventInfo4 = {
+//     id: 3,
+//     mainTask: "Problem Set", 
+//     name: "Q2",
+//     course: "STA247", 
+//     date: new Date("March 6, 2020 12:00"),
+//     endDate: new Date("March 6, 2020 13:00")
+// };
 
-const calEvents = [calEventInfo1, calEventInfo2, calEventInfo3, calEventInfo4];
+// const calEvents = [calEventInfo2];
 
 // Useful Date Constants 
 const daysOfWeek = {
@@ -270,21 +300,42 @@ function returnLastDay(date){
   return lastDay.getDate();
 }
 
+function incrementTimeSlot(timeslot) { 
+    const parts = timeslot.split('-')
+    const increment = parseInt(parts[parts.length-1]) + 1
+    parts[parts.length-1] = increment
+    const timeSlot = parts.join("-");
+    return timeSlot;
+}
+
+function calculateDuration(calEvent) { 
+    const duration = calEvent.endDate.getHours() - calEvent.date.getHours();
+    return duration;
+}
+
 function populateDayView(listOfEvents){
     const today = new Date();
     listOfEvents.forEach(calEvent => {
         if(calEvent.date.getDate() == today.getDate()){
             const timeSlotId = convertDateToDayId(calEvent.date);
+            console.log(timeSlotId);
             const timeSlot = document.getElementById(timeSlotId);
             const calEventDisplay = document.createElement("div");
             const displayName = document.createElement("h5");
             displayName.id = calEvent.id
             displayName.appendChild(document.createTextNode(calEvent.mainTask + ": " + calEvent.name));
-            calEventDisplay.style.background = courseColors[calEvent.course];
+            calEventDisplay.style.background = 'CSC309: "rgb(0, 75, 0)';
             calEventDisplay.appendChild(displayName);
             calEventDisplay.classList.add("cal-event");
             calEventDisplay.id = calEvent.id;
+            const duration = calculateDuration(calEvent);
             timeSlot.appendChild(calEventDisplay);
+            for(let i = 0; i < duration - 1; i ++) { 
+                const newTimeSlotId = incrementTimeSlot(timeSlotId);
+                const newTimeSlot = document.getElementById(newTimeSlotId);
+                newTimeSlot.style.background = 'CSC309: "rgb(0, 75, 0)';;
+                newTimeSlot.classList.add('cal-event');
+            }
         }
     })
 }
@@ -300,12 +351,19 @@ function populateWeekView(listOfEvents) {
             displayName.classList.add("week-day-text")
             displayName.id = calEvent.id
             displayName.appendChild(document.createTextNode(calEvent.mainTask + ": " + calEvent.name));
-            calEventDisplay.style.background = courseColors[calEvent.course];
+            calEventDisplay.style.background = 'CSC309: "rgb(0, 75, 0)';;
             calEventDisplay.appendChild(displayName);
             calEventDisplay.classList.add("cal-event");
             calEventDisplay.classList.add("week-cal-event");
             calEventDisplay.id = calEvent.id;
+            const duration = calculateDuration(calEvent);
+            console.log(duration);
             timeSlot.appendChild(calEventDisplay);
+            for(let i = 0; i < duration - 1; i ++) { 
+                const newTimeSlotId = incrementTimeSlot(timeSlotId);
+                const newTimeSlot = document.getElementById(newTimeSlotId);
+                newTimeSlot.style.background = 'CSC309: "rgb(0, 75, 0)';;
+            }
         }
     })
 }
@@ -319,7 +377,7 @@ function populateMonthView(listOfEvents) {
             const dateDisplay = document.createElement("div");
             dateDisplay.id = calEvent.id;
             dateDisplay.classList.add("month-event");
-            dateDisplay.style.background = courseColors[calEvent.course];
+            // dateDisplay.style.background = 'CSC309: "rgb(0, 75, 0)';
             dateSlot.appendChild(dateDisplay);
         }
     })

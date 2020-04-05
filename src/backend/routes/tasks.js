@@ -7,24 +7,27 @@ const cors = require('cors');
 app.use(cors());
 
 // mongoose and mongo connection
-const { mongoose } = require('../db/mongoose')
+const { mongoose } = require('../db/mongoose');
 
 // import the mongoose models
-const { User } = require('../models/user')
+const { User } = require('../models/user');
+const { Course } = require('../models/course');
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
   });
 
-router.get('/views/tasks/tasks.html/tasks/:userId', (req, res) => {
-    console.log("test");
+
+/**
+ * Get all a user's tasks
+ */
+router.get('/tasks/user-tasks/:userId', (req, res) => {
     const id = mongoose.Types.ObjectId(req.params.userId);
     User.findById(id).then(student => {
         const allTasks = []
         for(let i = 0; i < student.courses.length; i++){
             let singleCourse = student.courses[i]
-            // console.log(taskList.tasks);
             const tasksInCourse = singleCourse.tasks
             for(let k = 0; k < tasksInCourse.length; k++){
                 allTasks.push(tasksInCourse[k])
@@ -34,7 +37,31 @@ router.get('/views/tasks/tasks.html/tasks/:userId', (req, res) => {
     });
 });
 
-router.post('/views/tasks/tasks.html/tasks/:userId', (req, res) => {
+/**
+ * Get a user's courses to access course based tasks
+ */
+router.get('/tasks/course-tasks/:userId', (req,res) => { 
+    const id = mongoose.Types.ObjectId(req.params.userId);
+    User.findById(id).then(student => {
+        res.send(student.courses);
+    });
+})
+
+/**
+ * Get a task's course name from the courseId
+ */
+router.get('/tasks/task-info/:courseId', (req, res) => {
+    const id = mongoose.Types.ObjectId(req.params.courseId);
+    Course.findById(id).then(course => {
+        const courseName = course.courseName;
+        res.json({name: courseName})
+    });
+});
+
+/**
+ * Add a task to a user
+ */
+router.post('/tasks/user-tasks/:userId', (req, res) => {
     const id = mongoose.Types.ObjectId(req.params.userId);
     const cId = mongoose.Types.ObjectId(req.body.courseId);
     User.findById(id).then(student => {
@@ -53,22 +80,23 @@ router.post('/views/tasks/tasks.html/tasks/:userId', (req, res) => {
         for(let i = 0; i < courses.length; i++){
             if(student.courses[i].courseId.toString() == cId.toString()){
                 student.courses[i].tasks.push(newTask);
-                student.save(function (err) {
-                    console.log(err)
+                student.save(function (err, data) {
+                    res.json(data.courses[i].tasks);
                 });
-                res.send(student);
             }
         }
     });
 });
 
-router.delete('/views/tasks/tasks.html/tasks/:userId/:taskId', (req, res) => {
+/**
+ * 
+ */
+router.delete('/tasks/user-tasks/:userId/:taskId', (req, res) => {
     const userId = mongoose.Types.ObjectId(req.params.userId);
     const taskId = mongoose.Types.ObjectId(req.params.taskId);
     User.findById(userId).then(student => {
         for(let i = 0; i < student.courses.length; i++){
             let singleCourse = student.courses[i]
-            // console.log(taskList.tasks);
             singleCourse.tasks.pull(taskId)
         }
         student.save();
@@ -76,9 +104,10 @@ router.delete('/views/tasks/tasks.html/tasks/:userId/:taskId', (req, res) => {
     })
 });
 
-router.post('/views/tasks/tasks.html/tasks/:userId/:taskId', (req, res) => {
+router.post('/tasks/user-tasks/:userId/:taskId', (req, res) => {
     const userId = mongoose.Types.ObjectId(req.params.userId);
     const taskId = mongoose.Types.ObjectId(req.params.taskId);
+    console.log("HERE");
     User.findById(userId).then(student => {
         const newSubTask = {
             title: req.body.title,
@@ -102,7 +131,7 @@ router.post('/views/tasks/tasks.html/tasks/:userId/:taskId', (req, res) => {
         //     console.log(err)
         // });
     });
-    res.send("Done");
+    res.send(200);
 });
 
 module.exports = router;
