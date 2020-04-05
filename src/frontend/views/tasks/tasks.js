@@ -7,6 +7,7 @@ const getUrl = "views/tasks/tasks.html/tasks" + currUserID
 let tasks;
 
 fetch(getUrl).then((res) => {
+    console.log(res);
     tasks = JSON.parse(res)
 })
 let currID = 4;
