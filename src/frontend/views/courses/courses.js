@@ -1,3 +1,5 @@
+//import { isMainThread } from "worker_threads";
+
 //variables
 const courses = [
     {
@@ -32,36 +34,57 @@ const courses = [
     }
 ]
 const log = console.log
+const currUserID = '5e7d5a1935577101064fa228'
 
 // server call to get all courses information
-const userID = sessionStorage.getItem("user")
+// const userID = sessionStorage.getItem("user")
 
-$.ajax({
-    type: "GET",
-    url: "/courseInfo",
-    async: false,
-    data: JSON.stringify({"userID": `${userID}`}),
-    success: function (data, status) {
-        if (status == "success") {
-            console.log(data);
-            courses = data;
-        }
-    }
-})
-console.log(`courses: ${courses}`)
+// $.ajax({
+//     type: "GET",
+//     url: "/courseInfo",
+//     async: false,
+//     data: JSON.stringify({"userID": `${userID}`}),
+//     success: function (data, status) {
+//         if (status == "success") {
+//             console.log(data);
+//             courses = data;
+//         }
+//     }
+// })
+// console.log(`courses: ${courses}`)
 
+//get all courses
+//get the courses of the current user and display them on the page
+function getUserCourses() {
+    const url = '/views/courses/courses.html/user/' + currUserID;
 
-//add courses to the courses container
-const coursesContainer = $('#courses-container')[0];
-courses.map((course) => {
-    displayCourse(course);
-    log(course)
-})
+    // Since this is a GET request, simply call fetch on the URL
+    fetch(url)
+    .then((res) => { 
+        if (res.status === 200) {
+           return res.json()
+       } else {
+            alert('Could not get courses')
+       }                
+    })
+    .then((json) => {  // the resolved promise with the JSON body
+        const courses = json.courses
+        console.log(courses)
+        courses.map((course) => {
+            displayCourse(course);
+        })
+    }).catch((error) => {
+        console.log(error)
+    })
+}
+getUserCourses()
+
 //display a course
+const coursesContainer = $('#courses-container')[0];
 function displayCourse(course) {
     const ele = $(
-        `<div class="course-container card-styling" id='${course.courseCode}'>
-            <h2> ${course.courseCode} : ${course.courseName} </h2>
+        `<div class="course-container card-styling" id='${course.courseID}'>
+            <h2> ${course.courseCode} : ${course.courseTitle} </h2>
             <div class="triangle-down"></div>
         </div>`)[0];
     coursesContainer.append(ele);
@@ -262,11 +285,42 @@ $(document).on('click', '#add-course-btn', function (e) {
     e.preventDefault()
     const code = $('#course-code').val();
     const name = $('#course-title').val();
-    const course = {
+
+    const url = '/views/courses/courses.html/addCourse';
+    let data = {
+        userID: currUserID,
         courseCode: code,
-        courseName: name,
-        assessments: []
-    };
+        courseName: name
+    }
+    const request = new Request(url, {
+        method: 'post', 
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+    });
+
+    fetch(request)
+    .then((res) => { 
+        if (res.status === 200) {
+           return res.json()
+       } else {
+            alert('Could not add the course')
+       }                
+    })
+    .then((json) => {  // the resolved promise with the JSON body
+        
+        
+    }).catch((error) => {
+        console.log(error)
+    })
+
+
+
+
+
+
     //display course
     displayCourse(course);
     //modify variable
