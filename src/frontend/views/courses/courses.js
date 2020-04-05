@@ -76,6 +76,7 @@ function getUserCourses() {
     // Since this is a GET request, simply call fetch on the URL
     fetch(url)
     .then((res) => { 
+        console.log(url);
         if (res.status === 200) {
            return res.json()
        } else {
