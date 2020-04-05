@@ -51,10 +51,10 @@ router.get('/views/courses/courses.html/user/:userID', (req, res) => {
     })
  })
 
-// a POST route to send a message 
+// a POST route to add a course 
 router.post('/views/courses/courses.html/addCourse', (req, res)=> {
     
-    Course.findOneAndUpdate({courseCode: req.body.courseCode}, 
+    Course.findOneAndUpdate({courseCode: req.body.courseCode, courseName: req.body.courseName}, 
                             {$push: {enrolledUsers: new ObjectID(req.body.userID)}}).then((course) => {
         const userIDobj=new ObjectID(req.body.userID)
         let courseID = null
@@ -72,8 +72,9 @@ router.post('/views/courses/courses.html/addCourse', (req, res)=> {
                     courseTitle: req.body.courseCode,
                     tasks: []
                 }
-                User.findByIdAndUpdate(userIDobj, {$push: {userCourse}}).then((user) => {
-                    res.status(200).send()
+                User.findByIdAndUpdate(userIDobj, {$push: {courses: userCourse}}).then((user) => {
+                    console.log('user', user)
+                    res.send({courseID: courseID})
                 }, (err) => {
                     res.status(400).send()
                 })
@@ -82,6 +83,18 @@ router.post('/views/courses/courses.html/addCourse', (req, res)=> {
             })
         }else{
             courseID = course._id
+            const userCourse = {
+                muted:false,
+                courseId : new ObjectID(courseID),
+                courseTitle: req.body.courseCode,
+                tasks: []
+            }
+            User.findByIdAndUpdate(userIDobj, {$push: {courses: userCourse}}).then((user) => {
+                console.log('user', user)
+                res.send({courseID: courseID})
+            }, (err) => {
+                res.status(400).send()
+            })
         }
         console.log(courseID)
         

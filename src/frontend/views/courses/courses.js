@@ -325,22 +325,21 @@ $(document).on('click', '#add-course-btn', function (e) {
        }                
     })
     .then((json) => {  // the resolved promise with the JSON body
-        
-        
+        console.log(json)
+        //display course
+        const courseToAdd = {
+            courseID: json.courseID,
+            courseCode: code,
+            courseTitle: name
+        }
+        displayCourse(courseToAdd);
+        //change add course section back 
+        $('#add-course-container form')[0].remove()
+        $('#add-course-container').append($('<img src="add-24px.svg" alt="+">'))
+
     }).catch((error) => {
         console.log(error)
     })
 
 
-
-
-
-
-    //display course
-    displayCourse(course);
-    //modify variable
-    courses.push(course)
-    //change add course section back 
-    $('#add-course-container form')[0].remove()
-    $('#add-course-container').append($('<img src="add-24px.svg" alt="+">'))
 })
