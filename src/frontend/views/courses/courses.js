@@ -1,4 +1,20 @@
 //import { isMainThread } from "worker_threads";
+const currUserID = sessionStorage.getItem('user')
+console.log(currUserID)
+if(currUserID == null){
+    document.location.href="/";
+    // const url = '/'
+    // fetch(url)
+    // .then((res)=> {
+    //     if(res.status === 200){
+    //         console.log(res)
+    //     }else{
+    //         alert('could not get to the page')
+    //     }
+    // })
+}
+
+
 
 //variables
 const courses = [
@@ -34,7 +50,6 @@ const courses = [
     }
 ]
 const log = console.log
-const currUserID = '5e7d5a1935577101064fa228'
 
 // server call to get all courses information
 // const userID = sessionStorage.getItem("user")
