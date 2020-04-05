@@ -3,6 +3,8 @@ var router = express.Router();
 const app = express();
 var bodyParser = require('body-parser')
 app.use(express.json());
+const cors = require('cors');
+app.use(cors());
 
 // mongoose and mongo connection
 const { mongoose } = require('../db/mongoose')
@@ -10,7 +12,12 @@ const { mongoose } = require('../db/mongoose')
 // import the mongoose models
 const { User } = require('../models/user')
 
-router.get('/user-tasks/:userId', (req, res) => {
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
+router.get('/views/tasks/tasks.html/tasks/:userId', (req, res) => {
     console.log("test");
     const id = mongoose.Types.ObjectId(req.params.userId);
     User.findById(id).then(student => {
@@ -27,10 +34,9 @@ router.get('/user-tasks/:userId', (req, res) => {
     });
 });
 
-router.post('/user-tasks/:userId', (req, res) => {
+router.post('/views/tasks/tasks.html/tasks/:userId', (req, res) => {
     const id = mongoose.Types.ObjectId(req.params.userId);
     const cId = mongoose.Types.ObjectId(req.body.courseId);
-    const testId = mongoose.Types.ObjectId("5e7d5a1935577101064fa229");
     User.findById(id).then(student => {
         const newTask = {
             subTasks: [],
@@ -56,7 +62,7 @@ router.post('/user-tasks/:userId', (req, res) => {
     });
 });
 
-router.delete('/user-tasks/:userId/:taskId', (req, res) => {
+router.delete('/views/tasks/tasks.html/tasks/:userId/:taskId', (req, res) => {
     const userId = mongoose.Types.ObjectId(req.params.userId);
     const taskId = mongoose.Types.ObjectId(req.params.taskId);
     User.findById(userId).then(student => {
@@ -70,7 +76,7 @@ router.delete('/user-tasks/:userId/:taskId', (req, res) => {
     })
 });
 
-router.post('/user-tasks/:userId/:taskId', (req, res) => {
+router.post('/views/tasks/tasks.html/tasks/:userId/:taskId', (req, res) => {
     const userId = mongoose.Types.ObjectId(req.params.userId);
     const taskId = mongoose.Types.ObjectId(req.params.taskId);
     User.findById(userId).then(student => {

@@ -2,15 +2,15 @@
 const currUserID = sessionStorage.getItem('user')
 console.log(currUserID)
 
-const getUrl = "https://fast-crag-76695.herokuapp.com/user-tasks/5e7d5a1935577101064fa228"
+const getUrl = "views/tasks/tasks.html/tasks" + currUserID
 
 let tasks;
 
-// fetch(getUrl).then((res) => {
-//     tasks = JSON.parse(res)
-// })
-// let currID = 4;
-// const l = console.log
+fetch(getUrl).then((res) => {
+    tasks = JSON.parse(res)
+})
+let currID = 4;
+const l = console.log
 
 //display the tasksnpm
 const tasksContainer = $('tasks-content');
@@ -166,7 +166,7 @@ $(document).on('click', '#to-breakdown-btn', function(){
         "mark": 0
     }
 
-    const reqUrl = "http://127.0.0.1:5000/user-tasks/" + "5e7d5a1935577101064fa228"
+    const reqUrl = "http://127.0.0.1:5000/user-tasks/" + currUserID;
 
     const request = new Request(reqUrl, {
         method: 'post', 

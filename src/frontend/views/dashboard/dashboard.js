@@ -7,6 +7,14 @@ const courseColors = {
     STA247: "rgb(0, 174, 17)"
 };
 
+window.onload = () => { 
+    const url = 'views/tasks/tasks.html/tasks' + currUserID;
+    fetch(url).then((res) => {
+        const tasks = JSON.parse(res);
+        console.log(tasks);
+    })
+}
+
 // Calendar Event Objects (Hard Coded Event Data) 
 const calEventInfo1 = {
     id: 0,
