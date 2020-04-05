@@ -43,6 +43,7 @@ fetch(getTasksUrl).then((res) => {
             })
         })
     })
+    layoutMonth(new Date());
     displayNotifications();
 }).catch((error) => {
     console.log(error)
@@ -464,6 +465,5 @@ window.addEventListener("load", () => {
     const calTitle = document.getElementById("calTitle"); 
     calTitle.innerHTML = '';
     calTitle.appendChild(document.createTextNode(formatCalTitle(new Date())));
-    layoutDay(new Date());
-    document.getElementById("dayView").classList.add("selected-button");
+    // document.getElementById("monthView").classList.add("selected-button");
 })
