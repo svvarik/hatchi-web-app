@@ -3,7 +3,7 @@
 ## Instructions to Use the Application
 
 ### Starting Point
-The starting point for the application is https://fast-shelf-50341.herokuapp.com. Upon logging in as a user, users will be directed to the dashboard / homepage. There, they can access the features of the app.
+The starting point for the application is https://hatchi.herokuapp.com. Upon logging in as a user, users will be directed to the dashboard / homepage. There, they can access the features of the app.
 
 ### User Credentials
 User credentials for the application adhere to assignment requirements:
