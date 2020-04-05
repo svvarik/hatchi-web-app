@@ -166,7 +166,7 @@ $(document).on('click', '#to-breakdown-btn', function(){
         "mark": 0
     }
 
-    const reqUrl = "http://127.0.0.1:5000/user-tasks/" + currUserID;
+    const reqUrl = "views/tasks/tasks.html/tasks" + currUserID;
 
     const request = new Request(reqUrl, {
         method: 'post', 
@@ -227,7 +227,7 @@ $(document).on('click', '#finish-add-btn', function(){
     //     endTime: new Date(endDate.slice(0, 4), endDate.slice(5, 7)-1, endDate.slice(8, 10), endTime.slice(0, 2), endTime.slice(3,5))
     // }
 
-    const subReqUrl = "http://127.0.0.1:5000/user-tasks/" + "5e7d5a1935577101064fa228/" + newTask.id
+    const subReqUrl = "views/tasks/tasks.html/tasks" + currUserID + newTask.id
 
     const addTask = new Request(subReqUrl, {
         method: 'post', 
