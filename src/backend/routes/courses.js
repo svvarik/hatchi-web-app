@@ -5,7 +5,7 @@ var db = require("../db/mongoose");
 const log = console.log
 const { ObjectID } = require('mongodb')
 // body-parser: middleware for parsing HTTP JSON body into a usable object
-const bodyParser = require('body-parser') 
+const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
 // import the mongoose models
@@ -128,6 +128,51 @@ router.post('/views/courses/courses.html/addCourse', (req, res)=> {
         res.status(400).send()
     })
 })
+
+
+router.get('/displayAssessments/:userID', (req, res) => {
+    const userID = req.params.userID
+    if (!ObjectID.isValid(userID)) {
+        res.status(404).send()
+        return;
+    }
+    log("display assessments server")
+    const courseID = req.body.courseID
+    User.findById(userID, function (err, user) {
+        if (err) {
+            res.status(404).send("user not found")
+        } else {
+            const courses = []
+            for (const each of user.courses) {
+                log(each)
+                const oneCourse = {
+                    courseID: each.courseId,
+                    courseCode: each.courseCode,
+                    courseName: each.courseTitle,
+                    assessments: []
+                };
+                
+                    for (const eachAss of each.tasks) {
+                        const oneAss = {
+                            assessment: eachAss.title,
+                            weight: eachAss.weight,
+                            mark: eachAss.mark,
+                        }
+                        oneCourse.assessments.push(oneAss)
+                    }
+                    courses.push(oneCourse)
+                    
+                
+            }
+            res.send(courses);
+            res.status = "success";
+        }
+    }).catch((err) => {
+        res.status(500).send();
+    })
+})
+
+
 
 
 module.exports = router

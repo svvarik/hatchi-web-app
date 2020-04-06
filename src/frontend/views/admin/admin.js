@@ -205,7 +205,7 @@ function saveEdit(saveButton) {
 // -------------------------- [Notification] ----------------------------
 // show/hide the notification box
 function popUpNotification() {
-    var reportMsg;
+    var reportMsg = [];
     $.ajax({
         type: "GET",
         url: "/reportMessage",

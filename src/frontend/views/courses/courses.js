@@ -17,7 +17,7 @@ if(currUserID == null){
 
 
 //variables
-const courses = [
+var courses = [
     {
         courseCode: "CSC309",
         courseName: "Web Development",
@@ -109,14 +109,35 @@ function displayCourse(course) {
 //$('.triangle-down').click(function (e)
 $(document).on('click', '.triangle-down', function (e) {
     const courseContainer = $(e.target).parent()[0];
-    const courseCode = $(e.target).parent().attr('id');
+    const courseID = $(e.target).parent().attr('id');
+    log(courseID)
     e.target.remove()
     //add the table
     const table = generateHeaderRow();
     courseContainer.append(table);
     const btn = $('<button class="add-assess-btn">add assessment</button>')[0];
     courseContainer.append(btn)
-    const course = courses.filter(course => course.courseCode == courseCode)[0];
+
+    $.ajax({
+        type: "GET",
+        url: "/displayAssessments/"+currUserID,
+        async: false,
+        contentType: "application/json",
+        data: JSON.stringify({ "userID": `${currUserID}`, "courseID": `${courseID}` }),
+        traditional: true,
+        success: function (data, status) {
+            if (status == "success") {
+                courses = data
+                log(courses)
+            }
+        },
+        error: function (e) {
+            console.log(`Error Displaying Assessments: ${e}`);
+        }
+    })
+
+
+    const course = courses.filter(course => course.courseID == courseID)[0];
     course.assessments.map((item) => {
         table.append(generateTableRow(item.assessment, item.weight, item.mark))
     })
